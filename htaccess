@@ -1,0 +1,86 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Redirect non-www to www and ensure HTTPS
+    RewriteCond %{HTTP_HOST} !^www\. [NC]
+    RewriteRule ^(.*)$ https://www.%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+    # Redirect HTTP to HTTPS
+    RewriteCond %{HTTPS} off
+    RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+    # Redirect requests to index.php to the root domain
+    RewriteCond %{REQUEST_URI} ^/index\.php$
+    RewriteRule ^index\.php$ / [L,R=301]
+
+    RewriteRule ^german/verb-game$ pages/germanverbconjugator.php [L]
+    RewriteRule ^privacy$ pages/privacy.php [L]
+    RewriteRule ^german$ pages/germanhomepage.php [L]
+    RewriteRule ^articles$ pages/articleshomepage.php [L]
+
+    # Redirect requests for sitemap.xml to sitemap.php
+    RewriteRule ^sitemap\.xml$ /sitemap.php [L]
+
+    # Handle the new URL structure with category slug and article slug
+    RewriteRule ^([a-zA-Z0-9_-]+)/([a-zA-Z0-9_-]+)$ pages/article.php?category_slug=$1&slug=$2 [L]
+
+    # Handle the URL structure for category pages
+    RewriteRule ^([a-zA-Z0-9_-]+)$ pages/category.php?category_slug=$1 [L]
+    
+    # Optional: Redirect trailing slash to non-trailing slash for consistency
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^(.+)/$ /$1 [R=301,L]
+
+    # Redirect to the custom 404 page
+    ErrorDocument 404 /404.php
+</IfModule>
+
+# BEGIN Caching Rules
+
+# Cache images, CSS, JavaScript files for 1 month
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType image/jpg "access plus 1 month"
+    ExpiresByType image/jpeg "access plus 1 month"
+    ExpiresByType image/gif "access plus 1 month"
+    ExpiresByType image/png "access plus 1 month"
+    ExpiresByType image/webp "access plus 1 month"
+    ExpiresByType text/css "access plus 1 month"
+    ExpiresByType text/javascript "access plus 1 month"
+    ExpiresByType application/javascript "access plus 1 month"
+    ExpiresByType application/x-javascript "access plus 1 month"
+</IfModule>
+
+# Cache HTML and XML for 1 hour
+<IfModule mod_expires.c>
+    ExpiresByType text/html "access plus 1 hour"
+    ExpiresByType application/xhtml+xml "access plus 1 hour"
+    ExpiresByType application/xml "access plus 1 hour"
+</IfModule>
+
+# Leverage browser caching for better performance
+<IfModule mod_headers.c>
+    <FilesMatch "\.(jpg|jpeg|png|gif|css|js|ico|webp)$">
+        Header set Cache-Control "max-age=2592000, public"
+    </FilesMatch>
+    <FilesMatch "\.(html|htm|xml|txt)$">
+        Header set Cache-Control "max-age=3600, public, must-revalidate"
+    </FilesMatch>
+</IfModule>
+
+# ETag Settings - Optional (use carefully as it can sometimes lead to issues)
+#<IfModule mod_headers.c>
+#    Header unset ETag
+#    FileETag None
+#</IfModule>
+
+# Gzip Compression
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css application/javascript application/json application/xml
+</IfModule>
+
+# END Caching Rules
+
+# php -- BEGIN cPanel-generated handler, do not edit
+# This domain inherits the “PHP” package.
+# php -- END cPanel-generated handler, do not edit

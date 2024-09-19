@@ -1,185 +1,141 @@
+<?php
+/**
+ * PHP Script for Displaying Featured Articles on BlueSky Homesteading
+ *
+ * @package    BlueSkyHomesteading
+ * @author     Gabriel Sullivan
+ * @version    1.0
+ * @date       Last updated: September 19, 2024
+ * @created    July 2024
+ *
+ * This script connects to the database and retrieves the latest articles,
+ * displaying them on the front page along with their associated category slugs.
+ * It also includes meta tags for SEO and social media sharing, along with a
+ * structured header for the website.
+ *
+ * Database Connection:
+ * - Requires 'includes/databaseconnection.php' to establish a connection to the database.
+ *
+ * SQL Query:
+ * - Selects the latest 10 articles along with their title, meta description,
+ *   image URL, image alt text, and category slug.
+ * - Articles are ordered by their published date in descending order.
+ *
+ * Output:
+ * - If articles are found, the script will display the first article prominently,
+ *   followed by a list of the next four articles. If no articles are available,
+ *   a message will indicate that no articles were found.
+ *
+ * Includes:
+ * - 'includes/head.php': For common head elements and styles.
+ * - 'includes/consentbanner.php': For user consent management.
+ * - 'includes/navbar.php': For site navigation.
+ * - 'includes/footer.php': For common footer content.
+ *
+ * Frontend:
+ * - Utilizes HTML5 structure with proper semantic tags for accessibility.
+ * - Includes Open Graph and Twitter meta tags for enhanced social sharing.
+ * - Structured data (JSON-LD) for better search engine understanding.
+ */
+
+include 'includes/databaseconnection.php';
+
+// Query to get the latest articles along with their category slugs
+$sql = "SELECT articles.slug AS article_slug, articles.title, articles.meta_description, articles.image_url, articles.image_alt_text, categories.slug AS category_slug 
+        FROM articles 
+        JOIN categories ON articles.category = categories.name 
+        ORDER BY articles.published_date DESC 
+        LIMIT 10";
+$result = $conn->query($sql);
+
+$articles = [];
+if ($result->num_rows > 0) {
+    // Fetch the articles along with category slugs
+    while ($row = $result->fetch_assoc()) {
+        $articles[] = $row;
+    }
+} else {
+    $articles = [];
+}
+
+$conn->close();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="BlueSky Homesteading: Discover tips, tricks, and products for sustainable homesteading. Learn how to grow your own food, live off the land, and more!">
-    <meta name="keywords" content="homesteading, sustainable living, gardening, organic farming, self-sufficiency, off-grid">
-    <meta name="author" content="BlueSky Homesteading">
-    <title>BlueSky Homesteading | Sustainable Living Tips & Products</title>
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f9f5ee;
-            color: #333;
-            margin: 0;
-            padding: 0;
-        }
-        header {
-            background-color: #a8dadc;
-            padding: 20px;
-            text-align: center;
-        }
-        header h1 {
-            color: #1d3557;
-            font-size: 36px;
-            margin: 0;
-        }
-        header p {
-            color: #457b9d;
-            font-size: 18px;
-        }
-        nav {
-            background-color: #f1faee;
-            padding: 10px;
-            text-align: center;
-        }
-        nav a {
-            margin: 0 15px;
-            color: #1d3557;
-            text-decoration: none;
-            font-weight: bold;
-        }
-        .container {
-            max-width: 1200px;
-            margin: 20px auto;
-            padding: 0 15px;
-        }
-        .intro {
-            text-align: center;
-            background-color: #f1faee;
-            padding: 30px;
-            border-radius: 8px;
-        }
-        .intro h2 {
-            color: #457b9d;
-            font-size: 28px;
-        }
-        .intro p {
-            font-size: 18px;
-            line-height: 1.6;
-        }
-        .blog-section, .product-section {
-            margin: 40px 0;
-        }
-        .section-title {
-            font-size: 26px;
-            color: #1d3557;
-            margin-bottom: 20px;
-        }
-        .posts, .products {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
-        .post, .product {
-            background-color: #e9ecef;
-            padding: 15px;
-            border-radius: 8px;
-            width: 30%;
-        }
-        .post img, .product img {
-            width: 100%;
-            height: auto;
-            border-radius: 8px;
-        }
-        .post-title, .product-title {
-            font-size: 20px;
-            color: #1d3557;
-            margin: 10px 0;
-        }
-        .post-desc, .product-desc {
-            font-size: 16px;
-            color: #457b9d;
-        }
-        .footer {
-            background-color: #457b9d;
-            color: #f1faee;
-            text-align: center;
-            padding: 15px 0;
-        }
-        .footer p {
-            margin: 0;
-            font-size: 14px;
-        }
-        @media (max-width: 768px) {
-            .post, .product {
-                width: 100%;
-            }
-        }
-    </style>
+    <?php include 'includes/head.php'; ?>
+    <title>BlueSky Homesteading - Your Guide to Sustainable Living</title>
+    <meta name="description" content="Explore articles and resources on homesteading, sustainable living, gardening, and self-sufficiency.">
+    <meta name="keywords" content="homesteading, gardening, sustainable living, self-sufficiency, articles">
+    <meta property="og:title" content="BlueSky Homesteading - Your Guide to Sustainable Living">
+    <meta property="og:description" content="Explore articles and resources on homesteading, sustainable living, gardening, and self-sufficiency.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.blueskyhomesteading.com">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://www.blueskyhomesteading.com">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "BlueSky Homesteading",
+        "url": "https://www.blueskyhomesteading.com",
+        "description": "Explore articles and resources on homesteading, sustainable living, gardening, and self-sufficiency."
+    }
+    </script>
 </head>
 <body>
-    <!-- Header Section -->
-    <header>
-        <h1>BlueSky Homesteading</h1>
-        <p>Your Resource for Sustainable Living & Self-Sufficiency</p>
+    <?php include 'includes/consentbanner.php'; ?>
+    <?php include 'includes/navbar.php'; ?>
+    <header class="frontpage">
+         <h1 class="frontpage-header">
+            Welcome to Blue Sky Homesteading.
+         </h1>
+         <p class="frontpage-desc">Your guide to sustainable living and homesteading resources.</p>
+
+         <h2 class="section-header">Featured Articles</h2>
     </header>
+    <main class="main-page">
+        <?php
+        if (!empty($articles)) {
+            $counter = 1;
+            foreach ($articles as $article) {
+                if($counter == 1) {
+                    echo '<a class="top-article" href="https://www.blueskyhomesteading.com/'.htmlspecialchars($article['category_slug']).'/'.htmlspecialchars($article['article_slug']).'">';
+                    echo '<img src="'.$article['image_url'].'" alt="'.$article['image_alt_text'].'" class="frontpage-article-image" />';
+                } else if($counter == 2) {
+                    echo '<div class="latest-part">';
+                        echo '<a class="latest-article" href="https://www.blueskyhomesteading.com/'.htmlspecialchars($article['category_slug']).'/'.htmlspecialchars($article['article_slug']).'">';
+                } else if($counter > 2 && $counter <= 5) {
+                    echo '<a class="latest-article" href="https://www.blueskyhomesteading.com/'.htmlspecialchars($article['category_slug']).'/'.htmlspecialchars($article['article_slug']).'">';
+                }
+                echo '<div class="frontpage-article-text">';
+                    echo '<h3>'.htmlspecialchars($article['title']).'</h3>';
+                    if($counter == 1) {
+                        echo '<p>'.htmlspecialchars($article['meta_description']).'</p>';
+                    }
+                echo '</div>';
+                echo '</a>';
 
-    <!-- Navigation Bar -->
-    <nav>
-        <a href="#">Home</a>
-        <a href="#">Blog</a>
-        <a href="#">Shop</a>
-        <a href="#">About</a>
-        <a href="#">Contact</a>
-    </nav>
+                if($counter == 5) {
+                    echo '</div>';
+                }
 
-    <!-- Introduction Section -->
-    <div class="container">
-        <section class="intro">
-            <h2>Welcome to BlueSky Homesteading</h2>
-            <p>At BlueSky Homesteading, we provide you with everything you need to live sustainably. Explore our blog for expert tips on gardening, farming, and living off the land, or browse our curated shop of homesteading essentials!</p>
-        </section>
-
-        <!-- Blog Section -->
-        <section class="blog-section">
-            <h2 class="section-title">Latest Blog Posts</h2>
-            <div class="posts">
-                <article class="post">
-                    <img src="blog-post-1.jpg" alt="How to Start Your Organic Garden">
-                    <h3 class="post-title">How to Start Your Organic Garden</h3>
-                    <p class="post-desc">Learn the basics of starting an organic garden, from soil preparation to planting your first seeds.</p>
-                </article>
-                <article class="post">
-                    <img src="blog-post-2.jpg" alt="10 Essential Tools for Homesteaders">
-                    <h3 class="post-title">10 Essential Tools for Homesteaders</h3>
-                    <p class="post-desc">Discover the top tools every homesteader should have to maintain their land and crops.</p>
-                </article>
-                <article class="post">
-                    <img src="blog-post-3.jpg" alt="DIY: Building a Chicken Coop">
-                    <h3 class="post-title">DIY: Building a Chicken Coop</h3>
-                    <p class="post-desc">Step-by-step guide to building a cozy, secure chicken coop for your homestead.</p>
-                </article>
-            </div>
-        </section>
-
-        <!-- Product Section -->
-        <section class="product-section">
-            <h2 class="section-title">Shop Homesteading Essentials</h2>
-            <div class="products">
-                <div class="product">
-                    <img src="product-1.jpg" alt="Organic Seed Starter Kit">
-                    <h3 class="product-title">Organic Seed Starter Kit</h3>
-                    <p class="product-desc">Get started with organic gardening using this complete seed starter kit.</p>
-                </div>
-                <div class="product">
-                    <img src="product-2.jpg" alt="Solar Powered Water Pump">
-                    <h3 class="product-title">Solar Powered Water Pump</h3>
-                    <p class="product-desc">Perfect for sustainable irrigation, this solar pump helps you water your crops efficiently.</p>
-                </div>
-                <div class="product">
-                    <img src="product-3.jpg" alt="DIY Chicken Coop Plans">
-                    <h3 class="product-title">DIY Chicken Coop Plans</h3>
-                    <p class="product-desc">Download these detailed plans to build your own chicken coop for your homestead.</p>
-                </div>
-            </div>
-        </section>
-    </div>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <p>&copy; 2024 BlueSky Homesteading. All rights reserved.</p>
-    </footer>
+                $counter++;
+            }
+        } else {
+            echo "No articles found.";
+        }
+        ?>
+        <div class="guides-part">
+            <h2 class="section-header">Homesteading Guides</h2>
+            <ul class="side-list">
+                <li><a href="https://www.blueskyhomesteading.com/gardening">Gardening</a></li>
+                <li><a href="https://www.blueskyhomesteading.com/raising-chickens">Raising Chickens</a></li>
+                <li><a href="https://www.blueskyhomesteading.com/preserving-food">Preserving Food</a></li>
+                <!-- Add more guides as needed -->
+            </ul>
+        </div>
+    </main>
+    <?php include 'includes/footer.php'; ?>
 </body>
 </html>

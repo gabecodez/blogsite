@@ -1,1 +1,2 @@
-This is the code for the BlueSky Homesteading website.
+# bluesky
+# This is the code for the BlueSkyHomesteading website

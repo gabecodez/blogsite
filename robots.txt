@@ -1,0 +1,12 @@
+# Allow all crawlers access to everything
+User-agent: *
+Disallow: /admin/
+Disallow: /login/
+Disallow: /private/
+
+# Allow Googlebot to crawl the whole site
+User-agent: Googlebot
+Disallow:
+
+# Sitemap location
+Sitemap: https://www.blueskyhomesteading.com/sitemap.xml
