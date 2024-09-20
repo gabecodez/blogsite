@@ -60,7 +60,7 @@ header {
 }
 
 .navbar-brand .logo {
-    max-height: 50px;
+    max-height: 80px;
     margin-right: 10px;
     -webkit-user-select: none;  /* Safari */
     -moz-user-select: none;     /* Firefox */

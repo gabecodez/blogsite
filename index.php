@@ -88,7 +88,7 @@ $conn->close();
     <?php include 'includes/navbar.php'; ?>
     <header class="frontpage">
          <h1 class="frontpage-header">
-            Welcome to Blue Sky Homesteading.
+            Sow, harvest, and flourish—your homestead journey starts here.
          </h1>
          <p class="frontpage-desc">Your guide to sustainable living and homesteading resources.</p>
 

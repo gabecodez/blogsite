@@ -1,21 +1,21 @@
 <?php
 /**
- * PHP Script for Main Navigation on LangCentral
+ * PHP Script for Main Navigation on BlueSkyHomesteading
  *
- * @package    LangCentral
+ * @package    BlueSkyHomesteading
  * @author     Gabriel Sullivan
  * @version    1.0
  * @date       Last updated: September 19, 2024
  * @created    July 2024
  *
- * This script creates the main navigation bar for the LangCentral website,
- * allowing users to easily access different sections such as languages and articles.
+ * This script creates the main navigation bar for the BlueSkyHomesteading website,
+ * allowing users to easily access different sections such as homesteading guides and resources.
  * It includes responsive design features to adapt to mobile devices and enhance
  * user experience.
  *
  * Structure:
- * - The navigation bar consists of a logo, tagline, and links to various 
- *   language resources and articles.
+ * - The navigation bar consists of a logo, tagline, and links to various homesteading
+ *   resources such as gardening, DIY, and sustainability articles.
  * - A mobile toggle button is provided for expanding and collapsing the menu 
  *   on smaller screens.
  *
@@ -24,7 +24,7 @@
  *   for screen readers, including labels for toggling and dropdown menus.
  *
  * Dropdown Menus:
- * - The navbar includes dropdown menus for navigating to specific language 
+ * - The navbar includes dropdown menus for navigating to specific homesteading
  *   resources and articles. These menus are expandable and collapse as needed.
  *
  * Mobile Navigation:
@@ -40,16 +40,15 @@
  * - The navigation bar is designed to be visually appealing and user-friendly,
  *   incorporating a logo and tagline for branding.
  */
-
 ?>
 
 <nav class="navbar" aria-label="Main Navigation">
     <div class="navbar-indent">    
         <div class="navbar-brand">
-            <a href="https://www.langcentral.net" aria-label="LangCentral Home">
-                <img src="https://www.langcentral.net/images/logos/langcentrallogoweb.svg" alt="LangCentral Logo" class="logo">
+            <a href="https://www.blueskyhomesteading.com" aria-label="BlueSky Homesteading Home">
+                <img src="https://www.blueskyhomesteading.com/images/logos/blueskylogoblack.svg" alt="BlueSky Homesteading Logo" class="logo">
             </a>
-            <span class="tagline">Your Language Learning Hub</span>
+            <span class="tagline">Your Homesteading Journey Starts Here</span>
         </div>
         <div class="navbar-toggle" id="mobile-menu" aria-expanded="false" aria-controls="mobile-nav-panel" aria-label="Toggle navigation">
             <span class="bar"></span>
@@ -58,32 +57,42 @@
         </div>
         <ul class="navbar-menu">
             <li class="navbar-item dropdown">
-                <a href="#" class="nav-link dropdown-toggle" aria-haspopup="true" aria-expanded="false">Languages ⬎</a>
+                <a href="#" class="nav-link dropdown-toggle" aria-haspopup="true" aria-expanded="false">Homesteading Guides ⬎</a>
                 <ul class="dropdown-menu">
-                    <li><a href="https://www.langcentral.net/german">German</a></li>
+                    <li><a href="https://www.blueskyhomesteading.com/gardening">Gardening</a></li>
+                    <li><a href="https://www.blueskyhomesteading.com/diy">DIY Projects</a></li>
+                    <li><a href="https://www.blueskyhomesteading.com/sustainability">Sustainability</a></li>
                 </ul>
             </li>
             <li class="navbar-item dropdown">
-                <a href="https://www.langcentral.net/articles" class="nav-link dropdown-toggle" aria-haspopup="true" aria-expanded="false">Articles ⬎</a>
+                <a href="https://www.blueskyhomesteading.com/resources" class="nav-link dropdown-toggle" aria-haspopup="true" aria-expanded="false">Resources ⬎</a>
                 <ul class="dropdown-menu">
-                    <li><a href="https://www.langcentral.net/language-learning">Language Learning</a></li>
+                    <li><a href="https://www.blueskyhomesteading.com/tools">Homesteading Tools</a></li>
+                    <li><a href="https://www.blueskyhomesteading.com/articles">Latest Articles</a></li>
                 </ul>
+            </li>
+            <li class="navbar-item">
+                <a href="https://www.blueskyhomesteading.com/about" class="nav-link">About Us</a>
             </li>
         </ul>
     </div>
     <div class="mobile-nav-panel" id="mobile-nav-panel">
         <button class="close-panel" aria-label="Close navigation">✖</button>
         <ul>
-            <li><a href="#">Languages</a>
+            <li><a href="#">Homesteading Guides</a>
                 <ul>
-                    <li><a href="https://www.langcentral.net/german">German</a></li>
+                    <li><a href="https://www.blueskyhomesteading.com/gardening">Gardening</a></li>
+                    <li><a href="https://www.blueskyhomesteading.com/diy">DIY Projects</a></li>
+                    <li><a href="https://www.blueskyhomesteading.com/sustainability">Sustainability</a></li>
                 </ul>
             </li>
-            <li><a href="https://www.langcentral.net/articles">Articles</a>
+            <li><a href="https://www.blueskyhomesteading.com/resources">Resources</a>
                 <ul>
-                    <li><a href="https://www.langcentral.net/language-learning">Language Learning</a></li>
+                    <li><a href="https://www.blueskyhomesteading.com/tools">Homesteading Tools</a></li>
+                    <li><a href="https://www.blueskyhomesteading.com/articles">Latest Articles</a></li>
                 </ul>
             </li>
+            <li><a href="https://www.blueskyhomesteading.com/about">About Us</a></li>
         </ul>
     </div>
 </nav>

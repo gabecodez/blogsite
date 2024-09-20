@@ -13,9 +13,7 @@
     RewriteCond %{REQUEST_URI} ^/index\.php$
     RewriteRule ^index\.php$ / [L,R=301]
 
-    RewriteRule ^german/verb-game$ pages/germanverbconjugator.php [L]
     RewriteRule ^privacy$ pages/privacy.php [L]
-    RewriteRule ^german$ pages/germanhomepage.php [L]
     RewriteRule ^articles$ pages/articleshomepage.php [L]
 
     # Redirect requests for sitemap.xml to sitemap.php

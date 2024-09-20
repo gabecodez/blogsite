@@ -32,10 +32,10 @@
 ?>
 
 <footer>
-    <p>&copy; <?php echo date("Y"); ?> LangCentral. All rights reserved.</p>
+    <p>&copy; <?php echo date("Y"); ?> BlueSky Homesteading LLC. All rights reserved.</p>
 </footer>
 
 <!-- Consent Banner JavaScript -->
-<script src="https://www.langcentral.net/scripts/consentbannercode.js" async></script>
+<script src="https://www.blueskyhomesteading.com/scripts/consentbannercode.js" async></script>
 
-<script src="https://www.langcentral.net/scripts/navbarcode.js?ver=1.0" async></script>
+<script src="https://www.blueskyhomesteading.com/scripts/navbarcode.js?ver=1.0" async></script>
