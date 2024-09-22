@@ -92,6 +92,8 @@ $conn->close();
          </h1>
          <p class="frontpage-desc">Your guide to sustainable living and homesteading resources.</p>
 
+         <img class="frontpage-image" src="https://www.blueskyhomesteading.com/images/chickens.png" alt="A photo of chickens roosting" />
+
          <h2 class="section-header">Featured Articles</h2>
     </header>
     <main class="main-page">
@@ -126,15 +128,6 @@ $conn->close();
             echo "No articles found.";
         }
         ?>
-        <div class="guides-part">
-            <h2 class="section-header">Homesteading Guides</h2>
-            <ul class="side-list">
-                <li><a href="https://www.blueskyhomesteading.com/gardening">Gardening</a></li>
-                <li><a href="https://www.blueskyhomesteading.com/raising-chickens">Raising Chickens</a></li>
-                <li><a href="https://www.blueskyhomesteading.com/preserving-food">Preserving Food</a></li>
-                <!-- Add more guides as needed -->
-            </ul>
-        </div>
     </main>
     <?php include 'includes/footer.php'; ?>
 </body>

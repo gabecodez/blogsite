@@ -62,12 +62,7 @@
         <h1>404</h1>
         <h2>Oops! Page Not Found</h2>
         <p>It seems the page you're looking for doesn't exist. But don’t worry, we have plenty of resources to help you with your homesteading journey!</p>
-        <p>Check out our:</p>
-        <ul>
-            <li><a href="/blog">Latest Blog Posts</a></li>
-            <li><a href="/guides">Guides and Tutorials</a></li>
-            <li><a href="/community">Join Our Community</a></li>
-        </ul>
+        <p>Check out our <a href="https://www.blueskyhomesteading.com">homepage</a>.</p>
     </header>
     <?php include 'includes/footer.php'; ?>
 </body>

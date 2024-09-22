@@ -58,6 +58,7 @@
 <link rel="stylesheet" href="https://www.blueskyhomesteading.com/styles/styles.css?ver=1.21">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="icon" href="https://www.langcentral.net/images/favicon/langcentralfavicon.png" type="image/png">
-<link rel="apple-touch-icon" href="https://www.langcentral.net/images/favicon/langcentralfavicon.png">
+<link rel="icon" href="https://www.blueskyhomesteading.com/images/logos/blueskyfav.png" type="image/png">
+<link rel="apple-touch-icon" href="https://www.blueskyhomesteading.com/images/logos/blueskyfav.png">
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Nunito:ital,wght@0,900;1,900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Domine:wght@400..700&display=swap" rel="stylesheet">

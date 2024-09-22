@@ -38,13 +38,14 @@
 ?>
 
 <!-- Consent Banner HTML -->
-<div id="consent-banner" style="width: 100%; background: #333; color: #fff; padding: 10px; text-align: center; z-index: 1000; display: none;">
-<p style="margin: 0; font-size: 14px; color:white;">
-    We use cookies to enhance your experience on our website, to analyze our traffic, and to serve personalized content and advertisements. By clicking "Accept All", you consent to our use of cookies and other tracking technologies. 
-    <a href="https://www.langcentral.net/privacy" style="color: #ddd; text-decoration: underline;">Learn more</a>.
-  </p>
-  <div style="margin-top: 10px;">
-    <button id="accept-all" style="margin-right: 10px; padding: 5px 10px; background: #007bff; color: #fff; border: none; cursor: pointer;">Accept All</button>
-    <button id="reject-all" style="padding: 5px 10px; background: #6c757d; color: #fff; border: none; cursor: pointer;">Reject All</button>
+<div id="consent-banner" class="consent-banner">
+  <div class="consent-content">
+    <p>
+      We use cookies to enhance your experience on our website. <a href="https://www.blueskyhomesteading.com/privacy">Learn more</a>.
+    </p>
+    <div class="buttons-div">
+      <button id="accept-all" class="accept-all">Accept All</button>
+      <button id="reject-all" class="reject-all">Reject All</button>
+    </div>
   </div>
 </div>
