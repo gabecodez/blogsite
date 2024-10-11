@@ -32,10 +32,23 @@
 ?>
 
 <footer>
-    <p>&copy; <?php echo date("Y"); ?> BlueSky Homesteading LLC. All rights reserved.</p>
+    <div class="footer-container">
+        <!-- Use a <nav> element for better SEO as it's a set of navigation links -->
+        <nav aria-label="Footer navigation">
+            <ul class="footer-links">
+                <li><a href="https://www.blueskyhomesteading.com/about" title="About Us">About Us</a></li>
+                <li><a href="https://www.blueskyhomesteading.com/contact" title="Contact Us">Contact</a></li>
+                <li><a href="https://www.blueskyhomesteading.com/privacy" title="Privacy Policy">Privacy Policy</a></li>
+                <li><a href="https://www.blueskyhomesteading.com/search" title="Contact Us">Search</a></li>
+                <li><a href="https://www.facebook.com/BlueSky.Homestead23/" title="Contact Us">Follow us on Facebook</a></li>
+            </ul>
+        </nav>
+        <div class="footer-bottom">
+            <p>&copy; <?php echo date("Y"); ?> BlueSky Homesteading LLC. All rights reserved.</p>
+        </div>
+    </div>
 </footer>
 
 <!-- Consent Banner JavaScript -->
 <script src="https://www.blueskyhomesteading.com/scripts/consentbannercode.js" async></script>
-
 <script src="https://www.blueskyhomesteading.com/scripts/navbarcode.js?ver=1.0" async></script>

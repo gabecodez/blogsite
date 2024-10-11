@@ -57,7 +57,7 @@
         </div>
         <ul class="navbar-menu">
             <li class="navbar-item dropdown">
-                <a href="#" class="nav-link dropdown-toggle" aria-haspopup="true" aria-expanded="false">Homesteading Guides ⬎</a>
+                <a href="https://www.blueskyhomesteading.com/articles" class="nav-link dropdown-toggle" aria-haspopup="true" aria-expanded="false">Homesteading Guides ⬎</a>
                 <ul class="dropdown-menu">
                     <li><a href="https://www.blueskyhomesteading.com/gardening">Gardening</a></li>
                     <li><a href="https://www.blueskyhomesteading.com/diy">DIY Projects</a></li>
@@ -65,34 +65,34 @@
                 </ul>
             </li>
             <li class="navbar-item dropdown">
-                <a href="https://www.blueskyhomesteading.com/resources" class="nav-link dropdown-toggle" aria-haspopup="true" aria-expanded="false">Resources ⬎</a>
+                <a href="https://www.blueskyhomesteading.com/shop" class="nav-link dropdown-toggle" aria-haspopup="true" aria-expanded="false">Shop ⬎</a>
                 <ul class="dropdown-menu">
-                    <li><a href="https://www.blueskyhomesteading.com/tools">Homesteading Tools</a></li>
-                    <li><a href="https://www.blueskyhomesteading.com/articles">Latest Articles</a></li>
+                    <li><a href="https://www.blueskyhomesteading.com/shop/culinary">Culinary Products</a></li>
+                    <li><a href="https://www.blueskyhomesteading.com/shop/hardware">Hardware and Tools</a></li>
+                    <li><a href="https://www.blueskyhomesteading.com/shop/antiques">Antiques</a></li>
                 </ul>
             </li>
-            <li class="navbar-item">
-                <a href="https://www.blueskyhomesteading.com/about" class="nav-link">About Us</a>
-            </li>
+            <li class="navbar-item dropdown"><a href="https://www.blueskyhomesteading.com/search" class="nav-link">Search</a></li>
         </ul>
     </div>
     <div class="mobile-nav-panel" id="mobile-nav-panel">
         <button class="close-panel" aria-label="Close navigation">✖</button>
         <ul>
-            <li><a href="#">Homesteading Guides</a>
+            <li><a href="https://www.blueskyhomesteading.com/articles">Homesteading Guides</a>
                 <ul>
                     <li><a href="https://www.blueskyhomesteading.com/gardening">Gardening</a></li>
                     <li><a href="https://www.blueskyhomesteading.com/diy">DIY Projects</a></li>
                     <li><a href="https://www.blueskyhomesteading.com/sustainability">Sustainability</a></li>
                 </ul>
             </li>
-            <li><a href="https://www.blueskyhomesteading.com/resources">Resources</a>
+            <li><a href="https://www.blueskyhomesteading.com/shop">Shop</a>
                 <ul>
-                    <li><a href="https://www.blueskyhomesteading.com/tools">Homesteading Tools</a></li>
-                    <li><a href="https://www.blueskyhomesteading.com/articles">Latest Articles</a></li>
+                    <li><a href="https://www.blueskyhomesteading.com/shop/culinary">Culinary Products</a></li>
+                    <li><a href="https://www.blueskyhomesteading.com/hardware">Hardware and Tools</a></li>
+                    <li><a href="https://www.blueskyhomesteading.com/antiques">Antiques</a></li>
                 </ul>
             </li>
-            <li><a href="https://www.blueskyhomesteading.com/about">About Us</a></li>
+            <li><a href="https://www.blueskyhomesteading.com/search">Search</a></li>
         </ul>
     </div>
 </nav>
