@@ -112,13 +112,11 @@ $conn->close();
 <body>
     <?php include '../includes/consentbanner.php'; ?>
     <?php include '../includes/navbar.php'; ?>
-    <header class="frontpage">
-        <div>
-            <h1 class="frontpage-header"><?php echo htmlspecialchars($category); ?></h1>
-            <p class="frontpage-desc">Explore articles related to <?php echo htmlspecialchars($category); ?>.</p>
-        </div>
-    </header>
     <main class="main-page">
+        <header class="article__list__header">
+            <h1><?php echo htmlspecialchars($category); ?></h1>
+            <p>Explore articles related to <?php echo htmlspecialchars($category); ?>.</p>
+        </header>
         <div class="main-part">
             <?php
             if (!empty($articles)) {

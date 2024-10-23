@@ -147,23 +147,21 @@ $content_with_ads = $content;
 <body>
     <?php include '../includes/consentbanner.php'; ?>
     <?php include '../includes/navbar.php'; ?>
-    <header>
+    <main class="main-page">
         <div class="article-content">
-            <h1><?php echo htmlspecialchars($page_title); ?></h1>
-            <nav aria-label="breadcrumb">
-                <ol>
-                    <li><a href="https://www.blueskyhomesteading.com">Home</a></li>
-                    <li><a href="https://www.blueskyhomesteading.com/<?php echo htmlspecialchars($category_slug); ?>"><?php echo htmlspecialchars(ucfirst($category)); ?></a></li>
-                    <li aria-current="page"><?php echo htmlspecialchars($page_title); ?></li>
-                </ol>
-            </nav>
-            <?php if ($image_url) : ?>
-                <img src="<?php echo $image_url; ?>" alt="<?php echo $image_alt_text; ?>" class="article-img">
-            <?php endif; ?>
-        </div>
-    </header>
-    <main>
-        <div class="article-content">
+            <header>
+                <h1><?php echo htmlspecialchars($page_title); ?></h1>
+                <nav aria-label="breadcrumb">
+                    <ol>
+                        <li><a href="https://www.blueskyhomesteading.com">Home</a></li>
+                        <li><a href="https://www.blueskyhomesteading.com/<?php echo htmlspecialchars($category_slug); ?>"><?php echo htmlspecialchars(ucfirst($category)); ?></a></li>
+                        <li aria-current="page"><a href="https://www.blueskyhomesteading.com/<?php echo htmlspecialchars($category_slug) . '/' . htmlspecialchars($article_slug); ?>"><?php echo htmlspecialchars($page_title); ?></a></li>
+                    </ol>
+                </nav>
+                <?php if ($image_url) : ?>
+                    <img src="<?php echo $image_url; ?>" alt="<?php echo $image_alt_text; ?>" class="article-img">
+                <?php endif; ?>
+            </header>
             <article>
                 <?php echo $content_with_ads; ?>
             </article>

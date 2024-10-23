@@ -33,20 +33,19 @@
       <link rel="canonical" href="https://www.blueskyhomesteading.com/about">
    </head>
    <body>
+      <?php include '../includes/consentbanner.php'; ?>
       <?php include '../includes/navbar.php'; ?>
-      <header>
+      <main class="main-page">
          <div class="article-content">
-            <h1>About Us</h1>
-            <nav aria-label="breadcrumb">
-               <ol>
-                  <li><a href="https://www.blueskyhomesteading.com">Home</a></li>
-                  <li aria-current="page">About Us</li>
-               </ol>
-            </nav>
-         </div>
-      </header>
-      <main>
-         <div class="article-content">
+            <header>
+               <h1>About Us</h1>
+               <nav aria-label="breadcrumb">
+                  <ol>
+                     <li><a href="https://www.blueskyhomesteading.com">Home</a></li>
+                     <li aria-current="page"><a href="https://www.blueskyhomesteading.com/about">About Us</a></li>
+                  </ol>
+               </nav>
+            </header>
             <article>
                <h2>Who We Are</h2>
                <p>BlueSky Homesteading is dedicated to helping individuals and families embrace a sustainable, self-sufficient lifestyle. From practical tips on gardening and animal care to DIY projects and sustainable practices, we are passionate about empowering people to live in harmony with nature.</p>

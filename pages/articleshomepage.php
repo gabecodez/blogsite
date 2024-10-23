@@ -90,15 +90,11 @@ if ($result->num_rows > 0) {
 <body>
     <?php include '../includes/consentbanner.php'; ?>
     <?php include '../includes/navbar.php'; ?>
-    <header class="frontpage">
-        <div>
-            <h1 class="frontpage-header">
-               Latest Articles
-            </h1>
-            <p class="frontpage-desc">Our most recent articles and resources for homesteading enthusiasts.</p>
-        </div>
-    </header>
     <main class="main-page">
+        <header class="article__list__header">
+            <h1>Latest Articles</h1>
+            <p>Our most recent articles and resources for homesteading enthusiasts.</p>
+        </header>
         <div class="main-part">
         <?php
         if (!empty($articles)) {

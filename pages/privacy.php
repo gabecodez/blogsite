@@ -46,19 +46,17 @@
    <body>
       <?php include '../includes/consentbanner.php'; ?>
       <?php include '../includes/navbar.php'; ?>
-      <header>
+      <main class="main-page">
          <div class="article-content">
-            <h1>Privacy Policy</h1>
-            <nav aria-label="breadcrumb">
-               <ol>
-                  <li><a href="https://www.blueskyhomesteading.com">Home</a></li>
-                  <li aria-current="page">Privacy</li>
-               </ol>
-            </nav>
-         </div>
-      </header>
-      <main>
-         <div class="article-content">
+            <header>
+               <h1>Privacy Policy</h1>
+               <nav aria-label="breadcrumb">
+                  <ol>
+                     <li><a href="https://www.blueskyhomesteading.com">Home</a></li>
+                     <li aria-current="page"><a href="https://www.blueskyhomesteading.com/privacy">Privacy</a></li>
+                  </ol>
+               </nav>
+            </header>
             <article>
                <p>Effective Date: 09/19/2024</p>
                <h2>1. Introduction</h2>

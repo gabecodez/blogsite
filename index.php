@@ -86,48 +86,54 @@ $conn->close();
 <body>
     <?php include 'includes/consentbanner.php'; ?>
     <?php include 'includes/navbar.php'; ?>
-    <header class="frontpage">
-         <h1 class="frontpage-header">
-            Sow, harvest, and flourish—your homestead journey starts here.
-         </h1>
-         <p class="frontpage-desc">Your guide to sustainable living and homesteading resources.</p>
-
-         <img class="frontpage-image" src="https://www.blueskyhomesteading.com/images/chickens.png" alt="A photo of chickens roosting" />
-
-         <h2 class="section-header">Featured Articles</h2>
-    </header>
     <main class="main-page">
-        <?php
-        if (!empty($articles)) {
-            $counter = 1;
-            foreach ($articles as $article) {
-                if($counter == 1) {
-                    echo '<a class="top-article" href="https://www.blueskyhomesteading.com/'.htmlspecialchars($article['category_slug']).'/'.htmlspecialchars($article['article_slug']).'">';
-                    echo '<img src="'.$article['image_url'].'" alt="'.$article['image_alt_text'].'" class="frontpage-article-image" />';
-                } else if($counter == 2) {
-                    echo '<div class="latest-part">';
-                        echo '<a class="latest-article" href="https://www.blueskyhomesteading.com/'.htmlspecialchars($article['category_slug']).'/'.htmlspecialchars($article['article_slug']).'">';
-                } else if($counter > 2 && $counter <= 5) {
-                    echo '<a class="latest-article" href="https://www.blueskyhomesteading.com/'.htmlspecialchars($article['category_slug']).'/'.htmlspecialchars($article['article_slug']).'">';
-                }
-                echo '<div class="frontpage-article-text">';
-                    echo '<h3>'.htmlspecialchars($article['title']).'</h3>';
+        <header class="banner">
+            <div class="banner-content">
+                <h1>Sow, harvest, and flourish—your homestead journey starts here.</h1>
+                <div class="banner-buttons">
+                    <a href="https://www.blueskyhomesteading.com/shop" class="btn">Shop</a>
+                    <a href="https://www.blueskyhomesteading.com/articles" class="btn secondary">Blog</a>
+                </div>
+            </div>
+            <div class="banner-image">
+                <img src="https://www.blueskyhomesteading.com/images/chickensandchicks.jpg" class="desktop" alt="A photo of chickens eating">
+                <img src="https://www.blueskyhomesteading.com/images/chickens.png" class="mobile" alt="A photo of chickens roosting">
+            </div>
+        </header>
+        <section class="frontpage">
+            <h2 class="section-header">Featured Articles</h2>
+            <?php
+            if (!empty($articles)) {
+                $counter = 1;
+                foreach ($articles as $article) {
                     if($counter == 1) {
-                        echo '<p>'.htmlspecialchars($article['meta_description']).'</p>';
+                        echo '<a class="top-article" href="https://www.blueskyhomesteading.com/'.htmlspecialchars($article['category_slug']).'/'.htmlspecialchars($article['article_slug']).'">';
+                        echo '<img src="'.$article['image_url'].'" alt="'.$article['image_alt_text'].'" class="frontpage-article-image" />';
+                    } else if($counter == 2) {
+                        echo '<div class="latest-part">';
+                            echo '<a class="latest-article" href="https://www.blueskyhomesteading.com/'.htmlspecialchars($article['category_slug']).'/'.htmlspecialchars($article['article_slug']).'">';
+                    } else if($counter > 2 && $counter <= 5) {
+                        echo '<a class="latest-article" href="https://www.blueskyhomesteading.com/'.htmlspecialchars($article['category_slug']).'/'.htmlspecialchars($article['article_slug']).'">';
                     }
-                echo '</div>';
-                echo '</a>';
-
-                if($counter == 5) {
+                    echo '<div class="frontpage-article-text">';
+                        echo '<h3>'.htmlspecialchars($article['title']).'</h3>';
+                        if($counter == 1) {
+                            echo '<p>'.htmlspecialchars($article['meta_description']).'</p>';
+                        }
                     echo '</div>';
-                }
+                    echo '</a>';
 
-                $counter++;
+                    if($counter == 5) {
+                        echo '</div>';
+                    }
+
+                    $counter++;
+                }
+            } else {
+                echo "No articles found.";
             }
-        } else {
-            echo "No articles found.";
-        }
-        ?>
+            ?>
+        </section>
     </main>
     <?php include 'includes/footer.php'; ?>
 </body>

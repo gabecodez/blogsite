@@ -43,17 +43,20 @@
    <body>
       <?php include '../includes/consentbanner.php'; ?>
       <?php include '../includes/navbar.php'; ?>
-      <header>
+
+      <main class="main-page">
          <div class="article-content">
-            <h1>Search</h1>
-            <p>Functionality is provided by Google.</p>
-         </div>
-      </header>
-      <main>
-         <div class="article-content">
-            <script async src="https://cse.google.com/cse.js?cx=04cf003aa450442c3">
-            </script>
-            <div class="gcse-search"></div>
+            <header>
+               <div class="article-content">
+                  <h1>Search</h1>
+                  <p>Functionality is provided by Google.</p>
+               </div>
+            </header>
+            <div>
+               <script async src="https://cse.google.com/cse.js?cx=04cf003aa450442c3">
+               </script>
+               <div class="gcse-search"></div>
+            </div>
          </div>
       </main>
       <?php include '../includes/footer.php'; ?>
