@@ -47,9 +47,10 @@
 include '../includes/databaseconnection.php';
 
 // Query to get the latest articles along with their category slugs
-$sql = "SELECT articles.slug AS article_slug, articles.title, articles.meta_description, articles.image_url, articles.image_alt_text, categories.slug AS category_slug 
+$sql = "SELECT articles.slug AS article_slug, articles.title, articles.meta_description, articles.image_id, categories.slug AS category_slug 
         FROM articles 
-        JOIN categories ON articles.category = categories.name 
+        JOIN categories ON articles.category = categories.name
+        WHERE articles.public = 1 
         ORDER BY articles.published_date DESC 
         LIMIT 10";
 $result = $conn->query($sql);
@@ -68,22 +69,22 @@ if ($result->num_rows > 0) {
 <html lang="en">
 <head>
     <?php include '../includes/head.php'; ?>
-    <title>Latest Articles - BlueSky Homesteading</title>
+    <title>Latest Blog Posts - BlueSky Homesteading</title>
     <meta name="description" content="Discover the latest articles and resources for homesteading enthusiasts.">
     <meta name="keywords" content="homesteading, articles, resources, tips, self-sufficiency">
     <meta property="og:title" content="Latest Articles - BlueSky Homesteading">
     <meta property="og:description" content="Explore the newest articles from BlueSky Homesteading.">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://www.blueskyhomesteading.com/articles">
+    <meta property="og:url" content="https://www.blueskyhomesteading.com/blog">
     <meta name="twitter:card" content="summary_large_image">
-    <link rel="canonical" href="https://www.blueskyhomesteading.com/articles">
+    <link rel="canonical" href="https://www.blueskyhomesteading.com/blog">
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
         "@type": "WebSite",
-        "name": "BlueSky Homesteading",
-        "url": "https://www.blueskyhomesteading.com",
-        "description": "BlueSky Homesteading offers the latest articles and resources for homesteaders."
+        "name": "Latest Blog Posts - BlueSky Homesteading",
+        "url": "https://www.blueskyhomesteading.com/blog",
+        "description": "The latest blog posts for BlueSky Homesteading"
     }
     </script>
 </head>
@@ -92,7 +93,7 @@ if ($result->num_rows > 0) {
     <?php include '../includes/navbar.php'; ?>
     <main class="main-page">
         <header class="article__list__header">
-            <h1>Latest Articles</h1>
+            <h1>Latest Blog Posts</h1>
             <p>Our most recent articles and resources for homesteading enthusiasts.</p>
         </header>
         <div class="main-part">
@@ -100,7 +101,7 @@ if ($result->num_rows > 0) {
         if (!empty($articles)) {
             $counter = 1;
             foreach ($articles as $article) {
-                echo '<a class="latest-article" href="https://www.blueskyhomesteading.com/'.htmlspecialchars($article['category_slug']).'/'.htmlspecialchars($article['article_slug']).'">';
+                echo '<a class="latest-article" href="https://www.blueskyhomesteading.com/blog/'.htmlspecialchars($article['category_slug']).'/'.htmlspecialchars($article['article_slug']).'">';
                     echo '<div class="frontpage-article-text">';
                     echo '<h3>'.htmlspecialchars($article['title']).'</h3>';
                     if($counter == 1) {

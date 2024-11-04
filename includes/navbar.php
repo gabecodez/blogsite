@@ -57,11 +57,11 @@
         </div>
         <ul class="navbar-menu">
             <li class="navbar-item dropdown">
-                <a href="https://www.blueskyhomesteading.com/articles" class="nav-link dropdown-toggle" aria-haspopup="true" aria-expanded="false">Blog <svg style="vertical-align: middle;" xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="black"><path d="M200-200v-400h80v264l464-464 56 56-464 464h264v80H200Z"/></svg></a>
+                <a href="https://www.blueskyhomesteading.com/blog" class="nav-link dropdown-toggle" aria-haspopup="true" aria-expanded="false">Blog <svg style="vertical-align: middle;" xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="black"><path d="M200-200v-400h80v264l464-464 56 56-464 464h264v80H200Z"/></svg></a>
                 <ul class="dropdown-menu">
-                    <li><a href="https://www.blueskyhomesteading.com/gardening">Gardening</a></li>
-                    <li><a href="https://www.blueskyhomesteading.com/diy">DIY Projects</a></li>
-                    <li><a href="https://www.blueskyhomesteading.com/sustainability">Sustainability</a></li>
+                    <li><a href="https://www.blueskyhomesteading.com/blog/gardening">Gardening</a></li>
+                    <li><a href="https://www.blueskyhomesteading.com/blog/diy">DIY Projects</a></li>
+                    <li><a href="https://www.blueskyhomesteading.com/blog/sustainability">Sustainability</a></li>
                 </ul>
             </li>
             <li class="navbar-item dropdown">
@@ -78,11 +78,11 @@
     <div class="mobile-nav-panel" id="mobile-nav-panel">
         <button class="close-panel" aria-label="Close navigation">✖</button>
         <ul>
-            <li><a href="https://www.blueskyhomesteading.com/articles">Blog</a>
+            <li><a href="https://www.blueskyhomesteading.com/blog">Blog</a>
                 <ul>
-                    <li><a href="https://www.blueskyhomesteading.com/gardening">Gardening</a></li>
-                    <li><a href="https://www.blueskyhomesteading.com/diy">DIY Projects</a></li>
-                    <li><a href="https://www.blueskyhomesteading.com/sustainability">Sustainability</a></li>
+                    <li><a href="https://www.blueskyhomesteading.com/blog/gardening">Gardening</a></li>
+                    <li><a href="https://www.blueskyhomesteading.com/blog/diy">DIY Projects</a></li>
+                    <li><a href="https://www.blueskyhomesteading.com/blog/sustainability">Sustainability</a></li>
                 </ul>
             </li>
             <li><a href="https://www.blueskyhomesteading.com/shop">Shop</a>

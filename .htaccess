@@ -16,16 +16,28 @@
     RewriteRule ^privacy$ pages/privacy.php [L]
     RewriteRule ^about$ pages/about.php [L]
     RewriteRule ^search$ pages/search.php [L]
-    RewriteRule ^articles$ pages/articleshomepage.php [L]
+    RewriteRule ^contact$ pages/contact.php [L]
+    RewriteRule ^shop/cart$ pages/shop/cart.php [L]
+    RewriteRule ^shop/checkout$ pages/shop/checkout.php [L]
+    RewriteRule ^shop/checkout/success$ pages/shop/checkout_success.php [L]
+    RewriteRule ^shop/checkout/failure$ pages/shop/checkout_failure.php [L]
+    RewriteRule ^shop/add-to-cart$ pages/shop/add_to_cart.php [L]
+    RewriteRule ^shop/update-cart$ pages/shop/update_cart.php [L]
+    RewriteRule ^shop/remove-from-cart$ pages/shop/remove_from_cart.php [L]
+    RewriteRule ^blog$ pages/articleshomepage.php [L]
 
     # Redirect requests for sitemap.xml to sitemap.php
     RewriteRule ^sitemap\.xml$ /sitemap.php [L]
 
     # Handle the new URL structure with category slug and article slug
-    RewriteRule ^([a-zA-Z0-9_-]+)/([a-zA-Z0-9_-]+)$ pages/article.php?category_slug=$1&slug=$2 [L]
+    RewriteRule ^blog/([a-zA-Z0-9_-]+)/([a-zA-Z0-9_-]+)$ pages/article.php?category_slug=$1&slug=$2 [L]
 
     # Handle the URL structure for category pages
-    RewriteRule ^([a-zA-Z0-9_-]+)$ pages/category.php?category_slug=$1 [L]
+    RewriteRule ^blog/([a-zA-Z0-9_-]+)$ pages/category.php?category_slug=$1 [L]
+
+    #URL structure for product pages
+    RewriteRule ^shop/([a-zA-Z0-9_-]+)/([a-zA-Z0-9_-]+)$ pages/shop/product.php?category_slug=$1&product_slug=$2 [L,QSA]
+
     
     # Optional: Redirect trailing slash to non-trailing slash for consistency
     RewriteCond %{REQUEST_FILENAME} !-d

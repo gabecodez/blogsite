@@ -36,7 +36,7 @@
 ?>
 
 <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-RQE6HS5H7S"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-R3VZFYJ575"></script>
 <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
@@ -51,7 +51,7 @@
         'security_storage': 'granted'
     });
 
-    gtag('config', 'G-RQE6HS5H7S');
+    gtag('config', 'G-R3VZFYJ575');
 </script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -62,3 +62,5 @@
 <link rel="apple-touch-icon" href="https://www.blueskyhomesteading.com/images/logos/blueskyfav.png">
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Nunito:ital,wght@0,900;1,900&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Domine:wght@400..700&display=swap" rel="stylesheet">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7669980320440394"
+     crossorigin="anonymous"></script>

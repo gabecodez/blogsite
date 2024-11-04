@@ -40,10 +40,13 @@
 
 include 'includes/databaseconnection.php';
 
-// Query to get the latest articles along with their category slugs
-$sql = "SELECT articles.slug AS article_slug, articles.title, articles.meta_description, articles.image_url, articles.image_alt_text, categories.slug AS category_slug 
+// Query to get the latest articles along with their category slugs and image data
+$sql = "SELECT articles.slug AS article_slug, articles.title, articles.meta_description, articles.image_id, categories.slug AS category_slug, 
+               images.image_url, images.alttext, images.caption, images.credit, images.credit_url 
         FROM articles 
         JOIN categories ON articles.category = categories.name 
+        LEFT JOIN images ON articles.image_id = images.id 
+        WHERE articles.public = 1
         ORDER BY articles.published_date DESC 
         LIMIT 10";
 $result = $conn->query($sql);
@@ -92,7 +95,7 @@ $conn->close();
                 <h1>Sow, harvest, and flourish—your homestead journey starts here.</h1>
                 <div class="banner-buttons">
                     <a href="https://www.blueskyhomesteading.com/shop" class="btn">Shop</a>
-                    <a href="https://www.blueskyhomesteading.com/articles" class="btn secondary">Blog</a>
+                    <a href="https://www.blueskyhomesteading.com/blog" class="btn secondary">Blog</a>
                 </div>
             </div>
             <div class="banner-image">
@@ -103,35 +106,50 @@ $conn->close();
         <section class="frontpage">
             <h2 class="section-header">Featured Articles</h2>
             <?php
-            if (!empty($articles)) {
-                $counter = 1;
-                foreach ($articles as $article) {
-                    if($counter == 1) {
-                        echo '<a class="top-article" href="https://www.blueskyhomesteading.com/'.htmlspecialchars($article['category_slug']).'/'.htmlspecialchars($article['article_slug']).'">';
-                        echo '<img src="'.$article['image_url'].'" alt="'.$article['image_alt_text'].'" class="frontpage-article-image" />';
-                    } else if($counter == 2) {
-                        echo '<div class="latest-part">';
-                            echo '<a class="latest-article" href="https://www.blueskyhomesteading.com/'.htmlspecialchars($article['category_slug']).'/'.htmlspecialchars($article['article_slug']).'">';
-                    } else if($counter > 2 && $counter <= 5) {
-                        echo '<a class="latest-article" href="https://www.blueskyhomesteading.com/'.htmlspecialchars($article['category_slug']).'/'.htmlspecialchars($article['article_slug']).'">';
-                    }
-                    echo '<div class="frontpage-article-text">';
-                        echo '<h3>'.htmlspecialchars($article['title']).'</h3>';
-                        if($counter == 1) {
-                            echo '<p>'.htmlspecialchars($article['meta_description']).'</p>';
+                if (!empty($articles)) {
+                    $counter = 1;
+                    foreach ($articles as $article) {
+                        if ($counter == 1) {
+                            echo '<a class="top-article" href="https://www.blueskyhomesteading.com/blog/'.htmlspecialchars($article['category_slug']).'/'.htmlspecialchars($article['article_slug']).'">';
+                                echo '<div class="frontpage-article-image-parent">';
+                                if (!empty($article['image_url'])) {
+                                    echo '<img src="'.htmlspecialchars($article['image_url']).'" alt="'.htmlspecialchars($article['alttext']).'" class="frontpage-article-image">';
+                                }
+                                echo '</div>';
+                                echo '<div class="frontpage-article-text">';
+                                    echo '<h3>'.htmlspecialchars($article['title']).'</h3>';
+                                    echo '<p>'.htmlspecialchars($article['meta_description']).'</p>';
+                                echo '</div>';
+                                echo '</div>';
+                            echo '</a>';
+                        } else if ($counter == 2) {
+                            echo '<div class="latest-part">';
+                                echo '<a class="latest-article" href="https://www.blueskyhomesteading.com/blog/'.htmlspecialchars($article['category_slug']).'/'.htmlspecialchars($article['article_slug']).'">';
+                                    echo '<div class="article-image">';
+                                    if (!empty($article['image_url'])) {
+                                        echo '<img src="'.htmlspecialchars($article['image_url']).'" alt="'.htmlspecialchars($article['alttext']).'" class="responsive-img">';
+                                    }
+                                    echo '</div>';
+                                    echo '<div class="frontpage-article-text">';
+                                        echo '<h3>'.htmlspecialchars($article['title']).'</h3>';
+                                    echo '</div>';
+                                echo '</a>';
+                        } else if ($counter > 2 && $counter <= 5) {
+                                echo '<a class="latest-article" href="https://www.blueskyhomesteading.com/blog/'.htmlspecialchars($article['category_slug']).'/'.htmlspecialchars($article['article_slug']).'">';
+                                    echo '<div class="frontpage-article-text">';
+                                        echo '<h3>'.htmlspecialchars($article['title']).'</h3>';
+                                    echo '</div>';
+                                echo '</a>';
                         }
-                    echo '</div>';
-                    echo '</a>';
+                        if ($counter == 5) {
+                            echo '</div>';
+                        }
 
-                    if($counter == 5) {
-                        echo '</div>';
+                        $counter++;
                     }
-
-                    $counter++;
+                } else {
+                    echo "No articles found.";
                 }
-            } else {
-                echo "No articles found.";
-            }
             ?>
         </section>
     </main>

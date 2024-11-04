@@ -45,7 +45,7 @@ $category_slug = isset($_GET['category_slug']) ? $_GET['category_slug'] : '';
 
 if ($category_slug) {
     // Retrieve the category from the category_slug
-    $stmt = $conn->prepare("SELECT name FROM categories WHERE slug = ?");
+    $stmt = $conn->prepare("SELECT name, subheading, description FROM categories WHERE slug = ?");
     $stmt->bind_param("s", $category_slug);
     $stmt->execute();
     $result = $stmt->get_result();
@@ -55,7 +55,7 @@ if ($category_slug) {
         $category = $category_data['name'];
 
         // Fetch articles from the given category
-        $stmt = $conn->prepare("SELECT slug, title, meta_description FROM articles WHERE category = ? ORDER BY published_date DESC");
+        $stmt = $conn->prepare("SELECT slug, title, meta_description FROM articles WHERE category = ? AND public = 1 ORDER BY published_date DESC");
         $stmt->bind_param("s", $category);
         $stmt->execute();
         $result = $stmt->get_result();
@@ -90,22 +90,22 @@ $conn->close();
 <html lang="en">
 <head>
     <?php include '../includes/head.php'; ?>
-    <title>Articles in <?php echo htmlspecialchars($category); ?> - BlueSkyHomesteading</title>
-    <meta name="description" content="Articles in the category <?php echo htmlspecialchars($category); ?> from BlueSkyHomesteading.">
+    <title>Articles in <?php echo htmlspecialchars($category); ?> - BlueSky Homesteading</title>
+    <meta name="description" content="<?php echo htmlspecialchars($category_data['description']); ?>">
     <meta name="keywords" content="homesteading, articles, <?php echo htmlspecialchars($category); ?>">
     <meta property="og:title" content="Articles in <?php echo htmlspecialchars($category); ?> - BlueSkyHomesteading">
-    <meta property="og:description" content="Articles in the category <?php echo htmlspecialchars($category); ?> from BlueSkyHomesteading.">
+    <meta property="og:description" content="<?php echo htmlspecialchars($category_data['description']); ?>">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://www.blueskyhomesteading.com/<?php echo htmlspecialchars($category_slug); ?>">
+    <meta property="og:url" content="https://www.blueskyhomesteading.com/blog/<?php echo htmlspecialchars($category_slug); ?>">
     <meta name="twitter:card" content="summary_large_image">
-    <link rel="canonical" href="https://www.blueskyhomesteading.com/<?php echo htmlspecialchars($category_slug); ?>">
+    <link rel="canonical" href="https://www.blueskyhomesteading.com/blog/<?php echo htmlspecialchars($category_slug); ?>">
     <script type="application/ld+json">
         {
             "@context": "https://schema.org",
             "@type": "WebSite",
-            "name": "BlueSkyHomesteading",
-            "url": "https://www.blueskyhomesteading.com",
-            "description": "BlueSkyHomesteading offers articles in the category <?php echo htmlspecialchars($category); ?>."
+            "name": "Articles in <?php echo htmlspecialchars($category); ?> - BlueSky Homesteading",
+            "url": "https://www.blueskyhomesteading.com/blog<php echo htmlspecialchars($category_slug); ?>",
+            "description": "<?php echo htmlspecialchars($category_data['description']); ?>"
         }
     </script>
 </head>
@@ -115,13 +115,14 @@ $conn->close();
     <main class="main-page">
         <header class="article__list__header">
             <h1><?php echo htmlspecialchars($category); ?></h1>
-            <p>Explore articles related to <?php echo htmlspecialchars($category); ?>.</p>
+            <h3><?php echo htmlspecialchars($category_data['subheading']); ?></h3>
+            <p><?php echo htmlspecialchars($category_data['description']); ?></p>
         </header>
         <div class="main-part">
             <?php
             if (!empty($articles)) {
                 foreach ($articles as $article) {
-                    echo '<a class="latest-article" href="https://www.blueskyhomesteading.com/' . htmlspecialchars($category_slug) . '/' . htmlspecialchars($article['slug']) . '">';
+                    echo '<a class="latest-article" href="https://www.blueskyhomesteading.com/blog/' . htmlspecialchars($category_slug) . '/' . htmlspecialchars($article['slug']) . '">';
                     echo '<h3>' . htmlspecialchars($article['title']) . '</h3>';
                     echo '<p>' . htmlspecialchars($article['meta_description']) . '</p>';
                     echo '</a>';
