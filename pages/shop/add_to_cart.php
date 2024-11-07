@@ -20,7 +20,7 @@ if ($product_id > 0) {
             $stmt->bind_param("ii", $new_quantity, $cart_item['id']);
             $stmt->execute();
         } else {
-            $stmt = $shop_conn->prepare("INSERT INTO cart (session_id, product_id, quantity) VALUES (?, ?, ?)");
+            $stmt = $shop_conn->prepare("INSERT INTO cart (session_id, product_id, quantity, included_for_checkout) VALUES (?, ?, ?)");
             $stmt->bind_param("sii", $session_id, $product_id, $quantity);
             $stmt->execute();
         }

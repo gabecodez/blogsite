@@ -113,7 +113,7 @@ $conn->close();
                             echo '<a class="top-article" href="https://www.blueskyhomesteading.com/blog/'.htmlspecialchars($article['category_slug']).'/'.htmlspecialchars($article['article_slug']).'">';
                                 echo '<div class="frontpage-article-image-parent">';
                                 if (!empty($article['image_url'])) {
-                                    echo '<img src="'.htmlspecialchars($article['image_url']).'" alt="'.htmlspecialchars($article['alttext']).'" class="frontpage-article-image">';
+                                    echo '<img src="'.htmlspecialchars($article['image_url']).'" alt="'.htmlspecialchars($article['alttext']).'" class="frontpage-article-image" loading="lazy">';
                                 }
                                 echo '</div>';
                                 echo '<div class="frontpage-article-text">';
@@ -127,7 +127,7 @@ $conn->close();
                                 echo '<a class="latest-article" href="https://www.blueskyhomesteading.com/blog/'.htmlspecialchars($article['category_slug']).'/'.htmlspecialchars($article['article_slug']).'">';
                                     echo '<div class="article-image">';
                                     if (!empty($article['image_url'])) {
-                                        echo '<img src="'.htmlspecialchars($article['image_url']).'" alt="'.htmlspecialchars($article['alttext']).'" class="responsive-img">';
+                                        echo '<img src="'.htmlspecialchars($article['image_url']).'" alt="'.htmlspecialchars($article['alttext']).'" class="responsive-img" loading="lazy">';
                                     }
                                     echo '</div>';
                                     echo '<div class="frontpage-article-text">';

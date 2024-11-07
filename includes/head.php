@@ -53,14 +53,18 @@
 
     gtag('config', 'G-R3VZFYJ575');
 </script>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="https://www.blueskyhomesteading.com/styles/styles.css?ver=1.21">
+
+<!-- Favicon Preload -->
+<link rel="preload" href="https://www.blueskyhomesteading.com/images/logos/blueskyfav.png" as="image" type="image/png">
+<link rel="icon" href="https://www.blueskyhomesteading.com/images/logos/blueskyfav.png" type="image/png">
+
+<!-- Google Fonts Preconnect and Preload -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="icon" href="https://www.blueskyhomesteading.com/images/logos/blueskyfav.png" type="image/png">
-<link rel="apple-touch-icon" href="https://www.blueskyhomesteading.com/images/logos/blueskyfav.png">
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Nunito:ital,wght@0,900;1,900&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Domine:wght@400..700&display=swap" rel="stylesheet">
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7669980320440394"
-     crossorigin="anonymous"></script>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Nunito:ital,wght@0,900;1,900&family=Domine:wght@400..700&family=Inter:ital,opsz,wght@0,14..32,100..900&display=swap" rel="stylesheet">
+
+<!-- Stylesheet -->
+<link rel="stylesheet" href="https://www.blueskyhomesteading.com/styles/styles.css?ver=1.21">
+
+<!-- Ads (deferred loading) -->
+<script defer src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7669980320440394" crossorigin="anonymous"></script>

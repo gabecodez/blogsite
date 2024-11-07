@@ -1,4 +1,6 @@
 <?php
+// checkout.php
+
 require '../../../../vendor/autoload.php'; // Ensure you have the Stripe PHP library installed via Composer
 include '../../includes/databaseconnection.php';
 include '../../includes/shop_databaseconnection.php';
@@ -67,7 +69,7 @@ $session = \Stripe\Checkout\Session::create([
     'line_items' => $line_items,
     'mode' => 'payment',
     'success_url' => 'https://www.blueskyhomesteading.com/shop/checkout/success',
-    'cancel_url' => 'https://www.blueskyhomesteading.com/shop/checkout/failure',
+    'cancel_url' => 'https://www.blueskyhomesteading.com/shop/cart?status=1',
 ]);
 
 header('Location: ' . $session->url);

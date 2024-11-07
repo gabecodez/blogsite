@@ -1073,7 +1073,7 @@ footer {
     margin-top: 15px;
     border-radius: 4px;
     text-align: center;
-    font-family: "JetBrains Mono", monospace;
+    font-family: "Inter", sans-serif;
     font-optical-sizing: auto;
     font-weight: 500;
     font-style: normal;
@@ -1087,7 +1087,7 @@ footer {
     margin-top: 15px;
     border-radius: 4px;
     text-align: center;
-    font-family: "JetBrains Mono", monospace;
+    font-family: "Inter", sans-serif;
     font-optical-sizing: auto;
     font-weight: 500;
     font-style: normal;
@@ -1194,6 +1194,154 @@ button:hover,
 
 .checkout-button:hover {
     background-color: #229954;
+}
+
+.cart-page {
+    max-width: 1100px;
+    width: 96%;
+    margin: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 20px;
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+}
+
+.cart-content {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.items-list {
+    flex: 2;
+}
+
+.total-section {
+    flex: 1;
+}
+
+.cart-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+.cart-item:last-child {
+    border-bottom: none;
+}
+
+/* Checkbox styling */
+.item-checkbox {
+    margin-right: 10px;
+    transform: scale(1.2);
+}
+
+/* Item name link styling */
+.cart-item a {
+    text-decoration: none;
+    color: #333;
+    flex-grow: 1;
+    margin: 0 10px;
+    font-weight: 500;
+}
+
+/* Number input styling */
+.item-quantity {
+    width: 50px;
+    padding: 5px;
+    font-size: 16px;
+    text-align: center;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-right: 10px;
+}
+
+/* Item price styling */
+span[id^="item-price-"] {
+    font-weight: bold;
+    color: #555;
+    min-width: 80px;
+    text-align: right;
+}
+
+/* Remove button styling */
+.cart-item button {
+    display: flex;
+    align-items: center;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    color: #d81a1a;
+    font-weight: bold;
+    font-size: 14px;
+    max-width: 100px;
+    transition: color 0.3s;
+}
+
+.cart-item button:hover {
+    color: #ff4a4a;
+}
+
+.cart-item button svg {
+    margin-right: 5px;
+    transition: fill 0.3s;
+}
+
+.cart-item button:hover svg {
+    fill: #ff4a4a;
+}
+
+/* Total Price and Checkout Button */
+.total-price {
+    font-size: 1.3rem;
+    font-weight: bold;
+    text-align: right;
+    padding: 20px 0;
+    margin-top: 20px;
+}
+
+.checkout-button {
+    display: block;
+    text-align: center;
+    background-color: #000013;
+    color: #fff;
+    padding: 10px;
+    border-radius: 999999px;
+    font-size: 1.2rem;
+    text-decoration: none;
+    margin: 20px 0;
+    transition: background-color 0.3s;
+    font-weight: 700;
+}
+
+.checkout-button:hover {
+    background-color: #070d3a;
+}
+
+/* Transaction Status Message */
+.cart-page .error-message {
+    color: white;
+    background-color: red;
+    width: 100%;
+    border-radius: 8px;
+    padding: 0.6em;
+    display: block;
+    font-size: 1em;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.cart-page .small-note {
+    font-size: 1em;
+    text-align: left;
+    width: 100%;
+    color: black;
 }
 
 /* Responsive Styles */

@@ -1,4 +1,6 @@
 <?php
+// remove_from_cart.php
+
 session_start();
 include '../../includes/shop_databaseconnection.php';
 
