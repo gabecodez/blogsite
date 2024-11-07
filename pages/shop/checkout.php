@@ -36,30 +36,32 @@ if (isset($_GET['product_id'])) {
     }
 } else {
     // Retrieve cart items for this session
-    $stmt = $shop_conn->prepare("SELECT product_id, quantity FROM cart WHERE session_id = ?");
+    $stmt = $shop_conn->prepare("SELECT product_id, quantity, include_for_checkout FROM cart WHERE session_id = ?");
     $stmt->bind_param("s", $session_id);
     $stmt->execute();
     $result = $stmt->get_result();
 
     while ($cart_item = $result->fetch_assoc()) {
-        // Fetch product details to create line items
-        $product_stmt = $conn->prepare("SELECT name, price FROM products WHERE id = ?");
-        $product_stmt->bind_param("i", $cart_item['product_id']);
-        $product_stmt->execute();
-        $product_result = $product_stmt->get_result();
+        if($cart_item['include_for_checkout'] == 1) {
+            // Fetch product details to create line items
+            $product_stmt = $conn->prepare("SELECT name, price FROM products WHERE id = ?");
+            $product_stmt->bind_param("i", $cart_item['product_id']);
+            $product_stmt->execute();
+            $product_result = $product_stmt->get_result();
 
-        if ($product_result->num_rows > 0) {
-            $product = $product_result->fetch_assoc();
-            $line_items[] = [
-                'price_data' => [
-                    'currency' => 'usd',
-                    'product_data' => [
-                        'name' => $product['name'],
+            if ($product_result->num_rows > 0) {
+                $product = $product_result->fetch_assoc();
+                $line_items[] = [
+                    'price_data' => [
+                        'currency' => 'usd',
+                        'product_data' => [
+                            'name' => $product['name'],
+                        ],
+                        'unit_amount' => $product['price'] * 100, // Stripe expects the amount in cents
                     ],
-                    'unit_amount' => $product['price'] * 100, // Stripe expects the amount in cents
-                ],
-                'quantity' => $cart_item['quantity'],
-            ];
+                    'quantity' => $cart_item['quantity'],
+                ];
+            }
         }
     }
 }

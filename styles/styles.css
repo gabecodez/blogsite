@@ -1511,6 +1511,10 @@ span[id^="item-price-"] {
         flex: 1 1 calc(50% - 10px); /* Two images per row on medium screens */
     }
 
+    .cart-content {
+        flex-direction: column;
+    }
+
     #quantity,
     button,
     .checkout-button {

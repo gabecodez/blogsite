@@ -136,6 +136,27 @@ foreach ($cart_items as $item) {
             });
         }
 
+        document.querySelectorAll('.item-checkbox').forEach(checkbox => {
+            checkbox.addEventListener('change', function() {
+                const itemId = this.dataset.itemId;
+                const includeForCheckout = this.checked ? 1 : 0;
+
+                fetch('<?php echo SITE_URL ?>/shop/update-include-for-checkout', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: new URLSearchParams({ 'item_id': itemId, 'include_for_checkout': includeForCheckout })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        updateTotalPrice();
+                    } else {
+                        alert(data.message);
+                    }
+                });
+            });
+        });
+
         document.querySelectorAll('.item-quantity').forEach(input => {
             input.addEventListener('change', function() {
                 const itemId = this.dataset.itemId;
@@ -157,8 +178,6 @@ foreach ($cart_items as $item) {
                 });
             });
         });
-
-        document.querySelectorAll('.item-checkbox').forEach(checkbox => checkbox.addEventListener('change', updateTotalPrice));
 
         function removeItem(itemId) {
             fetch('<?php echo SITE_URL ?>/shop/remove-from-cart', {

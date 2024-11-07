@@ -23,6 +23,7 @@
     RewriteRule ^shop/checkout/failure$ pages/shop/checkout_failure.php [L]
     RewriteRule ^shop/add-to-cart$ pages/shop/add_to_cart.php [L]
     RewriteRule ^shop/update-cart$ pages/shop/update_cart.php [L]
+    RewriteRule ^shop/update-include-for-checkout$ pages/shop/update_include_for_checkout.php [L]
     RewriteRule ^shop/calculate-total$ pages/shop/calculate_total.php [L]
     RewriteRule ^shop/remove-from-cart$ pages/shop/remove_from_cart.php [L]
     RewriteRule ^blog$ pages/articleshomepage.php [L]
