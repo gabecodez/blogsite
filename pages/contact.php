@@ -49,12 +49,51 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['ajax']) && $_POST['aja
 <!DOCTYPE html>
 <html lang="en">
 
+
 <head>
-   <?php include '../includes/head.php'; ?>
-   <title>Contact Us - BlueSky Homesteading</title>
-   <meta name="description" content="Get in touch with BlueSky Homesteading. We look forward to hearing from you!">
-   <meta name="keywords" content="homesteading, contact us, support, inquiries">
-   <script src="https://www.google.com/recaptcha/api.js?render=6Lf9H28qAAAAAO9rrWq56gHZnn4gRoN3s5Ul-_OS"></script>
+    <?php
+    include '../includes/head.php';
+    $pageTitle = "Contact Us - BlueSky Homesteading";
+    $pageDescription = "Get in touch with BlueSky Homesteading. We look forward to hearing from you!";
+    $imageURL = "https://www.blueskyhomesteading.com/images/social_media_previews/basic_white_bg_w_logo.jpeg";
+    $pageURL = "https://www.blueskyhomesteading.com/contact";
+    $siteName = "BlueSky Homesteading";
+    ?>
+    <title><?php echo $pageTitle; ?></title>
+    <link rel="canonical" href="<?php echo $pageURL; ?>">
+    <meta name="description" content="<?php echo htmlspecialchars($pageDescription); ?>">
+    <meta name="keywords" content="homesteading, contact us, support, inquiries">
+    <meta name="author" content="BlueSky Homesteading">
+    <meta property="og:title" content="<?php echo htmlspecialchars($pageTitle); ?>">
+    <meta property="og:description" content="<?php echo htmlspecialchars($pageDescription); ?>">
+    <meta property="og:image" content="<?php echo htmlspecialchars($imageURL); ?>">
+    <meta property="og:url" content="<?php echo htmlspecialchars($pageURL); ?>">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="<?php echo htmlspecialchars($siteName); ?>">
+    <meta property="og:locale" content="en_US">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="<?php echo htmlspecialchars($twitterHandle); ?>">
+    <meta name="twitter:title" content="<?php echo htmlspecialchars($pageTitle); ?>">
+    <meta name="twitter:description" content="<?php echo htmlspecialchars($pageDescription); ?>">
+    <meta name="twitter:image" content="<?php echo htmlspecialchars($imageURL); ?>">
+    <meta name="twitter:url" content="<?php echo htmlspecialchars($pageURL); ?>">
+    <meta name="twitter:creator" content="<?php echo htmlspecialchars($creatorHandle); ?>">
+    <meta name="linkedin:card" content="summary_large_image">
+    <meta name="linkedin:title" content="<?php echo htmlspecialchars($pageTitle); ?>">
+    <meta name="linkedin:description" content="<?php echo htmlspecialchars($pageDescription); ?>">
+    <meta name="linkedin:image" content="<?php echo htmlspecialchars($imageURL); ?>">
+    <meta name="twitter:domain" content="blueskyhomesteading.com">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "<?php echo $pageTitle; ?>",
+        "url": "<?php echo $pageURL; ?>",
+        "description": "<?php echo $pageDescription; ?>"
+    }
+    </script>
+
+    <script src="https://www.google.com/recaptcha/api.js?render=6Lf9H28qAAAAAO9rrWq56gHZnn4gRoN3s5Ul-_OS"></script>
    <script>
       document.addEventListener("DOMContentLoaded", function() {
          // Function to handle form submission

@@ -36,13 +36,13 @@ if (isset($_GET['product_id'])) {
     }
 } else {
     // Retrieve cart items for this session
-    $stmt = $shop_conn->prepare("SELECT product_id, quantity, include_for_checkout FROM cart WHERE session_id = ?");
+    $stmt = $shop_conn->prepare("SELECT product_id, quantity FROM cart WHERE session_id = ?");
     $stmt->bind_param("s", $session_id);
     $stmt->execute();
     $result = $stmt->get_result();
-
-    while ($cart_item = $result->fetch_assoc()) {
-        if($cart_item['include_for_checkout'] == 1) {
+    
+    if ($result->num_rows > 0) {
+        while ($cart_item = $result->fetch_assoc()) {
             // Fetch product details to create line items
             $product_stmt = $conn->prepare("SELECT name, price FROM products WHERE id = ?");
             $product_stmt->bind_param("i", $cart_item['product_id']);
@@ -63,6 +63,9 @@ if (isset($_GET['product_id'])) {
                 ];
             }
         }
+    } else {
+        echo 'An error has occurred.';
+        exit();
     }
 }
 

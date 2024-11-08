@@ -68,23 +68,45 @@ if ($result->num_rows > 0) {
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <?php include '../includes/head.php'; ?>
-    <title>Latest Blog Posts - BlueSky Homesteading</title>
-    <meta name="description" content="Discover the latest articles and resources for homesteading enthusiasts.">
+    <?php
+    include '../includes/head.php';
+    $pageTitle = "Latest Blog Posts - BlueSky Homesteading";
+    $pageDescription = "Discover the latest articles and resources for homesteading enthusiasts.";
+    $imageURL = "https://www.blueskyhomesteading.com/images/social_media_previews/basic_white_bg_w_logo.jpeg";
+    $pageURL = "https://www.blueskyhomesteading.com/blog";
+    $siteName = "BlueSky Homesteading";
+    ?>
+    <title><?php echo $pageTitle; ?></title>
+    <link rel="canonical" href="<?php echo $pageURL; ?>">
+    <meta name="description" content="<?php echo htmlspecialchars($pageDescription); ?>">
     <meta name="keywords" content="homesteading, articles, resources, tips, self-sufficiency">
-    <meta property="og:title" content="Latest Articles - BlueSky Homesteading">
-    <meta property="og:description" content="Explore the newest articles from BlueSky Homesteading.">
+    <meta name="author" content="BlueSky Homesteading">
+    <meta property="og:title" content="<?php echo htmlspecialchars($pageTitle); ?>">
+    <meta property="og:description" content="<?php echo htmlspecialchars($pageDescription); ?>">
+    <meta property="og:image" content="<?php echo htmlspecialchars($imageURL); ?>">
+    <meta property="og:url" content="<?php echo htmlspecialchars($pageURL); ?>">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://www.blueskyhomesteading.com/blog">
+    <meta property="og:site_name" content="<?php echo htmlspecialchars($siteName); ?>">
+    <meta property="og:locale" content="en_US">
     <meta name="twitter:card" content="summary_large_image">
-    <link rel="canonical" href="https://www.blueskyhomesteading.com/blog">
+    <meta name="twitter:site" content="<?php echo htmlspecialchars($twitterHandle); ?>">
+    <meta name="twitter:title" content="<?php echo htmlspecialchars($pageTitle); ?>">
+    <meta name="twitter:description" content="<?php echo htmlspecialchars($pageDescription); ?>">
+    <meta name="twitter:image" content="<?php echo htmlspecialchars($imageURL); ?>">
+    <meta name="twitter:url" content="<?php echo htmlspecialchars($pageURL); ?>">
+    <meta name="twitter:creator" content="<?php echo htmlspecialchars($creatorHandle); ?>">
+    <meta name="linkedin:card" content="summary_large_image">
+    <meta name="linkedin:title" content="<?php echo htmlspecialchars($pageTitle); ?>">
+    <meta name="linkedin:description" content="<?php echo htmlspecialchars($pageDescription); ?>">
+    <meta name="linkedin:image" content="<?php echo htmlspecialchars($imageURL); ?>">
+    <meta name="twitter:domain" content="blueskyhomesteading.com">
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
         "@type": "WebSite",
-        "name": "Latest Blog Posts - BlueSky Homesteading",
-        "url": "https://www.blueskyhomesteading.com/blog",
-        "description": "The latest blog posts for BlueSky Homesteading"
+        "name": "<?php echo $pageTitle; ?>",
+        "url": "<?php echo $pageURL; ?>",
+        "description": "<?php echo $pageDescription; ?>"
     }
     </script>
 </head>

@@ -1,7 +1,6 @@
 <?php
 // cart.php
 
-include '../../includes/sitewide_std_vars.php';
 include '../../includes/shop_databaseconnection.php';
 include '../../includes/databaseconnection.php';
 session_start();
@@ -54,10 +53,42 @@ foreach ($cart_items as $item) {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <?php include '../../includes/head.php'; ?>
-    <title>Your Cart</title>
-    <link rel="stylesheet" href="<?php echo SITE_URL ?>/styles/styles.css">
+    <?php
+    include '../../includes/head.php';
+    $pageTitle = "Your Cart";
+    $pageDescription = "Your shopping cart";
+    $imageURL = "https://www.blueskyhomesteading.com/images/social_media_previews/basic_white_bg_w_logo.jpeg";
+    $pageURL = "https://www.blueskyhomesteading.com/shop/cart";
+    $siteName = "BlueSky Homesteading";
+    ?>
+    <title><?php echo $pageTitle; ?></title>
+    <link rel="canonical" href="<?php echo $pageURL; ?>">
+    <meta name="description" content="<?php echo htmlspecialchars($pageDescription); ?>">
+    <meta name="keywords" content="cart, shopping cart">
+    <meta name="author" content="BlueSky Homesteading">
+    <meta property="og:title" content="<?php echo htmlspecialchars($pageTitle); ?>">
+    <meta property="og:description" content="<?php echo htmlspecialchars($pageDescription); ?>">
+    <meta property="og:image" content="<?php echo htmlspecialchars($imageURL); ?>">
+    <meta property="og:url" content="<?php echo htmlspecialchars($pageURL); ?>">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="<?php echo htmlspecialchars($siteName); ?>">
+    <meta property="og:locale" content="en_US">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="<?php echo htmlspecialchars($twitterHandle); ?>">
+    <meta name="twitter:title" content="<?php echo htmlspecialchars($pageTitle); ?>">
+    <meta name="twitter:description" content="<?php echo htmlspecialchars($pageDescription); ?>">
+    <meta name="twitter:image" content="<?php echo htmlspecialchars($imageURL); ?>">
+    <meta name="twitter:url" content="<?php echo htmlspecialchars($pageURL); ?>">
+    <meta name="twitter:creator" content="<?php echo htmlspecialchars($creatorHandle); ?>">
+    <meta name="linkedin:card" content="summary_large_image">
+    <meta name="linkedin:title" content="<?php echo htmlspecialchars($pageTitle); ?>">
+    <meta name="linkedin:description" content="<?php echo htmlspecialchars($pageDescription); ?>">
+    <meta name="linkedin:image" content="<?php echo htmlspecialchars($imageURL); ?>">
+    <meta name="twitter:domain" content="blueskyhomesteading.com">
+</head>
+
 </head>
 <body>
     <?php include '../../includes/consentbanner.php'; ?>
@@ -69,7 +100,7 @@ foreach ($cart_items as $item) {
         if ($status === 1) {
             // Failure case
             // Implement failure handling logic here
-            echo '<p class="error-message">Your transaction could not be completed. Please try again. For help, please <a href="'.SITE_URL.'/contact">contact us.</a></p>';
+            echo '<p class="error-message">Your transaction could not be completed. Please try again. For help, please <a href="https://www.blueskyhomesteading.com/contact">contact us.</a></p>';
         } else {
             // Success case
         }
@@ -84,7 +115,6 @@ foreach ($cart_items as $item) {
                 <div class="items-list">
                 <?php foreach ($cart_items as $item): ?>
                     <div class="cart-item" data-item-id="<?php echo $item['id']; ?>">
-                        <input type="checkbox" class="item-checkbox" data-item-id="<?php echo $item['id']; ?>" checked>
                         <?php
                             $cat_stmt = $conn->prepare("SELECT slug FROM shop_categories WHERE public = 1 AND name = ?"); 
                             $cat_stmt->bind_param("s", $item['category']); 
@@ -94,7 +124,7 @@ foreach ($cart_items as $item) {
                                 $item_product = $result->fetch_assoc();
                             }
                         ?>
-                        <a href="<?php echo SITE_URL ?>/shop/<?php echo $item_product['slug']."/"; echo $item['slug']; ?>"><?php echo htmlspecialchars($item['name']); ?></a>
+                        <a href="https://www.blueskyhomesteading.com/shop/<?php echo $item_product['slug']."/"; echo $item['slug']; ?>"><?php echo htmlspecialchars($item['name']); ?></a>
                         <input type="number" class="item-quantity" data-item-id="<?php echo $item['id']; ?>" value="<?php echo $item['quantity']; ?>" min="1">
                         <span id="item-price-<?php echo $item['id']; ?>">$<?php echo number_format($item['price'] * $item['quantity'], 2); ?></span>
                         <button onclick="removeItem(<?php echo $item['id']; ?>)"><svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#d81a1a" style="vertical-align: middle;"><path d="M312-144q-29.7 0-50.85-21.15Q240-186.3 240-216v-480h-48v-72h192v-48h192v48h192v72h-48v479.57Q720-186 698.85-165T648-144H312Zm336-552H312v480h336v-480ZM384-288h72v-336h-72v336Zm120 0h72v-336h-72v336ZM312-696v480-480Z"/></svg><span>Remove</span></button>
@@ -103,8 +133,8 @@ foreach ($cart_items as $item) {
                 </div>
                 <div class="total-section">
                     <p class="total-price">Total: $<?php echo number_format($total_price, 2); ?></p>
-                    <a href="<?php echo SITE_URL ?>/shop/checkout" class="checkout-button">Checkout</a>
-                    <p class="small-note">Payment is securely handled by Stripe. Your satisfaction is our highest priority. Read about our <a href="<?php echo SITE_URL ?>/refunds">refunds and returns policy.</a></p>
+                    <a href="https://www.blueskyhomesteading.com/shop/checkout" class="checkout-button" id="checkout-button">Checkout</a>
+                    <p class="small-note">Payment is securely handled by Stripe. Your satisfaction is our highest priority. Read about our <a href="https://www.blueskyhomesteading.com/refunds">refunds and returns policy.</a></p>
                 </div>
             <?php endif; ?>
         </div>
@@ -116,16 +146,16 @@ foreach ($cart_items as $item) {
 
     <script>
         function updateTotalPrice() {
-            const checkedItems = document.querySelectorAll('.item-checkbox:checked');
+            const items = document.querySelectorAll('.cart-item');
             const itemData = [];
 
-            checkedItems.forEach(item => {
+            items.forEach(item => {
                 const itemId = item.dataset.itemId;
                 const quantity = document.querySelector(`.item-quantity[data-item-id="${itemId}"]`).value;
                 itemData.push({ id: itemId, quantity: quantity });
             });
 
-            fetch('<?php echo SITE_URL ?>/shop/calculate-total', {
+            fetch('https://www.blueskyhomesteading.com/shop/calculate-total', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
                 body: new URLSearchParams({ 'item_data': JSON.stringify(itemData) })
@@ -136,33 +166,12 @@ foreach ($cart_items as $item) {
             });
         }
 
-        document.querySelectorAll('.item-checkbox').forEach(checkbox => {
-            checkbox.addEventListener('change', function() {
-                const itemId = this.dataset.itemId;
-                const includeForCheckout = this.checked ? 1 : 0;
-
-                fetch('<?php echo SITE_URL ?>/shop/update-include-for-checkout', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                    body: new URLSearchParams({ 'item_id': itemId, 'include_for_checkout': includeForCheckout })
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        updateTotalPrice();
-                    } else {
-                        alert(data.message);
-                    }
-                });
-            });
-        });
-
         document.querySelectorAll('.item-quantity').forEach(input => {
             input.addEventListener('change', function() {
                 const itemId = this.dataset.itemId;
                 const quantity = this.value;
 
-                fetch('<?php echo SITE_URL ?>/shop/update-cart', {
+                fetch('https://www.blueskyhomesteading.com/shop/update-cart', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
                     body: new URLSearchParams({ 'item_id': itemId, 'quantity': quantity })
@@ -180,7 +189,7 @@ foreach ($cart_items as $item) {
         });
 
         function removeItem(itemId) {
-            fetch('<?php echo SITE_URL ?>/shop/remove-from-cart', {
+            fetch('https://www.blueskyhomesteading.com/shop/remove-from-cart', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
                 body: new URLSearchParams({ 'item_id': itemId })

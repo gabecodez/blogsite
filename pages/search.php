@@ -1,4 +1,5 @@
 <?php
+
 /**
  * PHP Script for Displaying Search Results on BlueSky Homesteading
  *
@@ -33,32 +34,71 @@
 
 <!DOCTYPE html>
 <html lang="en">
-   <head>
-      <?php include '../includes/head.php'; ?>
-      <title>BlueSky Homesteading - Search</title>
-      <meta name="description" content="Search our website.">
-      <meta name="keywords" content="homesteading, privacy, policy, resources, tips">
-      <link rel="canonical" href="https://www.blueskyhomesteading.com/search">
-   </head>
-   <body>
-      <?php include '../includes/consentbanner.php'; ?>
-      <?php include '../includes/navbar.php'; ?>
 
-      <main class="main-page">
-         <div class="article-content">
-            <header>
-               <div class="article-content">
-                  <h1>Search</h1>
-                  <p>Functionality is provided by Google.</p>
-               </div>
-            </header>
-            <div>
-               <script async src="https://cse.google.com/cse.js?cx=04cf003aa450442c3">
-               </script>
-               <div class="gcse-search"></div>
+<head>
+   <?php
+   include '../includes/head.php';
+   $pageTitle = "Search - BlueSky Homesteading";
+   $pageDescription = "Search our website.";
+   $imageURL = "https://www.blueskyhomesteading.com/images/social_media_previews/basic_white_bg_w_logo.jpeg";
+   $pageURL = "https://www.blueskyhomesteading.com/search";
+   $siteName = "BlueSky Homesteading";
+   ?>
+   <title><?php echo $pageTitle; ?></title>
+   <link rel="canonical" href="<?php echo $pageURL; ?>">
+   <meta name="description" content="<?php echo htmlspecialchars($pageDescription); ?>">
+   <meta name="keywords" content="homesteading, shop search, blog search, search">
+   <meta name="author" content="BlueSky Homesteading">
+   <meta property="og:title" content="<?php echo htmlspecialchars($pageTitle); ?>">
+   <meta property="og:description" content="<?php echo htmlspecialchars($pageDescription); ?>">
+   <meta property="og:image" content="<?php echo htmlspecialchars($imageURL); ?>">
+   <meta property="og:url" content="<?php echo htmlspecialchars($pageURL); ?>">
+   <meta property="og:type" content="website">
+   <meta property="og:site_name" content="<?php echo htmlspecialchars($siteName); ?>">
+   <meta property="og:locale" content="en_US">
+   <meta name="twitter:card" content="summary_large_image">
+   <meta name="twitter:site" content="<?php echo htmlspecialchars($twitterHandle); ?>">
+   <meta name="twitter:title" content="<?php echo htmlspecialchars($pageTitle); ?>">
+   <meta name="twitter:description" content="<?php echo htmlspecialchars($pageDescription); ?>">
+   <meta name="twitter:image" content="<?php echo htmlspecialchars($imageURL); ?>">
+   <meta name="twitter:url" content="<?php echo htmlspecialchars($pageURL); ?>">
+   <meta name="twitter:creator" content="<?php echo htmlspecialchars($creatorHandle); ?>">
+   <meta name="linkedin:card" content="summary_large_image">
+   <meta name="linkedin:title" content="<?php echo htmlspecialchars($pageTitle); ?>">
+   <meta name="linkedin:description" content="<?php echo htmlspecialchars($pageDescription); ?>">
+   <meta name="linkedin:image" content="<?php echo htmlspecialchars($imageURL); ?>">
+   <meta name="twitter:domain" content="blueskyhomesteading.com">
+   <script type="application/ld+json">
+      {
+         "@context": "https://schema.org",
+         "@type": "WebSite",
+         "name": "<?php echo $pageTitle; ?>",
+         "url": "<?php echo $pageURL; ?>",
+         "description": "<?php echo $pageDescription; ?>"
+      }
+   </script>
+</head>
+
+<body>
+   <?php include '../includes/consentbanner.php'; ?>
+   <?php include '../includes/navbar.php'; ?>
+
+   <main class="main-page">
+      <div class="article-content">
+         <header>
+            <div class="article-content">
+               <h1>Search</h1>
+               <p>Functionality is provided by Google.</p>
             </div>
+         </header>
+         <div>
+            <script async src="https://cse.google.com/cse.js?cx=04cf003aa450442c3">
+            </script>
+            <div class="gcse-search"></div>
          </div>
-      </main>
-      <?php include '../includes/footer.php'; ?>
-   </body>
+      </div>
+   </main>
+   <?php include '../includes/footer.php'; ?>
+</body>
+
 </html>

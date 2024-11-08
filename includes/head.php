@@ -65,6 +65,8 @@
 
 <!-- Stylesheet -->
 <link rel="stylesheet" href="https://www.blueskyhomesteading.com/styles/styles.css?ver=1.21">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="UTF-8">
 
 <!-- Ads (deferred loading) -->
 <script defer src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7669980320440394" crossorigin="anonymous"></script>

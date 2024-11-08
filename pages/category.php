@@ -88,18 +88,41 @@ $conn->close();
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <?php include '../includes/head.php'; ?>
-    <title>Articles in <?php echo htmlspecialchars($category); ?> - BlueSky Homesteading</title>
-    <meta name="description" content="<?php echo htmlspecialchars($category_data['description']); ?>">
-    <meta name="keywords" content="homesteading, articles, <?php echo htmlspecialchars($category); ?>">
-    <meta property="og:title" content="Articles in <?php echo htmlspecialchars($category); ?> - BlueSkyHomesteading">
-    <meta property="og:description" content="<?php echo htmlspecialchars($category_data['description']); ?>">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://www.blueskyhomesteading.com/blog/<?php echo htmlspecialchars($category_slug); ?>">
-    <meta name="twitter:card" content="summary_large_image">
-    <link rel="canonical" href="https://www.blueskyhomesteading.com/blog/<?php echo htmlspecialchars($category_slug); ?>">
-    <script type="application/ld+json">
+   <?php
+   include '../includes/head.php';
+   $pageTitle = "Articles in ".htmlspecialchars($category)." - BlueSky Homesteading";
+   $pageDescription = htmlspecialchars($category_data['description']);
+   $imageURL = "https://www.blueskyhomesteading.com/images/social_media_previews/basic_white_bg_w_logo.jpeg";
+   $pageURL = "https://www.blueskyhomesteading.com/blog/<?php echo htmlspecialchars($category_slug); ?>";
+   $siteName = "BlueSky Homesteading";
+   ?>
+   <title><?php echo $pageTitle; ?></title>
+   <link rel="canonical" href="<?php echo $pageURL; ?>">
+   <meta name="description" content="<?php echo htmlspecialchars($pageDescription); ?>">
+   <meta name="keywords" content="homesteading, articles, <?php echo htmlspecialchars($category); ?>">
+   <meta name="author" content="BlueSky Homesteading">
+   <meta property="og:title" content="<?php echo htmlspecialchars($pageTitle); ?>">
+   <meta property="og:description" content="<?php echo htmlspecialchars($pageDescription); ?>">
+   <meta property="og:image" content="<?php echo htmlspecialchars($imageURL); ?>">
+   <meta property="og:url" content="<?php echo htmlspecialchars($pageURL); ?>">
+   <meta property="og:type" content="website">
+   <meta property="og:site_name" content="<?php echo htmlspecialchars($siteName); ?>">
+   <meta property="og:locale" content="en_US">
+   <meta name="twitter:card" content="summary_large_image">
+   <meta name="twitter:site" content="<?php echo htmlspecialchars($twitterHandle); ?>">
+   <meta name="twitter:title" content="<?php echo htmlspecialchars($pageTitle); ?>">
+   <meta name="twitter:description" content="<?php echo htmlspecialchars($pageDescription); ?>">
+   <meta name="twitter:image" content="<?php echo htmlspecialchars($imageURL); ?>">
+   <meta name="twitter:url" content="<?php echo htmlspecialchars($pageURL); ?>">
+   <meta name="twitter:creator" content="<?php echo htmlspecialchars($creatorHandle); ?>">
+   <meta name="linkedin:card" content="summary_large_image">
+   <meta name="linkedin:title" content="<?php echo htmlspecialchars($pageTitle); ?>">
+   <meta name="linkedin:description" content="<?php echo htmlspecialchars($pageDescription); ?>">
+   <meta name="linkedin:image" content="<?php echo htmlspecialchars($imageURL); ?>">
+   <meta name="twitter:domain" content="blueskyhomesteading.com">
+   <script type="application/ld+json">
         {
             "@context": "https://schema.org",
             "@type": "WebSite",
@@ -109,6 +132,8 @@ $conn->close();
         }
     </script>
 </head>
+
+
 <body>
     <?php include '../includes/consentbanner.php'; ?>
     <?php include '../includes/navbar.php'; ?>
