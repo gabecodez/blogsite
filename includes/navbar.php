@@ -42,7 +42,7 @@
  */
 ?>
 
-<nav class="navbar" aria-label="Main Navigation">
+<nav class="navbar" id="navbar" aria-label="Main Navigation">
     <div class="navbar-indent">    
         <div class="navbar-brand">
             <a href="https://www.blueskyhomesteading.com" aria-label="BlueSky Homesteading Home">

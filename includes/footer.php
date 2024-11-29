@@ -39,8 +39,11 @@
                 <li><a href="https://www.blueskyhomesteading.com/about" title="About Us">About Us</a></li>
                 <li><a href="https://www.blueskyhomesteading.com/contact" title="Contact Us">Contact</a></li>
                 <li><a href="https://www.blueskyhomesteading.com/privacy" title="Privacy Policy">Privacy Policy</a></li>
+                <li><a href="https://www.blueskyhomesteading.com/shop/refunds" title="Refunds">Refunds</a></li>
                 <li><a href="https://www.blueskyhomesteading.com/search" title="Contact Us">Search</a></li>
-                <li><a href="https://www.facebook.com/BlueSky.Homestead23/" title="Contact Us">Follow us on Facebook</a></li>
+                <li><a href="https://www.facebook.com/BlueSky.Homestead23/" title="Facebook">Facebook</a></li>
+                <li><a href="https://www.instagram.com/bluesky.homestead/" title="Instagram">Instagram</a></li>
+                <li><a href="https://xt8aq0-3j.myshopify.com/" title="Shopify">Shopify</a></li>
             </ul>
         </nav>
         <div class="footer-bottom">

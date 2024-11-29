@@ -75,6 +75,9 @@ if ($result->num_rows > 0) {
     $imageURL = "https://www.blueskyhomesteading.com/images/social_media_previews/basic_white_bg_w_logo.jpeg";
     $pageURL = "https://www.blueskyhomesteading.com/blog";
     $siteName = "BlueSky Homesteading";
+    $creatorHandle = "";
+    $twitterHandle = "";
+
     ?>
     <title><?php echo $pageTitle; ?></title>
     <link rel="canonical" href="<?php echo $pageURL; ?>">
@@ -126,9 +129,7 @@ if ($result->num_rows > 0) {
                 echo '<a class="latest-article" href="https://www.blueskyhomesteading.com/blog/'.htmlspecialchars($article['category_slug']).'/'.htmlspecialchars($article['article_slug']).'">';
                     echo '<div class="frontpage-article-text">';
                     echo '<h3>'.htmlspecialchars($article['title']).'</h3>';
-                    if($counter == 1) {
-                        echo '<p>'.htmlspecialchars($article['meta_description']).'</p>';
-                    }
+                    echo '<p>'.htmlspecialchars($article['meta_description']).'</p>';
                 echo '</div>';
                 echo '</a>';
                 $counter++;

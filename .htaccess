@@ -26,6 +26,7 @@
     RewriteRule ^shop/update-include-for-checkout$ pages/shop/update_include_for_checkout.php [L]
     RewriteRule ^shop/calculate-total$ pages/shop/calculate_total.php [L]
     RewriteRule ^shop/remove-from-cart$ pages/shop/remove_from_cart.php [L]
+    RewriteRule ^shop/refunds$ pages/shop/refunds.php [L]
     RewriteRule ^blog$ pages/articleshomepage.php [L]
 
     # Redirect requests for sitemap.xml to sitemap.php
