@@ -62,6 +62,22 @@ if ($result->num_rows > 0) {
     $articles = [];
 }
 
+// Fetch latest products (e.g., the last 5 entries)
+$products_sql = "SELECT products.slug AS product_slug, products.name, products.meta_description, products.preview_image_ids, shop_categories.slug AS category_slug
+        FROM products 
+        JOIN shop_categories ON products.category = shop_categories.name
+        WHERE products.public = 1 
+        LIMIT 5";
+$result = $conn->query($products_sql);
+
+$products = [];
+if ($result->num_rows > 0) {
+    // Fetch the articles along with category slugs
+    while ($row = $result->fetch_assoc()) {
+        $products[] = $row;
+    }
+}
+
 $conn->close();
 ?>
 <!DOCTYPE html>
@@ -97,13 +113,28 @@ $conn->close();
             <div class="banner-content">
                 <h1>Sow, harvest, and flourish — your homestead journey starts here.</h1>
                 <div class="banner-buttons">
-                    <a href="https://www.blueskyhomesteading.com/shop" class="btn">Shop</a>
-                    <a href="https://www.blueskyhomesteading.com/blog" class="btn secondary">Blog</a>
+                    <a href="https://www.blueskyhomesteading.com/shop" class="btn">Shop our products</a>
+                    <a href="https://www.blueskyhomesteading.com/blog" class="btn secondary">Read our blog</a>
                 </div>
             </div>
         </header>
         <section class="frontpage">
-            <h2 class="section-header">Featured Articles</h2>
+            <h2>Explore the benefits of tallow for your skin health.</h2>
+        </section>
+        <section class="frontpage">
+            <h2 class="section-header">Shop Our Latest Health Products</h2>
+            <?php
+            if (!empty($products)) {
+                foreach ($products as $product) {
+                    echo '<a href="https://www.blueskyhomesteading.com/shop/' . htmlspecialchars($product['category_slug']) . '/' . htmlspecialchars($product['product_slug']) . '">';
+                        echo 'Tallow';
+                    echo '</a>';
+                }
+            }
+            ?>
+        </section>
+        <section class="frontpage">
+            <h2 class="section-header">Read Our Blog</h2>
             <?php
             if (!empty($articles)) {
                 $counter = 1;
@@ -123,12 +154,12 @@ $conn->close();
                         echo '</a>';
                     } else if ($counter == 2) {
                         echo '<div class="latest-part">';
-                        echo '<a class="latest-article" href="https://www.blueskyhomesteading.com/blog/' . htmlspecialchars($article['category_slug']) . '/' . htmlspecialchars($article['article_slug']) . '">';
-                        /*echo '<div class="article-image">';
-                                    if (!empty($article['image_url'])) {
-                                        echo '<img src="'.htmlspecialchars($article['image_url']).'" alt="'.htmlspecialchars($article['alttext']).'" class="responsive-img" loading="lazy">';
-                                    }
-                                    echo '</div>';*/
+                        echo '<a class="top-article" href="https://www.blueskyhomesteading.com/blog/' . htmlspecialchars($article['category_slug']) . '/' . htmlspecialchars($article['article_slug']) . '">';
+                        echo '<div class="frontpage-article-image-parent">';
+                        if (!empty($article['image_url'])) {
+                            echo '<img src="' . htmlspecialchars($article['image_url']) . '" alt="' . htmlspecialchars($article['alttext']) . '" class="frontpage-article-image" loading="lazy">';
+                        }
+                        echo '</div>';
                         echo '<div class="frontpage-article-text">';
                         echo '<h3>' . htmlspecialchars($article['title']) . '</h3>';
                         echo '<p>' . htmlspecialchars($article['meta_description']) . '</p>';
@@ -151,11 +182,6 @@ $conn->close();
                 echo "No articles found.";
             }
             ?>
-        </section>
-
-        <section class="frontpage">
-            <h2 class="section-header">Featured Products</h2>
-
         </section>
     </main>
     <?php include 'includes/footer.php'; ?>

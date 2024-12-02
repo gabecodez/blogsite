@@ -21,9 +21,9 @@ body {
     top: 0;
     z-index: 1000;
     width: 100%;
-    font-family: "JetBrains Mono", monospace;
+    font-family: "Inter", sans-serif;
     font-optical-sizing: auto;
-    font-weight: 700;
+    font-weight: 500;
     font-style: normal;
     border-bottom-style: solid;
     border-bottom-color: rgb(255, 255, 255);
@@ -567,11 +567,10 @@ nav[aria-label="breadcrumb"] li:last-child a {
     transition: border-color 0.3s ease, background-color 0.3s ease, color 0.3s ease;
     display: inline-block;
     cursor: pointer;
-    font-family: "JetBrains Mono", monospace;
+    font-family: "Inter", sans-serif;
     font-optical-sizing: auto;
     font-weight: 500;
     font-style: normal;
-    text-transform: uppercase;
 }
 
 .banner-buttons .btn.secondary { 
