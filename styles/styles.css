@@ -545,7 +545,8 @@ nav[aria-label="breadcrumb"] li:last-child a {
 
 .banner-content h1 {
     font-size: 2em;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
+    padding: 0;
 }
 
 /* Modern Button Styles */
@@ -559,13 +560,12 @@ nav[aria-label="breadcrumb"] li:last-child a {
     padding: 8px 20px;
     font-size: 1rem;
     color: white;
-    border: 2px solid black;
-    border-radius: 999999px;
-    background-color: black;
+    border-radius: 10px;
+    background-color: rgb(62, 78, 150);
     text-decoration: none;
     text-align: center;
-    transition: border-color 0.3s ease, background-color 0.3s ease, color 0.3s ease;
-    display: inline-block;
+    transition: border-color 0.3s ease, background-color 0.3s ease, color 0.3s ease, padding 0.3s ease;
+    display: block;
     cursor: pointer;
     font-family: "Inter", sans-serif;
     font-optical-sizing: auto;
@@ -584,12 +584,12 @@ nav[aria-label="breadcrumb"] li:last-child a {
     content: '';
     position: absolute;
     top: 50%;
-    right: -20px;
-    width: 30px;
+    right: 18px;
+    width: 14px;
     /* Length of the arrow shaft */
     height: 2px;
     /* Thickness of the arrow shaft */
-    background-color: black;
+    background-color: rgba(255, 255, 255, 0);
     transform: translateY(-50%);
     transition: border-color 0.3s ease, background-color 0.3s ease, right 0.3s ease, width 0.3s ease;
 }
@@ -598,11 +598,11 @@ nav[aria-label="breadcrumb"] li:last-child a {
     content: '';
     position: absolute;
     top: 50%;
-    right: -20px;
-    border: solid black;
+    right: 18px;
+    border: solid rgba(255, 255, 255, 0);
     border-width: 2px 2px 0 0;
-    width: 10px;
-    height: 10px;
+    width: 8px;
+    height: 8px;
     transform: translateY(-50%) rotate(45deg);
     transition: border-color 0.3s ease, background-color 0.3s ease, right 0.3s ease, width 0.3s ease;
 }
@@ -610,38 +610,20 @@ nav[aria-label="breadcrumb"] li:last-child a {
 /* Hover Effect */
 .banner-buttons .btn:hover {
     background-color: black;
-    border: 2px solid black;
     color: white;
+    padding-right: 40px;
 }
 
 .banner-buttons .btn:hover::after {
-    background-color: black;
-    /* Change the arrow color on hover */
-    right: -30px;
-    /* Move the arrow on hover */
-    width: 40px;
-    /* Increase the length of the arrow */
+    background-color: rgb(255, 255, 255);
 }
 
 .banner-buttons .btn:hover::before {
-    border-color: black;
-    /* Change arrowhead color */
-    right: -30px;
-    /* Move the arrowhead */
+    border-color: rgb(255, 255, 255);
 }
 
 .guides-part {
     grid-area: guides;
-    width: 100%;
-    display: block;
-    overflow: hidden;
-    max-width: 100%;
-    max-height: 100%;
-}
-
-/* Article layout */
-.latest-part {
-    grid-area: latest;
     width: 100%;
     display: block;
     overflow: hidden;
@@ -657,6 +639,7 @@ nav[aria-label="breadcrumb"] li:last-child a {
     max-height: 100%;
     align-items: stretch;
     justify-content: center;
+    gap: 20px;
 }
 
 .top-article {
@@ -1479,6 +1462,39 @@ span[id^="item-price-"] {
     color: black;
 }
 
+.product-preview-section {
+    display: flex;
+    align-items: center;
+}
+
+.see-more-btn {
+    position: relative;
+    padding: 8px 20px;
+    font-size: 1em;
+    color: black;
+    text-decoration: none;
+    text-align: center;
+    display: block;
+    cursor: pointer;
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+    flex: 1;
+}
+
+.product-preview {
+    display: block;
+    flex: 1;
+    overflow: hidden;
+    padding: 1em;
+    background-color: white;
+}
+
+.product-preview img {
+    width: 100%;
+}
+
 /* Responsive Styles */
 @media (max-width: 700px) {
 
@@ -1492,40 +1508,56 @@ span[id^="item-price-"] {
         display: flex;
     }
 
+    .navbar-brand {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
     .mobile-nav-panel {
-        display: none;
+        display: block;
+        pointer-events: none;
+        opacity: 0;
+        visibility: hidden; /* Prevents interaction while hidden */
+        transition: opacity 0.3s ease-in-out; /* Controls fade-in duration */
         position: fixed;
         top: 0;
         right: 0;
         width: 100%;
         height: 100%;
-        background-color: #141f1a;
+        background-color: #ffffff;
         z-index: 9999;
         padding-top: 60px;
         overflow-y: auto;
     }
 
     .mobile-nav-panel.open {
-        display: block;
+        pointer-events: auto;
+        opacity: 1;
+        visibility: visible;
     }
 
     .mobile-nav-panel ul {
         list-style-type: none;
         padding: 0;
+        padding-left: 20px;
     }
 
     .mobile-nav-panel ul li {
-        padding: 15px;
+        padding: 0.4em;
     }
 
     .mobile-nav-panel ul li ul {
-        padding-left: 40px;
+        padding-top: 10px;
+        padding-left: 10px;
     }
 
     .mobile-nav-panel ul li a {
-        color: rgb(255, 255, 255);
+        color: rgb(0, 0, 0);
         text-decoration: none;
         display: block;
+        font-size: 2em;
+        font-weight: 800;
+        line-height: 1em;
     }
 
     .mobile-nav-panel .close-panel {
@@ -1534,7 +1566,7 @@ span[id^="item-price-"] {
         right: 20px;
         background: none;
         border: none;
-        color: rgb(255, 255, 255);
+        color: rgb(0, 0, 0);
         font-size: 24px;
         cursor: pointer;
     }
@@ -1549,6 +1581,10 @@ span[id^="item-price-"] {
 
     .error-page-header h2 {
         font-size: 20px;
+    }
+
+    .latest-part {
+        flex-direction: column;
     }
 
     .latest-articles h2,
@@ -1598,16 +1634,23 @@ span[id^="item-price-"] {
 
     .banner-content {
         text-align: center;
-        padding: 10px;
     }
 
     .banner-buttons {
         gap: 35px;
-        padding-right: 20px;
     }
 
     .banner-buttons .btn {
         flex: 1;
+        display: block;
+    }
+
+    .banner-buttons .btn::after {
+        background-color: white;
+    }
+
+    .banner-buttons .btn::before {
+        border-color: white;
     }
 
     .banner-content h1 {

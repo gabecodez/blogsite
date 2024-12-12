@@ -77,8 +77,6 @@ if ($result->num_rows > 0) {
         $products[] = $row;
     }
 }
-
-$conn->close();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -110,31 +108,68 @@ $conn->close();
     <?php include 'includes/navbar.php'; ?>
     <main class="main-page">
         <header class="banner">
+            <div class="banner-image mobile">
+                <img src="https://www.blueskyhomesteading.com/images/rose-4372048_1280.png" alt="A flower" loading="lazy" />
+            </div>
+
             <div class="banner-content">
                 <h1>Sow, harvest, and flourish — your homestead journey starts here.</h1>
+                <p>Resources to inspire a healthy and sustainable lifestyle</p>
                 <div class="banner-buttons">
-                    <a href="https://www.blueskyhomesteading.com/shop" class="btn">Shop our products</a>
-                    <a href="https://www.blueskyhomesteading.com/blog" class="btn secondary">Read our blog</a>
+                    <a href="https://www.blueskyhomesteading.com/blog" class="btn">Read our blog</a>
                 </div>
+            </div>
+
+            <div class="banner-image desktop">
+                <img src="https://www.blueskyhomesteading.com/images/rose-4372048_1280.png" alt="A flower" loading="lazy" />
             </div>
         </header>
         <section class="frontpage">
-            <h2>Explore the benefits of tallow for your skin health.</h2>
+            <h2>As seen at:</h2>
         </section>
+
         <section class="frontpage">
-            <h2 class="section-header">Shop Our Latest Health Products</h2>
-            <?php
-            if (!empty($products)) {
-                foreach ($products as $product) {
-                    echo '<a href="https://www.blueskyhomesteading.com/shop/' . htmlspecialchars($product['category_slug']) . '/' . htmlspecialchars($product['product_slug']) . '">';
-                        echo 'Tallow';
-                    echo '</a>';
+            <h2 class="section-header">Shop our products</h2>
+            <div class="product-preview-section">
+                <?php
+                if (!empty($products)) {
+                    foreach ($products as $product) {
+                        // Fetch image details if there are any image IDs
+                        $image_data = [];
+                        if (!empty($product['preview_image_ids'])) {
+                            $image_ids = explode(',', $product['preview_image_ids']);
+
+                            $image_id = trim($image_ids[0]);
+                            $stmt = $conn->prepare("SELECT image_url, alttext, public FROM images WHERE id = ? AND public = 1");
+                            $stmt->bind_param("i", $image_id);
+                            $stmt->execute();
+                            $image_result = $stmt->get_result();
+
+                            if ($image_result->num_rows > 0) {
+                                $image_data[] = $image_result->fetch_assoc();
+                            }
+
+                            $stmt->close();
+                        }
+
+                        echo '<a class="product-preview" href="https://www.blueskyhomesteading.com/shop/' . htmlspecialchars($product['category_slug']) . '/' . htmlspecialchars($product['product_slug']) . '">';
+                        foreach ($image_data as $image) {
+                            echo '<img src="' . htmlspecialchars($image['image_url']) . '" alt="' . htmlspecialchars($image['alttext']) . '">';
+                        }
+                        echo '<span class="name">' . $product['name'] . '</span>';
+                        echo '<span class="buy-btn">View</span>';
+                        echo '</a>';
+                    }
                 }
-            }
-            ?>
+
+                $conn->close();
+                ?>
+
+                <a href="https://www.blueskyhomesteading.com/shop" class="see-more-btn">Explore all products</a>
+            </div>
         </section>
         <section class="frontpage">
-            <h2 class="section-header">Read Our Blog</h2>
+            <h2 class="section-header">Read our blog</h2>
             <?php
             if (!empty($articles)) {
                 $counter = 1;
@@ -154,25 +189,30 @@ $conn->close();
                         echo '</a>';
                     } else if ($counter == 2) {
                         echo '<div class="latest-part">';
-                        echo '<a class="top-article" href="https://www.blueskyhomesteading.com/blog/' . htmlspecialchars($article['category_slug']) . '/' . htmlspecialchars($article['article_slug']) . '">';
-                        echo '<div class="frontpage-article-image-parent">';
-                        if (!empty($article['image_url'])) {
-                            echo '<img src="' . htmlspecialchars($article['image_url']) . '" alt="' . htmlspecialchars($article['alttext']) . '" class="frontpage-article-image" loading="lazy">';
-                        }
-                        echo '</div>';
-                        echo '<div class="frontpage-article-text">';
-                        echo '<h3>' . htmlspecialchars($article['title']) . '</h3>';
-                        echo '<p>' . htmlspecialchars($article['meta_description']) . '</p>';
-                        echo '</div>';
-                        echo '</a>';
+                            echo '<a class="top-article" href="https://www.blueskyhomesteading.com/blog/' . htmlspecialchars($article['category_slug']) . '/' . htmlspecialchars($article['article_slug']) . '">';
+                                echo '<div class="frontpage-article-image-parent">';
+                                if (!empty($article['image_url'])) {
+                                    echo '<img src="' . htmlspecialchars($article['image_url']) . '" alt="' . htmlspecialchars($article['alttext']) . '" class="frontpage-article-image" loading="lazy">';
+                                }
+                                echo '</div>';
+                                echo '<div class="frontpage-article-text">';
+                                    echo '<h3>' . htmlspecialchars($article['title']) . '</h3>';
+                                echo '</div>';
+                            echo '</a>';
                     } else if ($counter > 2 && $counter <= 3) {
-                        echo '<a class="latest-article" href="https://www.blueskyhomesteading.com/blog/' . htmlspecialchars($article['category_slug']) . '/' . htmlspecialchars($article['article_slug']) . '">';
-                        echo '<div class="frontpage-article-text">';
-                        echo '<h3>' . htmlspecialchars($article['title']) . '</h3>';
-                        echo '</div>';
+                        echo '<a class="top-article" href="https://www.blueskyhomesteading.com/blog/' . htmlspecialchars($article['category_slug']) . '/' . htmlspecialchars($article['article_slug']) . '">';
+                            echo '<div class="frontpage-article-image-parent">';
+                            if (!empty($article['image_url'])) {
+                                echo '<img src="' . htmlspecialchars($article['image_url']) . '" alt="' . htmlspecialchars($article['alttext']) . '" class="frontpage-article-image" loading="lazy">';
+                            }
+                            echo '</div>';
+                            echo '<div class="frontpage-article-text">';
+                                echo '<h3>' . htmlspecialchars($article['title']) . '</h3>';
+                            echo '</div>';
                         echo '</a>';
                     }
-                    if ($counter == 5) {
+
+                    if ($counter == 3) {
                         echo '</div>';
                     }
 
@@ -182,6 +222,10 @@ $conn->close();
                 echo "No articles found.";
             }
             ?>
+        </section>
+
+        <section class="frontpage">
+            <h2>Our Story</h2>
         </section>
     </main>
     <?php include 'includes/footer.php'; ?>
