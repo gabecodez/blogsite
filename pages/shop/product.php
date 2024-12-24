@@ -1,6 +1,9 @@
 <?php
 include '../../includes/databaseconnection.php';
 
+session_start();
+$session_id = session_id();
+
 function show404()
 {
     include '../../404.php';
@@ -73,23 +76,6 @@ if (!empty($product['preview_image_ids'])) {
 
     <main class="main-page">
         <div class="product-info">
-            <section class="product-action">
-                <h1><?php echo htmlspecialchars($product['name']); ?></h1>
-                <p class="product-price">$<?php echo number_format($product['price'], 2); ?> each</p>
-                <div class="atc-section">
-                    <div class="atc-quantity-section">
-                        <label class="atc-quantity-label" for="quantity">Quantity:</label>
-                        <input class="atc-quantity-selector" type="number" id="quantity" name="quantity" value="1" min="1">
-                    </div>
-
-                    <button class="add-to-cart-button" onclick="addToCart(<?php echo $product['id']; ?>)">Add to Cart</button>
-                </div>
-
-                <hr class="small-hr-separator" />
-
-                <a href="https://www.blueskyhomesteading.com/shop/checkout?product_id=<?php echo $product['id']; ?>" class="buy-now-button">Buy Now</a>
-                <p class="button-footnote">* This will bring you straight to checkout.</p>
-            </section>
             <section class="carousel">
                 <div class="carousel-images">
                     <?php foreach ($image_data as $image) : ?>
@@ -110,6 +96,26 @@ if (!empty($product['preview_image_ids'])) {
                 </div>
                 <button class="carousel-nav prev" onclick="prevSlide()">&#10094;</button>
                 <button class="carousel-nav next" onclick="nextSlide()">&#10095;</button>
+            </section>
+
+            <section class="product-action">
+                <h1><?php echo htmlspecialchars($product['name']); ?></h1>
+                <p class="product-price">$<?php echo number_format($product['price'], 2); ?> each</p>
+                <div class="atc-section">
+                    <div class="atc-quantity-section">
+                        <label class="atc-quantity-label" for="quantity">Quantity:</label>
+                        <input class="atc-quantity-selector" type="number" id="quantity" name="quantity" value="1" min="1">
+                    </div>
+
+                    <button class="add-to-cart-button" onclick="addToCart(<?php echo $product['id']; ?>)">Add to Cart</button>
+                </div>
+
+                <hr class="small-hr-separator" />
+
+                <a href="https://www.blueskyhomesteading.com/shop/checkout?product_id=<?php echo $product['id']; ?>" class="buy-now-button">Buy Now</a>
+                <p class="button-footnote">* This will bring you straight to checkout.</p>
+
+                <?php echo $product['description']; ?>
             </section>
         </div>
     </main>

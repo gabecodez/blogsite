@@ -43,6 +43,9 @@
  */
 
  include '../includes/databaseconnection.php';
+
+session_start();
+$session_id = session_id();
  
  // Function to handle 404 errors
  function show404() {

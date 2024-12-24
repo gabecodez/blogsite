@@ -46,6 +46,9 @@
 
 include '../includes/databaseconnection.php';
 
+session_start();
+$session_id = session_id();
+
 // Query to get the latest articles along with their category slugs
 $sql = "SELECT articles.slug AS article_slug, articles.title, articles.meta_description, articles.image_id, categories.slug AS category_slug 
         FROM articles 

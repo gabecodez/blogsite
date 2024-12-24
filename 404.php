@@ -30,6 +30,9 @@
  * - Includes Open Graph and Twitter meta tags for enhanced social sharing.
  * - Structured data (JSON-LD) for better search engine understanding.
  */
+
+session_start();
+$session_id = session_id();
 ?>
 
 <!DOCTYPE html>

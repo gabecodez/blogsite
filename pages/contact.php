@@ -1,4 +1,7 @@
 <?php
+session_start();
+$session_id = session_id();
+
 // reCAPTCHA secret key from Google reCAPTCHA admin console
 $secret_key = '6Lf9H28qAAAAAHyKNxZrBjY0apdVpfL-8LPFTWu-';
 

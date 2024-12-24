@@ -21,7 +21,8 @@
  * - Utilizes HTML5 and semantic tags for better accessibility and SEO.
  * - Includes a breadcrumb navigation for user orientation within the site.
  */
-
+session_start();
+$session_id = session_id();
 ?>
 
 <!DOCTYPE html>
@@ -35,6 +36,8 @@
    $imageURL = "https://www.blueskyhomesteading.com/images/social_media_previews/basic_white_bg_w_logo.jpeg";
    $pageURL = "https://www.blueskyhomesteading.com/about";
    $siteName = "BlueSky Homesteading";
+   $twitterHandle = "";
+   $creatorHandle = "";
    ?>
    <title><?php echo $pageTitle; ?></title>
    <link rel="canonical" href="<?php echo $pageURL; ?>">

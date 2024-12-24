@@ -29,7 +29,8 @@
  * Compliance:
  * - Ensures users are informed about search functionalities, their data rights, and the use of cookies for tracking user behavior.
  */
-
+session_start();
+$session_id = session_id();
 ?>
 
 <!DOCTYPE html>
@@ -43,6 +44,8 @@
    $imageURL = "https://www.blueskyhomesteading.com/images/social_media_previews/basic_white_bg_w_logo.jpeg";
    $pageURL = "https://www.blueskyhomesteading.com/search";
    $siteName = "BlueSky Homesteading";
+   $twitterHandle = "";
+   $creatorHandle = "";
    ?>
    <title><?php echo $pageTitle; ?></title>
    <link rel="canonical" href="<?php echo $pageURL; ?>">

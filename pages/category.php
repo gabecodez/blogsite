@@ -40,6 +40,9 @@
 
 include '../includes/databaseconnection.php';
 
+session_start();
+$session_id = session_id();
+
 // Get the category slug from the URL
 $category_slug = isset($_GET['category_slug']) ? $_GET['category_slug'] : '';
 
@@ -97,6 +100,8 @@ $conn->close();
    $imageURL = "https://www.blueskyhomesteading.com/images/social_media_previews/basic_white_bg_w_logo.jpeg";
    $pageURL = "https://www.blueskyhomesteading.com/blog/<?php echo htmlspecialchars($category_slug); ?>";
    $siteName = "BlueSky Homesteading";
+   $twitterHandle = "";
+   $creatorHandle = "";
    ?>
    <title><?php echo $pageTitle; ?></title>
    <link rel="canonical" href="<?php echo $pageURL; ?>">

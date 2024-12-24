@@ -32,7 +32,8 @@
  * - Ensures users are informed about their rights regarding their personal information,
  *   adhering to best practices in privacy policy disclosures.
  */
-
+session_start();
+$session_id = session_id();
 ?>
 
 <!DOCTYPE html>
@@ -46,6 +47,8 @@
    $imageURL = "https://www.blueskyhomesteading.com/images/social_media_previews/basic_white_bg_w_logo.jpeg";
    $pageURL = "https://www.blueskyhomesteading.com/privacy";
    $siteName = "BlueSky Homesteading";
+   $twitterHandle = "";
+   $creatorHandle = "";
    ?>
    <title><?php echo $pageTitle; ?></title>
    <link rel="canonical" href="<?php echo $pageURL; ?>">

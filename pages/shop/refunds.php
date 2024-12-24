@@ -28,7 +28,8 @@
  * - Provides information on eligible and non-eligible items/services for refund.
  *
  */
-
+session_start();
+$session_id = session_id();
 ?>
 
 <!DOCTYPE html>
