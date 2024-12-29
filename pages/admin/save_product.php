@@ -35,6 +35,32 @@ try {
     }
 
     if ($stmt->execute()) {
+        $last_product_id = $product_id > 0 ? $product_id : $stmt->insert_id;
+
+        // Handle multiple image uploads
+        if (isset($_FILES['image'])) {
+            foreach ($_FILES['image']['tmp_name'] as $index => $tmp_name) {
+                if ($_FILES['image']['error'][$index] == UPLOAD_ERR_OK) {
+                    $image_name = basename($_FILES['image']['name'][$index]);
+                    $target_dir = '../../uploads/';
+                    $target_file = $target_dir . $image_name;
+
+                    if (move_uploaded_file($tmp_name, $target_file)) {
+                        $image_path = '/uploads/' . $image_name;
+                        $caption = $_POST['caption'][$index] ?? '';
+                        $credit = $_POST['credit'][$index] ?? '';
+                        $credit_url = $_POST['credit_url'][$index] ?? '';
+                        $alttext = $_POST['alttext'][$index] ?? '';
+
+                        // Save image path and metadata to images table
+                        $stmt = $conn->prepare("INSERT INTO images (image_url, caption, credit, credit_url, alttext, public) VALUES (?, ?, ?, ?, ?, 1)");
+                        $stmt->bind_param("sssss", $image_path, $caption, $credit, $credit_url, $alttext);
+                        $stmt->execute();
+                    }
+                }
+            }
+        }
+
         echo json_encode(['success' => true, 'message' => 'Product saved successfully']);
     } else {
         http_response_code(500);

@@ -24,7 +24,23 @@ try {
     $result = $stmt->get_result();
 
     if ($result->num_rows > 0) {
-        echo json_encode($result->fetch_assoc());
+        $product = $result->fetch_assoc();
+
+        // Fetch image paths and metadata
+        $image_ids = explode(',', $product['preview_image_ids']);
+        $images = [];
+        foreach ($image_ids as $image_id) {
+            $stmt = $conn->prepare("SELECT image_url, caption, credit, credit_url, alttext FROM images WHERE id = ?");
+            $stmt->bind_param("i", $image_id);
+            $stmt->execute();
+            $image_result = $stmt->get_result();
+            if ($image_result->num_rows > 0) {
+                $images[] = $image_result->fetch_assoc();
+            }
+        }
+        $product['images'] = $images;
+
+        echo json_encode($product);
     } else {
         http_response_code(404);
         echo json_encode(['message' => 'Product not found']);
