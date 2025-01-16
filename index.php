@@ -80,6 +80,8 @@ if ($result->num_rows > 0) {
         $products[] = $row;
     }
 }
+
+$on_homepage = true; // lets navbar know we are on the homepage
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -108,29 +110,24 @@ if ($result->num_rows > 0) {
 
 <body>
     <?php include 'includes/consentbanner.php'; ?>
-    <?php include 'includes/navbar.php'; ?>
     <main>
-        <header>
-            <div class="page-indent">
-                <div class="banner">
-                    <div class="banner-image mobile">
-                        <img src="https://www.blueskyhomesteading.com/images/rose-4372048_1280.png" alt="A flower" loading="lazy" />
-                    </div>
-
-                    <div class="banner-content">
-                        <h1>Sow, harvest, and flourish — your homestead journey starts here.</h1>
-                        <p>Resources to inspire a healthy and sustainable lifestyle</p>
-                        <div class="banner-buttons">
-                            <a href="https://www.blueskyhomesteading.com/blog" class="btn">Read our blog</a>
-                        </div>
-                    </div>
-
-                    <div class="banner-image desktop">
-                        <img src="https://www.blueskyhomesteading.com/images/rose-4372048_1280.png" alt="A flower" loading="lazy" />
+        <div class="video-container">
+            <video autoplay muted loop playsinline>
+                <source src="https://www.blueskyhomesteading.com/videos/field_video.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <div class="overlay">
+                <div class="banner-content">
+                    <h1>Harvest the life you love.</h1>
+                    <p>Explore resources to inspire a healthy, sustainable lifestyle.</p>
+                    <div class="banner-buttons">
+                        <a href="https://www.blueskyhomesteading.com/blog" class="btn">Read our blog</a>
                     </div>
                 </div>
             </div>
-        </header>
+        </div>
+
+        <?php include 'includes/navbar.php'; ?>
 
         <section class="frontpage products_section">
             <div class="page-indent">
