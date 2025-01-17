@@ -1,4 +1,6 @@
 <?php
+//admin_page.php
+
 include '../../includes/admin_databaseconnection.php';
 session_start();
 
@@ -65,9 +67,10 @@ try {
                 <?php endforeach; ?>
             </tbody>
         </table>
+    </main>
 
-        <!-- Modal for Create/Edit -->
-        <div id="productModal" class="modal">
+    <!-- Modal for Create/Edit -->
+    <div id="productModal" class="modal">
             <div class="modal-content">
                 <span class="close">&times;</span>
                 <h2 id="modalTitle">Create Product</h2>
@@ -81,8 +84,6 @@ try {
                     <input type="number" id="price" name="price" step="0.01" required>
                     <label for="description">Description:</label>
                     <textarea id="description" name="description" required></textarea>
-                    <label for="preview_image_ids">Preview Image IDs (comma-separated):</label>
-                    <input type="text" id="preview_image_ids" name="preview_image_ids">
                     
                     <!-- Image Upload Section -->
                     <div id="imageUploadContainer">
@@ -106,7 +107,6 @@ try {
                 </form>
             </div>
         </div>
-    </main>
 
     <script>
         // Modal handling
@@ -135,7 +135,7 @@ try {
                 modalTitle.textContent = 'Edit Product';
                 const productId = btn.dataset.id;
 
-                fetch(`/pages/admin/get_product.php?id=${productId}`)
+                fetch(`https://www.blueskyhomesteading.com/pages/admin/get_product.php?id=${productId}`)
                     .then(res => res.json())
                     .then(data => {
                         productIdInput.value = data.id;
@@ -143,7 +143,6 @@ try {
                         document.getElementById('category').value = data.category;
                         document.getElementById('price').value = data.price;
                         document.getElementById('description').value = data.description;
-                        document.getElementById('preview_image_ids').value = data.preview_image_ids;
                         imageUploadContainer.innerHTML = '';
                         if (data.images && data.images.length > 0) {
                             data.images.forEach(image => {
@@ -191,7 +190,7 @@ try {
             e.preventDefault();
             const formData = new FormData(productForm);
 
-            fetch('/pages/admin/save_product.php', {
+            fetch('https://www.blueskyhomesteading.com/pages/admin/save_product.php', {
                     method: 'POST',
                     body: formData
                 })
@@ -206,7 +205,7 @@ try {
         document.querySelectorAll('.deleteBtn').forEach(btn => {
             btn.onclick = () => {
                 if (confirm('Are you sure you want to delete this product?')) {
-                    fetch(`/pages/admin/delete_product.php?id=${btn.dataset.id}`, {
+                    fetch(`https://www.blueskyhomesteading.com/pages/admin/delete_product.php?id=${btn.dataset.id}`, {
                             method: 'DELETE'
                         })
                         .then(res => res.json())

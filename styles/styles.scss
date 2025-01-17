@@ -666,7 +666,7 @@ nav[aria-label="breadcrumb"] {
 
 .video-container {
   position: relative;
-  height: 100vh;
+  height: 80vh;
   width: 100%;
   overflow: hidden;
 }
@@ -741,7 +741,6 @@ nav[aria-label="breadcrumb"] {
 
     &.secondary {
       color: black;
-      border: 2px solid rgb(0, 0, 0);
       background-color: white;
     }
 
@@ -1929,7 +1928,7 @@ span[id^="item-price-"] {
   }
 
   .banner-content {
-    text-align: center;
+    padding: 1em;
   }
 
   .banner-buttons {
@@ -1938,19 +1937,11 @@ span[id^="item-price-"] {
     .btn {
       flex: 1;
       display: block;
-
-      &::after {
-        background-color: white;
-      }
-
-      &::before {
-        border-color: white;
-      }
     }
   }
 
   .banner-content h1 {
-    font-size: 2rem;
+    font-size: 4em;
   }
 
   nav[aria-label="breadcrumb"] {

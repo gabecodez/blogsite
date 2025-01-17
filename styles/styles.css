@@ -564,7 +564,7 @@ nav[aria-label=breadcrumb] li:last-child a {
 
 .video-container {
   position: relative;
-  height: 100vh;
+  height: 80vh;
   width: 100%;
   overflow: hidden;
 }
@@ -635,7 +635,6 @@ nav[aria-label=breadcrumb] li:last-child a {
 }
 .banner-buttons .btn.secondary {
   color: black;
-  border: 2px solid rgb(0, 0, 0);
   background-color: white;
 }
 .banner-buttons .btn::after {
@@ -1682,7 +1681,7 @@ span[id^=item-price-] {
     display: none;
   }
   .banner-content {
-    text-align: center;
+    padding: 1em;
   }
   .banner-buttons {
     gap: 35px;
@@ -1691,14 +1690,8 @@ span[id^=item-price-] {
     flex: 1;
     display: block;
   }
-  .banner-buttons .btn::after {
-    background-color: white;
-  }
-  .banner-buttons .btn::before {
-    border-color: white;
-  }
   .banner-content h1 {
-    font-size: 2rem;
+    font-size: 4em;
   }
   nav[aria-label=breadcrumb] ol {
     flex-wrap: wrap;

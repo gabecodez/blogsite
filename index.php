@@ -110,6 +110,7 @@ $on_homepage = true; // lets navbar know we are on the homepage
 
 <body>
     <?php include 'includes/consentbanner.php'; ?>
+    <?php include 'includes/navbar.php'; ?>
     <main>
         <div class="video-container">
             <video autoplay muted loop playsinline>
@@ -119,15 +120,35 @@ $on_homepage = true; // lets navbar know we are on the homepage
             <div class="overlay">
                 <div class="banner-content">
                     <h1>Harvest the life you love.</h1>
-                    <p>Explore resources to inspire a healthy, sustainable lifestyle.</p>
+                    <p>Explore resources to inspire a healthy, sustainable homesteading lifestyle.</p>
                     <div class="banner-buttons">
                         <a href="https://www.blueskyhomesteading.com/blog" class="btn">Read our blog</a>
+                        <a href="https://www.blueskyhomesteading.com/shop" class="btn secondary">See our shop</a>
                     </div>
                 </div>
             </div>
         </div>
 
-        <?php include 'includes/navbar.php'; ?>
+        <section class="frontpage as_seen_at">
+            <div class="page-indent">
+                <h2>As featured at</h2>
+
+                <div class="company_logos">
+                    <a href="https://columbiapamarkethouse.org/" class="company_logo">
+                        <img src="https://www.blueskyhomesteading.com/images/spotlight_logos/columbia_market.svg" alt="Columbia Market logo" />
+                    </a>
+                    <a href="https://www.facebook.com/p/Fount-and-Fill-100079901063870/" class="company_logo">
+                        <img src="https://www.blueskyhomesteading.com/images/spotlight_logos/fount_and_fill.jpeg" alt="Fount and Fill logo" />
+                    </a>
+                    <a href="https://www.facebook.com/PebblesandLaceGifts/" class="company_logo">
+                        <img src="https://www.blueskyhomesteading.com/images/spotlight_logos/pebbles_and_lace.jpg" alt="Pebbles and Lace logo" />
+                    </a>
+                    <div class="company_logo">
+                        <img src="https://www.blueskyhomesteading.com/images/spotlight_logos/a_tiny_homestead.jpeg" alt="A Tiny Homestead logo" />
+                    </div>
+                </div>
+            </div>
+        </section>
 
         <section class="frontpage products_section">
             <div class="page-indent">
@@ -170,27 +191,6 @@ $on_homepage = true; // lets navbar know we are on the homepage
                     ?>
 
                     <a href="https://www.blueskyhomesteading.com/shop" class="see-more-btn">Explore all products</a>
-                </div>
-            </div>
-        </section>
-
-        <section class="frontpage as_seen_at">
-            <div class="page-indent">
-                <h2>As featured at</h2>
-
-                <div class="company_logos">
-                    <a href="https://columbiapamarkethouse.org/" class="company_logo">
-                        <img src="https://www.blueskyhomesteading.com/images/spotlight_logos/columbia_market.svg" alt="Columbia Market logo" />
-                    </a>
-                    <a href="https://www.facebook.com/p/Fount-and-Fill-100079901063870/" class="company_logo">
-                        <img src="https://www.blueskyhomesteading.com/images/spotlight_logos/fount_and_fill.jpeg" alt="Fount and Fill logo" />
-                    </a>
-                    <a href="https://www.facebook.com/PebblesandLaceGifts/" class="company_logo">
-                        <img src="https://www.blueskyhomesteading.com/images/spotlight_logos/pebbles_and_lace.jpg" alt="Pebbles and Lace logo" />
-                    </a>
-                    <div class="company_logo">
-                        <img src="https://www.blueskyhomesteading.com/images/spotlight_logos/a_tiny_homestead.jpeg" alt="A Tiny Homestead logo" />
-                    </div>
                 </div>
             </div>
         </section>
@@ -250,12 +250,6 @@ $on_homepage = true; // lets navbar know we are on the homepage
                 }
                 ?>
             </div>
-        </section>
-
-        <section class="frontpage our_story">
-            <div class="page-indent">
-                <h2>Our Story</h2>
-                <div class="page-indent">
         </section>
     </main>
     <?php include 'includes/footer.php'; ?>
