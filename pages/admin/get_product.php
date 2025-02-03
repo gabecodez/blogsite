@@ -1,5 +1,5 @@
 <?php
-//get_product.php
+// get_product.php
 include '../../includes/admin_databaseconnection.php';
 session_start();
 
@@ -18,6 +18,7 @@ if ($product_id <= 0) {
 }
 
 try {
+    // Retrieve the product record.
     $stmt = $conn->prepare("SELECT * FROM products WHERE id = ?");
     $stmt->bind_param("i", $product_id);
     $stmt->execute();
@@ -26,18 +27,30 @@ try {
     if ($result->num_rows > 0) {
         $product = $result->fetch_assoc();
 
-        // Fetch image paths and metadata
+        // Fetch image paths and metadata.
+        // Explode the comma-separated string into an array.
         $image_ids = explode(',', $product['preview_image_ids']);
         $images = [];
         foreach ($image_ids as $image_id) {
-            $stmt = $conn->prepare("SELECT image_url, caption, credit, credit_url, alttext FROM images WHERE id = ?");
-            $stmt->bind_param("i", $image_id);
-            $stmt->execute();
-            $image_result = $stmt->get_result();
+            $image_id = trim($image_id);
+            if (empty($image_id)) {
+                continue;
+            }
+            // IMPORTANT: Select the "id" field along with other columns.
+            $imgStmt = $conn->prepare("SELECT id, image_url, caption, credit, credit_url, alttext FROM images WHERE id = ?");
+            if (!$imgStmt) {
+                error_log("Prepare failed: " . $conn->error);
+                continue;
+            }
+            $imgStmt->bind_param("i", $image_id);
+            $imgStmt->execute();
+            $image_result = $imgStmt->get_result();
             if ($image_result->num_rows > 0) {
                 $images[] = $image_result->fetch_assoc();
             }
+            $imgStmt->close();
         }
+        // Append the images array to the product data.
         $product['images'] = $images;
 
         echo json_encode($product);
@@ -50,7 +63,9 @@ try {
     http_response_code(500);
     echo json_encode(['message' => 'Server error']);
 } finally {
-    if (isset($stmt)) $stmt->close();
+    if (isset($stmt)) {
+        $stmt->close();
+    }
     $conn->close();
 }
 ?>

@@ -664,36 +664,6 @@ nav[aria-label="breadcrumb"] {
   }
 }
 
-.video-container {
-  position: relative;
-  height: 80vh;
-  width: 100%;
-  overflow: hidden;
-}
-
-.video-container video {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  min-width: 100%;
-  min-height: 100%;
-  height: auto;
-  transform: translate(-50%, -50%);
-}
-
-.overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  color: white;
-}
 /* Content on the right */
 
 .banner-content {
@@ -706,11 +676,11 @@ nav[aria-label="breadcrumb"] {
     font-size: 6em;
     margin-bottom: 10px;
     padding: 0;
-    color: white;
+    color: $header_color;
   }
 
   p {
-    color: white;
+    color: $header_color;
   }
 }
 
@@ -865,7 +835,7 @@ nav[aria-label="breadcrumb"] {
 
 .latest-article {
   flex: 1;
-  padding: 16px;
+  padding: 0.5em;
   margin: 16px 0;
   background-color: #e4dbd7;
   width: 100%;
@@ -873,6 +843,7 @@ nav[aria-label="breadcrumb"] {
   overflow: hidden;
   transition: background-color 0.3s ease;
   text-decoration: none;
+  border-radius: 10px;
 
   &:hover {
     background-color: #f6d5d5;
@@ -1091,7 +1062,7 @@ ul {
 
 .latest-articles h2,
 .site-links h2 {
-  font-size: 22px;
+  font-size: 1.5em;
   color: #333;
   margin-bottom: 15px;
 }
@@ -1110,7 +1081,7 @@ ul {
   }
 
   h3 {
-    font-size: 20px;
+    font-size: 1.5em;
     margin: 0;
   }
 
@@ -1706,6 +1677,7 @@ span[id^="item-price-"] {
 .product-preview-section {
   display: flex;
   align-items: center;
+  gap: 1em;
 }
 
 .see-more-btn {
@@ -1726,7 +1698,7 @@ span[id^="item-price-"] {
 
 .product-preview {
   display: block;
-  flex: 1;
+  flex: 2;
   overflow: hidden;
   padding: 0;
   background-color: #e4dbd7;
@@ -1751,7 +1723,7 @@ span[id^="item-price-"] {
     width: 100%;
     display: block;
     font-family: $display_font;
-    font-size: 1.5em;
+    font-size: 1.2em;
     font-weight: 600;
     color: $header_color;
     margin-bottom: 0.8em;
@@ -1763,7 +1735,7 @@ span[id^="item-price-"] {
     display: block;
     background-color: $line_color;
     text-align: center;
-    padding: 0.8em;
+    padding: 0.5em;
     font-family: $main_font;
     font-weight: 600;
     font-size: 1em;
@@ -1880,16 +1852,16 @@ span[id^="item-price-"] {
 
   .latest-articles h2,
   .site-links h2 {
-    font-size: 20px;
+    font-size: 1.5em;
   }
 
   .latest-article {
     h3 {
-      font-size: 18px;
+      font-size: 1.5em;
     }
 
     p {
-      font-size: 14px;
+      font-size: 1em;
     }
   }
 

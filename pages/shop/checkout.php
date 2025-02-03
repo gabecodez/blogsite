@@ -14,7 +14,7 @@ $line_items = [];
 // Check if a product_id is passed for direct purchase
 if (isset($_GET['product_id'])) {
     $product_id = (int)$_GET['product_id'];
-    
+
     // Fetch product details
     $stmt = $conn->prepare("SELECT name, price FROM products WHERE id = ?");
     $stmt->bind_param("i", $product_id);
@@ -26,6 +26,7 @@ if (isset($_GET['product_id'])) {
         $line_items[] = [
             'price_data' => [
                 'currency' => 'usd',
+
                 'product_data' => [
                     'name' => $product['name'],
                 ],
@@ -40,7 +41,7 @@ if (isset($_GET['product_id'])) {
     $stmt->bind_param("s", $session_id);
     $stmt->execute();
     $result = $stmt->get_result();
-    
+
     if ($result->num_rows > 0) {
         while ($cart_item = $result->fetch_assoc()) {
             // Fetch product details to create line items
@@ -75,8 +76,53 @@ $session = \Stripe\Checkout\Session::create([
     'mode' => 'payment',
     'success_url' => 'https://www.blueskyhomesteading.com/shop/checkout/success',
     'cancel_url' => 'https://www.blueskyhomesteading.com/shop/cart?status=1',
+    'phone_number_collection' => ['enabled' => true],
+    'billing_address_collection' => 'required',
+    'automatic_tax' => ['enabled' => true],
+    'shipping_address_collection' => ['allowed_countries' => ['US', 'CA']],
+    'shipping_options' => [
+        [
+            'shipping_rate_data' => [
+                'type' => 'fixed_amount',
+                'fixed_amount' => [
+                    'amount' => 0,
+                    'currency' => 'usd',
+                ],
+                'display_name' => 'Free shipping',
+                'delivery_estimate' => [
+                    'minimum' => [
+                        'unit' => 'business_day',
+                        'value' => 5,
+                    ],
+                    'maximum' => [
+                        'unit' => 'business_day',
+                        'value' => 7,
+                    ],
+                ],
+            ],
+        ],
+        [
+            'shipping_rate_data' => [
+                'type' => 'fixed_amount',
+                'fixed_amount' => [
+                    'amount' => 1500,
+                    'currency' => 'usd',
+                ],
+                'display_name' => 'Next day air',
+                'delivery_estimate' => [
+                    'minimum' => [
+                        'unit' => 'business_day',
+                        'value' => 1,
+                    ],
+                    'maximum' => [
+                        'unit' => 'business_day',
+                        'value' => 1,
+                    ],
+                ],
+            ],
+        ],
+    ],
 ]);
 
 header('Location: ' . $session->url);
 exit();
-?>

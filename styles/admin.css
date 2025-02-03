@@ -1,222 +1,220 @@
-/* General styles */
-body {
+/* admin.css */
+
+/* Global Styles */
+* {
+    box-sizing: border-box;
+  }
+  
+  body {
     font-family: Arial, sans-serif;
-    background-color: #f9f9f9;
+    background-color: #f4f4f4;
     margin: 0;
     padding: 0;
     color: #333;
-}
-
-.container {
+  }
+  
+  /* Main Content */
+  .main-page {
     max-width: 1200px;
-    margin: 20px auto;
-    padding: 15px;
-    background-color: #fff;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-/* Header styles */
-.header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 0;
-    flex-wrap: wrap;
-}
-
-.header h1 {
-    margin: 0;
-    font-size: 24px;
-}
-
-.header .button {
-    background-color: #007bff;
-    color: #fff;
-    padding: 8px 15px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    text-decoration: none;
-    font-size: 14px;
-    margin-top: 10px;
-}
-
-.header .button:hover {
-    background-color: #0056b3;
-}
-
-/* Table styles */
-.table {
+    margin: 30px auto;
+    background: #fff;
+    padding: 20px;
+    border-radius: 6px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Table Styles */
+  table {
     width: 100%;
     border-collapse: collapse;
-    margin: 20px 0;
-    overflow-x: auto;
-}
-
-.table th, .table td {
-    border: 1px solid #ddd;
-    padding: 10px;
+    margin-top: 20px;
+  }
+  
+  table th,
+  table td {
     text-align: left;
-}
-
-.table th {
-    background-color: #f4f4f4;
-    font-weight: bold;
-}
-
-.table tr:hover {
+    padding: 12px 15px;
+    border-bottom: 1px solid #e1e1e1;
+  }
+  
+  table th {
     background-color: #f9f9f9;
-}
-
-.table .action-buttons {
-    display: flex;
-    gap: 10px;
-}
-
-.table .button {
-    background-color: #007bff;
-    color: #fff;
-    padding: 5px 10px;
+    font-weight: bold;
+  }
+  
+  /* Button Styles */
+  button {
+    background-color: #3498db;
     border: none;
-    border-radius: 3px;
+    color: #fff;
+    padding: 8px 16px;
+    margin: 5px 0;
+    border-radius: 4px;
     cursor: pointer;
-    text-decoration: none;
-    font-size: 12px;
-}
-
-.table .button.edit {
-    background-color: #28a745;
-}
-
-.table .button.delete {
-    background-color: #dc3545;
-}
-
-.table .button:hover {
-    opacity: 0.9;
-}
-
-/* Pop-up modal styles */
-.modal {
-    display: none;
+    transition: background-color 0.3s ease;
+  }
+  
+  button:hover {
+    background-color: #2980b9;
+  }
+  
+  /* Specific Button Colors */
+  #createProductBtn {
+    background-color: #27ae60;
+  }
+  
+  #createProductBtn:hover {
+    background-color: #1e8449;
+  }
+  
+  #addImageBtn {
+    background-color: #2ecc71;
+  }
+  
+  #addImageBtn:hover {
+    background-color: #27ae60;
+  }
+  
+  #submitProductBtn {
+    background-color: #e67e22;
+  }
+  
+  #submitProductBtn:hover {
+    background-color: #d35400;
+  }
+  
+  /* Modal Styles */
+  .modal {
+    display: none; /* Hidden by default */
     position: fixed;
-    top: 0;
+    z-index: 1000;
     left: 0;
+    top: 0;
     width: 100%;
     height: 100%;
+    overflow-y: auto;
     background-color: rgba(0, 0, 0, 0.5);
-    z-index: 1000;
-    justify-content: center;
-    align-items: center;
-}
-
-.modal.active {
-    display: flex;
-}
-
-.modal-content {
+    padding: 40px 0;
+  }
+  
+  .modal-content {
     background-color: #fff;
-    padding: 20px;
-    border-radius: 5px;
+    margin: auto;
+    padding: 20px 30px;
+    border: 1px solid #888;
     width: 90%;
-    max-width: 500px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    border-radius: 6px;
     position: relative;
-}
-
-.modal-content img {
-    width: 50px;
-}
-
-.modal-content h2 {
-    margin: 0 0 20px;
-    font-size: 20px;
-}
-
-.modal-content .form-group {
-    margin-bottom: 15px;
-}
-
-.modal-content .form-group label {
-    display: block;
+  }
+  
+  .close {
+    color: #aaa;
+    position: absolute;
+    right: 15px;
+    top: 10px;
+    font-size: 28px;
     font-weight: bold;
-    margin-bottom: 5px;
-}
-
-.modal-content .form-group input,
-.modal-content .form-group textarea {
-    width: 100%;
-    padding: 8px;
-    border: 1px solid #ddd;
-    border-radius: 3px;
-}
-
-.modal-content .form-group textarea {
-    resize: vertical;
-    min-height: 80px;
-}
-
-.modal-content .form-actions {
-    display: flex;
-    justify-content: flex-end;
-    gap: 10px;
-}
-
-.modal-content .button {
-    padding: 8px 15px;
-    border: none;
-    border-radius: 5px;
     cursor: pointer;
-    font-size: 14px;
-}
-
-.modal-content .button.save {
-    background-color: #28a745;
-    color: #fff;
-}
-
-.modal-content .button.cancel {
-    background-color: #dc3545;
-    color: #fff;
-}
-
-.modal-content .button:hover {
-    opacity: 0.9;
-}
-
-/* Close button */
-.modal-content .close {
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: #000;
+  }
+  
+  /* Form Styles */
+  form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  
+  form input[type="text"],
+  form input[type="number"],
+  form input[type="file"],
+  form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  form textarea {
+    resize: vertical;
+  }
+  
+  /* Image Upload Section */
+  .image-upload {
+    border: 1px solid #ddd;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 4px;
+    background-color: #f8f8f8;
+    position: relative;
+  }
+  
+  .image-upload .image-preview {
+    margin-top: 10px;
+  }
+  
+  .image-upload .image-preview img {
+    max-width: 100%;
+    border-radius: 4px;
+  }
+  
+  /* Remove Image Button */
+  .image-upload .removeImageBtn {
+    background-color: #e74c3c;
     position: absolute;
     top: 10px;
     right: 10px;
-    background: none;
+    padding: 5px 10px;
+    font-size: 12px;
     border: none;
-    font-size: 20px;
+    border-radius: 4px;
     cursor: pointer;
-    color: #333;
-}
-
-.modal-content .close:hover {
-    color: #000;
-}
-
-/* Responsive styles */
-@media (max-width: 768px) {
-    .header {
-        flex-direction: column;
-        align-items: flex-start;
+  }
+  
+  .image-upload .removeImageBtn:hover {
+    background-color: #c0392b;
+  }
+  
+  /* Media Queries for Mobile */
+  @media (max-width: 768px) {
+    .main-page {
+      margin: 15px;
+      padding: 15px;
     }
-
-    .header .button {
-        margin-top: 10px;
+  
+    table th,
+    table td {
+      padding: 10px;
     }
-
-    .table th, .table td {
-        padding: 8px;
+  
+    button {
+      padding: 10px;
+      font-size: 14px;
     }
-
+  }
+  
+  @media (max-width: 480px) {
     .modal-content {
-        width: 95%;
+      width: 95%;
+      padding: 15px;
     }
-}
+  
+    form input[type="text"],
+    form input[type="number"],
+    form input[type="file"],
+    form textarea {
+      padding: 8px;
+      font-size: 14px;
+    }
+  
+    .image-upload {
+      padding: 10px;
+    }
+  }
+  

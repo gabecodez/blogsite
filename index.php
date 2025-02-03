@@ -112,12 +112,9 @@ $on_homepage = true; // lets navbar know we are on the homepage
     <?php include 'includes/consentbanner.php'; ?>
     <?php include 'includes/navbar.php'; ?>
     <main>
-        <div class="video-container">
-            <video autoplay muted loop playsinline>
-                <source src="https://www.blueskyhomesteading.com/videos/field_video.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
-            <div class="overlay">
+        <section class="frontpage">
+            <div class="page-indent">
+                <div class="banner">
                 <div class="banner-content">
                     <h1>Harvest the life you love.</h1>
                     <p>Explore resources to inspire a healthy, sustainable homesteading lifestyle.</p>
@@ -126,72 +123,11 @@ $on_homepage = true; // lets navbar know we are on the homepage
                         <a href="https://www.blueskyhomesteading.com/shop" class="btn secondary">See our shop</a>
                     </div>
                 </div>
-            </div>
-        </div>
 
-        <section class="frontpage as_seen_at">
-            <div class="page-indent">
-                <h2>As featured at</h2>
-
-                <div class="company_logos">
-                    <a href="https://columbiapamarkethouse.org/" class="company_logo">
-                        <img src="https://www.blueskyhomesteading.com/images/spotlight_logos/columbia_market.svg" alt="Columbia Market logo" />
-                    </a>
-                    <a href="https://www.facebook.com/p/Fount-and-Fill-100079901063870/" class="company_logo">
-                        <img src="https://www.blueskyhomesteading.com/images/spotlight_logos/fount_and_fill.jpeg" alt="Fount and Fill logo" />
-                    </a>
-                    <a href="https://www.facebook.com/PebblesandLaceGifts/" class="company_logo">
-                        <img src="https://www.blueskyhomesteading.com/images/spotlight_logos/pebbles_and_lace.jpg" alt="Pebbles and Lace logo" />
-                    </a>
-                    <div class="company_logo">
-                        <img src="https://www.blueskyhomesteading.com/images/spotlight_logos/a_tiny_homestead.jpeg" alt="A Tiny Homestead logo" />
-                    </div>
+                <div class="banner-image">
+                    <img src="https://www.blueskyhomesteading.com/images/rose-4372048_1280.png" alt="Homestead garden" loading="lazy">
                 </div>
-            </div>
-        </section>
-
-        <section class="frontpage products_section">
-            <div class="page-indent">
-                <h2>Shop our products</h2>
-                <div class="product-preview-section">
-                    <?php
-                    if (!empty($products)) {
-                        foreach ($products as $product) {
-                            // Fetch image details if there are any image IDs
-                            $image_data = [];
-                            if (!empty($product['preview_image_ids'])) {
-                                $image_ids = explode(',', $product['preview_image_ids']);
-
-                                $image_id = trim($image_ids[0]);
-                                $stmt = $conn->prepare("SELECT image_url, alttext, public FROM images WHERE id = ? AND public = 1 LIMIT 1");
-                                $stmt->bind_param("i", $image_id);
-                                $stmt->execute();
-                                $image_result = $stmt->get_result();
-
-                                if ($image_result->num_rows > 0) {
-                                    $image_data[] = $image_result->fetch_assoc();
-                                }
-
-                                $stmt->close();
-                            }
-
-                            echo '<a class="product-preview" href="https://www.blueskyhomesteading.com/shop/' . htmlspecialchars($product['category_slug']) . '/' . htmlspecialchars($product['product_slug']) . '">';
-                            foreach ($image_data as $image) {
-                                echo '<img src="' . htmlspecialchars($image['image_url']) . '" alt="' . htmlspecialchars($image['alttext']) . '">';
-                            }
-                            echo '<div class="text">';
-                            echo '<span class="name">' . $product['name'] . '</span>';
-                            echo '<span class="buy-btn">View</span>';
-                            echo '</div>';
-                            echo '</a>';
-                        }
-                    }
-
-                    $conn->close();
-                    ?>
-
-                    <a href="https://www.blueskyhomesteading.com/shop" class="see-more-btn">Explore all products</a>
-                </div>
+    </div>
             </div>
         </section>
 
@@ -249,6 +185,72 @@ $on_homepage = true; // lets navbar know we are on the homepage
                     echo "No articles found.";
                 }
                 ?>
+            </div>
+        </section>
+
+        <section class="frontpage products_section">
+            <div class="page-indent">
+                <h2>Shop our products</h2>
+                <div class="product-preview-section">
+                    <?php
+                    if (!empty($products)) {
+                        foreach ($products as $product) {
+                            // Fetch image details if there are any image IDs
+                            $image_data = [];
+                            if (!empty($product['preview_image_ids'])) {
+                                $image_ids = explode(',', $product['preview_image_ids']);
+
+                                $image_id = trim($image_ids[0]);
+                                $stmt = $conn->prepare("SELECT image_url, alttext, public FROM images WHERE id = ? AND public = 1 LIMIT 4");
+                                $stmt->bind_param("i", $image_id);
+                                $stmt->execute();
+                                $image_result = $stmt->get_result();
+
+                                if ($image_result->num_rows > 0) {
+                                    $image_data[] = $image_result->fetch_assoc();
+                                }
+
+                                $stmt->close();
+                            }
+
+                            echo '<a class="product-preview" href="https://www.blueskyhomesteading.com/shop/' . htmlspecialchars($product['category_slug']) . '/' . htmlspecialchars($product['product_slug']) . '">';
+                            foreach ($image_data as $image) {
+                                echo '<img src="' . htmlspecialchars($image['image_url']) . '" alt="' . htmlspecialchars($image['alttext']) . '">';
+                            }
+                            echo '<div class="text">';
+                            echo '<span class="name">' . $product['name'] . '</span>';
+                            echo '<span class="buy-btn">View</span>';
+                            echo '</div>';
+                            echo '</a>';
+                        }
+                    }
+
+                    $conn->close();
+                    ?>
+
+                    <a href="https://www.blueskyhomesteading.com/shop" class="see-more-btn">Explore all products</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="frontpage as_seen_at">
+            <div class="page-indent">
+                <h2>As featured at</h2>
+
+                <div class="company_logos">
+                    <a href="https://columbiapamarkethouse.org/" class="company_logo">
+                        <img src="https://www.blueskyhomesteading.com/images/spotlight_logos/columbia_market.svg" alt="Columbia Market logo" />
+                    </a>
+                    <a href="https://www.facebook.com/p/Fount-and-Fill-100079901063870/" class="company_logo">
+                        <img src="https://www.blueskyhomesteading.com/images/spotlight_logos/fount_and_fill.jpeg" alt="Fount and Fill logo" />
+                    </a>
+                    <a href="https://www.facebook.com/PebblesandLaceGifts/" class="company_logo">
+                        <img src="https://www.blueskyhomesteading.com/images/spotlight_logos/pebbles_and_lace.jpg" alt="Pebbles and Lace logo" />
+                    </a>
+                    <div class="company_logo">
+                        <img src="https://www.blueskyhomesteading.com/images/spotlight_logos/a_tiny_homestead.jpeg" alt="A Tiny Homestead logo" />
+                    </div>
+                </div>
             </div>
         </section>
     </main>
