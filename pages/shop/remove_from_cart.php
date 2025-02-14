@@ -1,8 +1,12 @@
 <?php
-// remove_from_cart.php
+// File: remove_from_cart.php
+// Author: Gabriel Sullivan
+// Purpose: Removing function for cart for BlueSky Homesteading
+declare(strict_types=1);
 
-session_start();
-include '../../includes/shop_databaseconnection.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/../../includes/blueskyhomesteading/shop_databaseconnection.php';
+
+require_once $_SERVER['DOCUMENT_ROOT'] . '/../../includes/blueskyhomesteading/session_starter.php';
 
 $item_id = isset($_POST['item_id']) ? (int)$_POST['item_id'] : 0;
 

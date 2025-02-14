@@ -1,8 +1,14 @@
 <?php
+// File: login.php
+// Author: Gabriel Sullivan
+// Purpose: (temporary) login page for BlueSky Homesteading
+declare(strict_types=1);
+
 // if an account system is ever implemented this needs to be changed to prevent dangerous user perms
 // it should be changed so that its just for user creation
-include '../includes/admin_databaseconnection.php';
-session_start();
+require_once $_SERVER['DOCUMENT_ROOT'] . '/../../includes/blueskyhomesteading/admin_databaseconnection.php';
+
+require_once $_SERVER['DOCUMENT_ROOT'] . '/../../includes/blueskyhomesteading/session_starter.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = $_POST['username'];

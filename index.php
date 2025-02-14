@@ -1,48 +1,12 @@
 <?php
+// File: index.php
+// Author: Gabriel Sullivan
+// Purpose: Homepage for BlueSky Homesteading
+declare(strict_types=1);
 
-/**
- * PHP Script for Displaying Featured Articles on BlueSky Homesteading
- *
- * @package    BlueSkyHomesteading
- * @author     Gabriel Sullivan
- * @version    1.0
- * @date       Last updated: September 19, 2024
- * @created    July 2024
- *
- * This script connects to the database and retrieves the latest articles,
- * displaying them on the front page along with their associated category slugs.
- * It also includes meta tags for SEO and social media sharing, along with a
- * structured header for the website.
- *
- * Database Connection:
- * - Requires 'includes/databaseconnection.php' to establish a connection to the database.
- *
- * SQL Query:
- * - Selects the latest 10 articles along with their title, meta description,
- *   image URL, image alt text, and category slug.
- * - Articles are ordered by their published date in descending order.
- *
- * Output:
- * - If articles are found, the script will display the first article prominently,
- *   followed by a list of the next four articles. If no articles are available,
- *   a message will indicate that no articles were found.
- *
- * Includes:
- * - 'includes/head.php': For common head elements and styles.
- * - 'includes/consentbanner.php': For user consent management.
- * - 'includes/navbar.php': For site navigation.
- * - 'includes/footer.php': For common footer content.
- *
- * Frontend:
- * - Utilizes HTML5 structure with proper semantic tags for accessibility.
- * - Includes Open Graph and Twitter meta tags for enhanced social sharing.
- * - Structured data (JSON-LD) for better search engine understanding.
- */
+require_once $_SERVER['DOCUMENT_ROOT'] . '/../../includes/blueskyhomesteading/databaseconnection.php';
 
-include 'includes/databaseconnection.php';
-
-session_start();
-$session_id = session_id();
+require_once $_SERVER['DOCUMENT_ROOT'] . '/../../includes/blueskyhomesteading/session_starter.php';
 
 // Query to get the latest articles along with their category slugs and image data
 $sql = "SELECT articles.slug AS article_slug, articles.title, articles.meta_description, articles.image_id, categories.slug AS category_slug, 
@@ -87,7 +51,7 @@ $on_homepage = true; // lets navbar know we are on the homepage
 <html lang="en">
 
 <head>
-    <?php include 'includes/head.php'; ?>
+    <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/../../includes/blueskyhomesteading/head.php'; ?>
     <title>BlueSky Homesteading - Your Guide to Sustainable Living</title>
     <meta name="description" content="Explore articles and resources on homesteading, sustainable living, gardening, and self-sufficiency.">
     <meta name="keywords" content="homesteading, gardening, sustainable living, self-sufficiency, articles">
@@ -109,31 +73,34 @@ $on_homepage = true; // lets navbar know we are on the homepage
 </head>
 
 <body>
-    <?php include 'includes/consentbanner.php'; ?>
-    <?php include 'includes/navbar.php'; ?>
+    <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/../../includes/blueskyhomesteading/consentbanner.php'; ?>
+    <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/../../includes/blueskyhomesteading/navbar.php'; ?>
     <main>
         <section class="frontpage">
             <div class="page-indent">
                 <div class="banner">
-                <div class="banner-content">
-                    <h1>Harvest the life you love.</h1>
-                    <p>Explore resources to inspire a healthy, sustainable homesteading lifestyle.</p>
-                    <div class="banner-buttons">
-                        <a href="https://www.blueskyhomesteading.com/blog" class="btn">Read our blog</a>
-                        <a href="https://www.blueskyhomesteading.com/shop" class="btn secondary">See our shop</a>
+                    <div class="banner-image mobile">
+                        <img src="https://www.blueskyhomesteading.com/images/rose-4372048_1280.png" alt="Homestead garden" loading="lazy">
+                    </div>
+                    <div class="banner-content">
+                        <h1>Harvest the life you love.</h1>
+                        <p>Explore resources to inspire a healthy, sustainable homesteading lifestyle.</p>
+                        <div class="banner-buttons">
+                            <a href="https://www.blueskyhomesteading.com/shop" class="btn">Shop our products</a>
+                            <a href="https://www.blueskyhomesteading.com/blog" class="btn secondary">Read our blog</a>
+                        </div>
+                    </div>
+
+                    <div class="banner-image desktop">
+                        <img src="https://www.blueskyhomesteading.com/images/rose-4372048_1280.png" alt="Homestead garden" loading="lazy">
                     </div>
                 </div>
-
-                <div class="banner-image">
-                    <img src="https://www.blueskyhomesteading.com/images/rose-4372048_1280.png" alt="Homestead garden" loading="lazy">
-                </div>
-    </div>
             </div>
         </section>
 
         <section class="frontpage blog">
             <div class="page-indent">
-                <h2>Read our blog</h2>
+                <h2>Latest posts</h2>
                 <?php
                 if (!empty($articles)) {
                     $counter = 1;
@@ -190,7 +157,7 @@ $on_homepage = true; // lets navbar know we are on the homepage
 
         <section class="frontpage products_section">
             <div class="page-indent">
-                <h2>Shop our products</h2>
+                <h2>Our products</h2>
                 <div class="product-preview-section">
                     <?php
                     if (!empty($products)) {
@@ -219,7 +186,6 @@ $on_homepage = true; // lets navbar know we are on the homepage
                             }
                             echo '<div class="text">';
                             echo '<span class="name">' . $product['name'] . '</span>';
-                            echo '<span class="buy-btn">View</span>';
                             echo '</div>';
                             echo '</a>';
                         }
@@ -254,7 +220,7 @@ $on_homepage = true; // lets navbar know we are on the homepage
             </div>
         </section>
     </main>
-    <?php include 'includes/footer.php'; ?>
+    <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/../../includes/blueskyhomesteading/footer.php'; ?>
 </body>
 
 </html>

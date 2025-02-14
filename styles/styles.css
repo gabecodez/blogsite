@@ -582,8 +582,8 @@ nav[aria-label=breadcrumb] li:last-child a {
 /* Modern Button Styles */
 .banner-buttons {
   display: flex;
-  gap: 40px;
-  justify-content: center;
+  gap: 20px;
+  justify-content: left;
 }
 .banner-buttons .btn {
   position: relative;
@@ -591,7 +591,7 @@ nav[aria-label=breadcrumb] li:last-child a {
   font-size: 1rem;
   color: white;
   border-radius: 10px;
-  background-color: #6f1a07;
+  background-color: #17076f;
   text-decoration: none;
   text-align: center;
   transition: border-color 0.3s ease, background-color 0.3s ease, color 0.3s ease, padding 0.3s ease;
@@ -603,8 +603,18 @@ nav[aria-label=breadcrumb] li:last-child a {
   font-style: normal;
 }
 .banner-buttons .btn.secondary {
+  color: rgba(0, 0, 0, 0.632);
+  background-color: transparent;
+}
+.banner-buttons .btn.secondary:hover {
+  background-color: transparent;
   color: black;
-  background-color: white;
+}
+.banner-buttons .btn.secondary:hover::after {
+  background-color: rgb(0, 0, 0);
+}
+.banner-buttons .btn.secondary:hover::before {
+  border-color: rgb(0, 0, 0);
 }
 .banner-buttons .btn::after {
   content: "";
@@ -1029,7 +1039,7 @@ footer {
 }
 .contact-form button[type=submit] {
   display: inline-block;
-  background-color: #6f1a07;
+  background-color: #17076f;
   color: #fff6f1;
   border: none;
   padding: 12px 20px;
@@ -1255,7 +1265,7 @@ label[for=quantity] {
   font-size: 1em;
   line-height: 1em;
   color: #fff;
-  background-color: #6f1a07;
+  background-color: #17076f;
   border: none;
   border-radius: 99999px;
   cursor: pointer;
@@ -1445,7 +1455,7 @@ span[id^=item-price-] {
 /* Transaction Status Message */
 .cart-page .error-message {
   color: #0d1f22;
-  border-color: #6f1a07;
+  border-color: #17076f;
   border-style: solid;
   border-width: 1px;
   width: 100%;
@@ -1506,6 +1516,7 @@ span[id^=item-price-] {
 .product-preview .text {
   padding: 1em;
   padding-top: 0.6em;
+  padding-bottom: 0.6em;
 }
 .product-preview .name {
   width: 100%;
@@ -1534,7 +1545,7 @@ span[id^=item-price-] {
   background-color: #f6d5d5;
 }
 .product-preview:hover .buy-btn {
-  background-color: #6f1a07;
+  background-color: #17076f;
 }
 
 /* Responsive Styles */
@@ -1655,7 +1666,8 @@ span[id^=item-price-] {
     padding: 1em;
   }
   .banner-buttons {
-    gap: 35px;
+    gap: 10px;
+    flex-direction: column;
   }
   .banner-buttons .btn {
     flex: 1;
@@ -1703,6 +1715,9 @@ span[id^=item-price-] {
     display: none;
   }
   .product-info {
+    flex-direction: column;
+  }
+  .product-preview-section {
     flex-direction: column;
   }
 }/*# sourceMappingURL=styles.css.map */

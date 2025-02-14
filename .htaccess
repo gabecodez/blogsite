@@ -17,6 +17,7 @@
     RewriteRule ^about$ pages/about.php [L]
     RewriteRule ^search$ pages/search.php [L]
     RewriteRule ^contact$ pages/contact.php [L]
+    RewriteRule ^shop$ pages/shop/index.php [L]
     RewriteRule ^shop/cart$ pages/shop/cart.php [L]
     RewriteRule ^admin/login$ pages/login.php [L]
     RewriteRule ^admin/register$ pages/register.php [L]

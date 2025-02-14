@@ -1,8 +1,14 @@
 <?php
+// File: register.php
+// Author: Gabriel Sullivan
+// Purpose: (temporary) Register page for BlueSky Homesteading
+declare(strict_types=1);
+
 // if an account system is ever implemented this needs to be changed to prevent dangerous user perms
 // it should be changed so that its just for user creation
-include '../../includes/admin_databaseconnection.php';
-session_start();
+require_once $_SERVER['DOCUMENT_ROOT'] . '/../../includes/blueskyhomesteading/admin_databaseconnection.php';
+
+require_once $_SERVER['DOCUMENT_ROOT'] . '/../../includes/blueskyhomesteading/session_starter.php';
 
 // this would then also be removed given these circumstances so that users can make users
 // but they should only be allowed to make normal users not admins

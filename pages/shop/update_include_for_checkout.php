@@ -1,7 +1,12 @@
 <?php
-// update-include-for-checkout.php
-include '../../includes/shop_databaseconnection.php';
-session_start();
+// File: update-include-for-checkout.php
+// Author: Gabriel Sullivan
+// Purpose: update-include-for-checkout for BlueSky Homesteading
+declare(strict_types=1);
+
+require_once $_SERVER['DOCUMENT_ROOT'] . '/../../includes/blueskyhomesteading/shop_databaseconnection.php';
+
+require_once $_SERVER['DOCUMENT_ROOT'] . '/../../includes/blueskyhomesteading/session_starter.php';
 
 $item_id = filter_input(INPUT_POST, 'item_id', FILTER_VALIDATE_INT);
 $include_for_checkout = filter_input(INPUT_POST, 'include_for_checkout', FILTER_VALIDATE_INT);

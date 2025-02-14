@@ -85,10 +85,10 @@ $session = \Stripe\Checkout\Session::create([
             'shipping_rate_data' => [
                 'type' => 'fixed_amount',
                 'fixed_amount' => [
-                    'amount' => 0,
+                    'amount' => 500,
                     'currency' => 'usd',
                 ],
-                'display_name' => 'Free shipping',
+                'display_name' => 'Standard shipping',
                 'delivery_estimate' => [
                     'minimum' => [
                         'unit' => 'business_day',
@@ -123,6 +123,7 @@ $session = \Stripe\Checkout\Session::create([
         ],
     ],
 ]);
+
 
 header('Location: ' . $session->url);
 exit();

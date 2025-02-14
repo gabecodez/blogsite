@@ -1,28 +1,10 @@
 <?php
+// File: about.php
+// Author: Gabriel Sullivan
+// Purpose: About page for BlueSky Homesteading
+declare(strict_types=1);
 
-/**
- * PHP Script for Displaying About Page on BlueSky Homesteading
- *
- * @package    BlueSkyHomesteading
- * @author     Gabriel Sullivan
- * @version    1.0
- * @date       Last updated: October 6, 2024
- * @created    October 2024
- *
- * This script generates the About page for the BlueSky Homesteading website.
- * It provides an overview of the website's mission, history, and core values.
- *
- * Includes:
- * - 'includes/head.php': For common head elements, SEO meta tags, and page title.
- * - 'includes/navbar.php': For site navigation links to other sections of the website.
- * - 'includes/footer.php': For common footer content displayed on all pages.
- *
- * Structure:
- * - Utilizes HTML5 and semantic tags for better accessibility and SEO.
- * - Includes a breadcrumb navigation for user orientation within the site.
- */
-session_start();
-$session_id = session_id();
+require_once $_SERVER['DOCUMENT_ROOT'] . '/../../includes/blueskyhomesteading/session_starter.php';
 ?>
 
 <!DOCTYPE html>
@@ -30,7 +12,7 @@ $session_id = session_id();
 
 <head>
    <?php
-   include '../includes/head.php';
+   require_once $_SERVER['DOCUMENT_ROOT'] . '/../../includes/blueskyhomesteading/head.php';
    $pageTitle = "About Us - BlueSky Homesteading";
    $pageDescription = "Learn more about BlueSky Homesteading and our mission to support sustainable living.";
    $imageURL = "https://www.blueskyhomesteading.com/images/social_media_previews/basic_white_bg_w_logo.jpeg";
@@ -75,8 +57,8 @@ $session_id = session_id();
 </head>
 
 <body>
-   <?php include '../includes/consentbanner.php'; ?>
-   <?php include '../includes/navbar.php'; ?>
+   <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/../../includes/blueskyhomesteading/consentbanner.php'; ?>
+   <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/../../includes/blueskyhomesteading/navbar.php'; ?>
    <main class="main-page">
       <div class="article-content">
          <header>
@@ -102,7 +84,7 @@ $session_id = session_id();
          </article>
       </div>
    </main>
-   <?php include '../includes/footer.php'; ?>
+   <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/../../includes/blueskyhomesteading/footer.php'; ?>
 </body>
 
 </html>

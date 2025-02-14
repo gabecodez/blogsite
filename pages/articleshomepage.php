@@ -1,53 +1,12 @@
 <?php
-/**
- * PHP Script for Displaying Latest Articles on BlueSky Homesteading
- *
- * @package    BlueSkyHomesteading
- * @author     Gabriel Sullivan
- * @version    1.0
- * @date       Last updated: September 19, 2024
- * @created    July 2024
- *
- * This script connects to a MySQL database to fetch and display the latest articles 
- * related to homesteading on the front page. Each article is shown with its title, 
- * meta description, associated category slug, and relevant image details. The script 
- * also incorporates SEO best practices through the inclusion of meta tags for social 
- * media sharing and structured data.
- *
- * Database Connection:
- * - Requires 'includes/databaseconnection.php' to establish a connection to the database.
- *
- * SQL Query:
- * - Retrieves the latest 10 articles with the following fields:
- *   - Article slug
- *   - Title
- *   - Meta description
- *   - Image URL
- *   - Image alt text
- *   - Associated category slug
- * - Articles are sorted by their published date in descending order.
- *
- * Output:
- * - If articles are found, the first article is displayed prominently, followed 
- *   by a list of subsequent articles. If no articles are available, a message 
- *   indicating "No articles found" is shown.
- *
- * Includes:
- * - 'includes/head.php': For common head elements and styles.
- * - 'includes/consentbanner.php': For user consent management.
- * - 'includes/navbar.php': For site navigation.
- * - 'includes/footer.php': For common footer content.
- *
- * Frontend:
- * - Utilizes HTML5 structure with appropriate semantic tags for accessibility.
- * - Integrates Open Graph and Twitter meta tags for enhanced social sharing.
- * - Implements structured data (JSON-LD) for improved search engine understanding.
- */
+// File: articleshomepage.php
+// Author: Gabriel Sullivan
+// Purpose: Homepage for blog for BlueSky Homesteading
+declare(strict_types=1);
 
-include '../includes/databaseconnection.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/../../includes/blueskyhomesteading/databaseconnection.php';
 
-session_start();
-$session_id = session_id();
+require_once $_SERVER['DOCUMENT_ROOT'] . '/../../includes/blueskyhomesteading/session_starter.php';
 
 // Query to get the latest articles along with their category slugs
 $sql = "SELECT articles.slug AS article_slug, articles.title, articles.meta_description, articles.image_id, categories.slug AS category_slug 
@@ -72,7 +31,7 @@ if ($result->num_rows > 0) {
 <html lang="en">
 <head>
     <?php
-    include '../includes/head.php';
+    require_once $_SERVER['DOCUMENT_ROOT'] . '/../../includes/blueskyhomesteading/head.php';
     $pageTitle = "Latest Blog Posts - BlueSky Homesteading";
     $pageDescription = "Discover the latest articles and resources for homesteading enthusiasts.";
     $imageURL = "https://www.blueskyhomesteading.com/images/social_media_previews/basic_white_bg_w_logo.jpeg";
@@ -117,8 +76,8 @@ if ($result->num_rows > 0) {
     </script>
 </head>
 <body>
-    <?php include '../includes/consentbanner.php'; ?>
-    <?php include '../includes/navbar.php'; ?>
+    <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/../../includes/blueskyhomesteading/consentbanner.php'; ?>
+    <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/../../includes/blueskyhomesteading/navbar.php'; ?>
     <main class="main-page">
         <header class="article__list__header">
             <h1>Latest Blog Posts</h1>
@@ -143,6 +102,6 @@ if ($result->num_rows > 0) {
         ?>
         </div>
     </main>
-    <?php include '../includes/footer.php'; ?>
+    <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/../../includes/blueskyhomesteading/footer.php'; ?>
 </body>
 </html>

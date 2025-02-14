@@ -1,44 +1,16 @@
 <?php
-/**
- * PHP Script for Displaying 404 Not Found Error Page on BlueSky Homesteading
- *
- * @package    BlueSkyHomesteading
- * @author     Gabriel Sullivan
- * @version    1.0
- * @date       Last updated: September 19, 2024
- * @created    July 2024
- *
- * This script serves a 404 Not Found error page, providing users with
- * a friendly message and alternative navigation options. It includes
- * relevant meta tags for SEO and social media sharing, along with a
- * structured header for user experience.
- *
- * Includes:
- * - 'includes/head.php': For common head elements and styles.
- * - 'includes/consentbanner.php': For user consent management.
- * - 'includes/navbar.php': For site navigation.
- * - 'includes/footer.php': For common footer content.
- *
- * Output:
- * - Displays a prominent 404 error header along with a user-friendly
- *   message indicating that the requested page cannot be found.
- * - Provides links to the latest blog posts, guides, and community
- *   resources to help users navigate the site.
- *
- * Frontend:
- * - Utilizes HTML5 structure with proper semantic tags for accessibility.
- * - Includes Open Graph and Twitter meta tags for enhanced social sharing.
- * - Structured data (JSON-LD) for better search engine understanding.
- */
+// File: 404.php
+// Author: Gabriel Sullivan
+// Purpose: 404 page for BlueSky Homesteading
+declare(strict_types=1);
 
-session_start();
-$session_id = session_id();
+require_once $_SERVER['DOCUMENT_ROOT'] . '/../../includes/blueskyhomesteading/session_starter.php';
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <?php include 'includes/head.php'; ?>
+    <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/../../includes/blueskyhomesteading/head.php'; ?>
     <title>404 Not Found - BlueSky Homesteading</title>
     <meta name="description" content="Oops! The page you're looking for cannot be found. Discover our resources and articles on sustainable living and homesteading.">
     <meta name="keywords" content="404, not found, error, page missing, homesteading, sustainable living">
@@ -59,14 +31,14 @@ $session_id = session_id();
     </script>
 </head>
 <body>
-    <?php include 'includes/consentbanner.php'; ?>
-    <?php include 'includes/navbar.php'; ?>
+    <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/../../includes/blueskyhomesteading/consentbanner.php'; ?>
+    <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/../../includes/blueskyhomesteading/navbar.php'; ?>
     <header class="error-page-header">
         <h1>404</h1>
         <h2>Oops! Page Not Found</h2>
         <p>It seems the page you're looking for doesn't exist. But don’t worry, we have plenty of resources to help you with your homesteading journey!</p>
         <p>Check out our <a href="https://www.blueskyhomesteading.com">homepage</a>.</p>
     </header>
-    <?php include 'includes/footer.php'; ?>
+    <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/../../includes/blueskyhomesteading/footer.php'; ?>
 </body>
 </html>

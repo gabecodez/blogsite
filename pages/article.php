@@ -1,55 +1,16 @@
 <?php
-/**
- * PHP Script for Displaying Individual Articles on BlueSky Homesteading
- *
- * @package    BlueSkyHomesteading
- * @author     Gabriel Sullivan
- * @version    1.0
- * @date       Last updated: September 19, 2024
- * @created    July 2024
- *
- * This script retrieves a specific article based on the provided category
- * and article slugs from the URL. It fetches the article details from the
- * database and displays them on the page, including SEO metadata for 
- * improved visibility on search engines and social media platforms.
- *
- * Database Connection:
- * - Requires 'includes/databaseconnection.php' to connect to the database.
- *
- * URL Parameters:
- * - Expects 'category_slug' and 'slug' parameters in the URL to identify 
- *   the correct article.
- *
- * SQL Queries:
- * - The first query retrieves the category name based on the category slug.
- * - The second query retrieves the article details (title, content, 
- *   meta description, keywords, image URL, and alt text) based on the 
- *   article slug and the corresponding category.
- *
- * Output:
- * - If the article is found, it is displayed along with its title, content,
- *   and relevant metadata. If not found, a 404 error page is shown.
- *
- * Includes:
- * - 'includes/head.php': For common head elements and styles.
- * - 'includes/consentbanner.php': For user consent management.
- * - 'includes/navbar.php': For site navigation.
- * - 'includes/footer.php': For common footer content.
- *
- * Frontend:
- * - Utilizes HTML5 structure with proper semantic tags for accessibility.
- * - Includes Open Graph and Twitter meta tags for enhanced social sharing.
- * - Structured data (JSON-LD) for better search engine understanding.
- */
+// File: article.php
+// Author: Gabriel Sullivan
+// Purpose: Article page template for BlueSky Homesteading
+declare(strict_types=1);
 
- include '../includes/databaseconnection.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/../../includes/blueskyhomesteading/databaseconnection.php';
 
-session_start();
-$session_id = session_id();
+require_once $_SERVER['DOCUMENT_ROOT'] . '/../../includes/blueskyhomesteading/session_starter.php';
  
  // Function to handle 404 errors
  function show404() {
-     include '../404.php';
+    require_once $_SERVER['DOCUMENT_ROOT'] . '/404.php';
      http_response_code(404);
      exit();
  }
@@ -123,7 +84,7 @@ $content_with_ads = $content;
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <?php include '../includes/head.php'; ?>
+    <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/../../includes/blueskyhomesteading/head.php'; ?>
     <title><?php echo htmlspecialchars($page_title); ?></title>
     <meta name="description" content="<?php echo htmlspecialchars($meta_description); ?>">
     <meta name="keywords" content="<?php echo htmlspecialchars($meta_keywords); ?>">
@@ -161,8 +122,8 @@ $content_with_ads = $content;
     </script>
 </head>
 <body>
-    <?php include '../includes/consentbanner.php'; ?>
-    <?php include '../includes/navbar.php'; ?>
+    <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/../../includes/blueskyhomesteading/consentbanner.php'; ?>
+    <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/../../includes/blueskyhomesteading/navbar.php'; ?>
     <main class="main-page">
         <div class="article-content">
             <header>
@@ -197,6 +158,6 @@ $content_with_ads = $content;
             </article>
         </div>
     </main>
-    <?php include '../includes/footer.php'; ?>
+    <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/../../includes/blueskyhomesteading/footer.php'; ?>
 </body>
 </html>

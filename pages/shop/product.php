@@ -1,12 +1,16 @@
 <?php
-include '../../includes/databaseconnection.php';
+// File: product.php
+// Author: Gabriel Sullivan
+// Purpose: Product template page for BlueSky Homesteading
+declare(strict_types=1);
 
-session_start();
-$session_id = session_id();
+require_once $_SERVER['DOCUMENT_ROOT'] . '/../../includes/blueskyhomesteading/databaseconnection.php';
+
+require_once $_SERVER['DOCUMENT_ROOT'] . '/../../includes/blueskyhomesteading/session_starter.php';
 
 function show404()
 {
-    include '../../404.php';
+    require_once $_SERVER['DOCUMENT_ROOT'] . '/404.php';
     http_response_code(404);
     exit();
 }
@@ -65,14 +69,14 @@ if (!empty($product['preview_image_ids'])) {
 <html lang="en">
 
 <head>
-    <?php include '../../includes/head.php'; ?>
+    <?php require_once '../../includes/head.php'; ?>
     <title><?php echo htmlspecialchars($product['name']); ?> - Product Page</title>
     <link rel="stylesheet" href="https://www.blueskyhomesteading.com/styles/styles.css">
 </head>
 
 <body>
-    <?php include '../../includes/consentbanner.php'; ?>
-    <?php include '../../includes/navbar.php'; ?>
+    <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/../../includes/blueskyhomesteading/consentbanner.php'; ?>
+    <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/../../includes/blueskyhomesteading/navbar.php'; ?>
 
     <main class="main-page">
         <div class="product-info">
@@ -173,7 +177,7 @@ if (!empty($product['preview_image_ids'])) {
         }
     </script>
 
-    <?php include '../../includes/footer.php'; ?>
+    <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/../../includes/blueskyhomesteading/footer.php'; ?>
 </body>
 
 </html>

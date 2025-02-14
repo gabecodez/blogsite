@@ -1,47 +1,12 @@
 <?php
-/**
- * PHP Script for Displaying Articles by Category on BlueSky Homesteading
- *
- * @package    BlueSkyHomesteading
- * @author     Gabriel Sullivan
- * @version    1.0
- * @date       Last updated: September 19, 2024
- * @created    July 2024
- *
- * This script retrieves articles from a specified category based on the
- * category slug provided in the URL. It connects to the database,
- * fetches category information, and retrieves the relevant articles.
- * The results are displayed on the front page with appropriate SEO
- * meta tags and a structured header.
- *
- * Database Connection:
- * - Requires 'includes/databaseconnection.php' to establish a connection to the database.
- *
- * SQL Queries:
- * - The first query fetches the category name based on the category slug.
- * - The second query retrieves articles belonging to that category, ordered by their published date in descending order.
- *
- * Output:
- * - If articles are found, they are displayed as links with titles and meta descriptions.
- * - If no articles or an invalid category slug is provided, a 404 error page is included.
- *
- * Includes:
- * - 'includes/head.php': For common head elements and styles.
- * - 'includes/consentbanner.php': For user consent management.
- * - 'includes/navbar.php': For site navigation.
- * - 'includes/footer.php': For common footer content.
- *
- * Frontend:
- * - Utilizes HTML5 structure with semantic tags for accessibility.
- * - Includes Open Graph and Twitter meta tags for enhanced social sharing.
- * - Structured data (JSON-LD) is used to provide search engines with better context about the website.
- */
+// File: category.php
+// Author: Gabriel Sullivan
+// Purpose: Blog category page for BlueSky Homesteading
+declare(strict_types=1);
 
+require_once $_SERVER['DOCUMENT_ROOT'] . '/../../includes/blueskyhomesteading/databaseconnection.php';
 
-include '../includes/databaseconnection.php';
-
-session_start();
-$session_id = session_id();
+require_once $_SERVER['DOCUMENT_ROOT'] . '/../../includes/blueskyhomesteading/session_starter.php';
 
 // Get the category slug from the URL
 $category_slug = isset($_GET['category_slug']) ? $_GET['category_slug'] : '';
@@ -76,12 +41,12 @@ if ($category_slug) {
         $stmt->close();
         $result->free();
     } else {
-        include '../404.php'; // Include 404 content
+        require_once $_SERVER['DOCUMENT_ROOT'] . '/404.php'; // Include 404 content
         http_response_code(404); // Set HTTP status code to 404 Not Found
         exit();
     }
 } else {
-    include '../404.php'; // Include 404 content
+    require_once $_SERVER['DOCUMENT_ROOT'] . '/404.php'; // Include 404 content
     http_response_code(404); // Set HTTP status code to 404 Not Found
     exit();
 }
@@ -94,7 +59,7 @@ $conn->close();
 
 <head>
    <?php
-   include '../includes/head.php';
+   require_once $_SERVER['DOCUMENT_ROOT'] . '/../../includes/blueskyhomesteading/head.php';
    $pageTitle = "Articles in ".htmlspecialchars($category)." - BlueSky Homesteading";
    $pageDescription = htmlspecialchars($category_data['description']);
    $imageURL = "https://www.blueskyhomesteading.com/images/social_media_previews/basic_white_bg_w_logo.jpeg";
@@ -140,8 +105,8 @@ $conn->close();
 
 
 <body>
-    <?php include '../includes/consentbanner.php'; ?>
-    <?php include '../includes/navbar.php'; ?>
+    <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/../../includes/blueskyhomesteading/consentbanner.php'; ?>
+    <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/../../includes/blueskyhomesteading/navbar.php';; ?>
     <main class="main-page">
         <header class="article__list__header">
             <h1><?php echo htmlspecialchars($category); ?></h1>
@@ -163,6 +128,6 @@ $conn->close();
             ?>
         </div>
     </main>
-    <?php include '../includes/footer.php'; ?>
+    <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/../../includes/blueskyhomesteading/footer.php'; ?>
 </body>
 </html>

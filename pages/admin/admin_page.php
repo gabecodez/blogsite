@@ -1,6 +1,6 @@
 <?php
 // admin_page.php
-include '../../includes/admin_databaseconnection.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/../../includes/blueskyhomesteading/admin_databaseconnection.php';
 session_start();
 
 // Ensure that the user is an authenticated admin.
@@ -35,12 +35,12 @@ try {
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <?php include '../../includes/head.php'; ?>
+    <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/../../includes/blueskyhomesteading/head.php'; ?>
     <title>Admin Dashboard</title>
     <link rel="stylesheet" href="https://www.blueskyhomesteading.com/styles/admin.css">
 </head>
 <body>
-    <?php include '../../includes/navbar.php'; ?>
+    <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/../../includes/blueskyhomesteading/navbar.php'; ?>
     <main class="main-page">
         <h1>Admin Dashboard</h1>
         <button id="createProductBtn">Create New Product</button>
@@ -314,6 +314,6 @@ try {
         };
     });
     </script>
-    <?php include '../../includes/footer.php'; ?>
+    <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/../../includes/blueskyhomesteading/footer.php'; ?>
 </body>
 </html>

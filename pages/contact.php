@@ -1,6 +1,10 @@
 <?php
-session_start();
-$session_id = session_id();
+// File: contact.php
+// Author: Gabriel Sullivan
+// Purpose: Contact us page for BlueSky Homesteading
+declare(strict_types=1);
+
+require_once $_SERVER['DOCUMENT_ROOT'] . '/../../includes/blueskyhomesteading/session_starter.php';
 
 // reCAPTCHA secret key from Google reCAPTCHA admin console
 $secret_key = '6Lf9H28qAAAAAHyKNxZrBjY0apdVpfL-8LPFTWu-';
@@ -55,12 +59,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['ajax']) && $_POST['aja
 
 <head>
     <?php
-    include '../includes/head.php';
+    require_once $_SERVER['DOCUMENT_ROOT'] . '/../../includes/blueskyhomesteading/head.php';
     $pageTitle = "Contact Us - BlueSky Homesteading";
     $pageDescription = "Get in touch with BlueSky Homesteading. We look forward to hearing from you!";
     $imageURL = "https://www.blueskyhomesteading.com/images/social_media_previews/basic_white_bg_w_logo.jpeg";
     $pageURL = "https://www.blueskyhomesteading.com/contact";
     $siteName = "BlueSky Homesteading";
+    $creatorHandle = "";
+    $twitterHandle = "";
     ?>
     <title><?php echo $pageTitle; ?></title>
     <link rel="canonical" href="<?php echo $pageURL; ?>">
@@ -138,8 +144,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['ajax']) && $_POST['aja
 </head>
 
 <body>
-   <?php include '../includes/consentbanner.php'; ?>
-   <?php include '../includes/navbar.php'; ?>
+   <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/../../includes/blueskyhomesteading/consentbanner.php'; ?>
+   <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/../../includes/blueskyhomesteading/navbar.php'; ?>
 
    <main class="main-page">
       <div class="article-content">
@@ -168,7 +174,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['ajax']) && $_POST['aja
       </div>
    </main>
 
-   <?php include '../includes/footer.php'; ?>
+   <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/../../includes/blueskyhomesteading/footer.php'; ?>
 </body>
 
 </html>

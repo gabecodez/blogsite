@@ -62,6 +62,8 @@ foreach ($cart_items as $item) {
     $imageURL = "https://www.blueskyhomesteading.com/images/social_media_previews/basic_white_bg_w_logo.jpeg";
     $pageURL = "https://www.blueskyhomesteading.com/shop/cart";
     $siteName = "BlueSky Homesteading";
+    $twitterHandle = "";
+    $creatorHandle = "";
     ?>
     <title><?php echo $pageTitle; ?></title>
     <link rel="canonical" href="<?php echo $pageURL; ?>">

@@ -1,6 +1,6 @@
 <?php
 // get_product.php
-include '../../includes/admin_databaseconnection.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/../../includes/blueskyhomesteading/admin_databaseconnection.php';
 session_start();
 
 if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {

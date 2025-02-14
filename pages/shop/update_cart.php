@@ -1,15 +1,19 @@
 <?php
-// update_cart.php
+// File: update_cart.php
+// Author: Gabriel Sullivan
+// Purpose: Update cart function for BlueSky Homesteading
+declare(strict_types=1);
+
 header('Content-Type: application/json');
 ob_clean();
 
-session_start();
-include '../../includes/shop_databaseconnection.php';
-include '../../includes/databaseconnection.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/../../includes/blueskyhomesteading/shop_databaseconnection.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/../../includes/blueskyhomesteading/databaseconnection.php';
+
+require_once $_SERVER['DOCUMENT_ROOT'] . '/../../includes/blueskyhomesteading/session_starter.php';
 
 $item_id = isset($_POST['item_id']) ? (int)$_POST['item_id'] : 0;
 $quantity = isset($_POST['quantity']) ? (int)$_POST['quantity'] : 1;
-$session_id = session_id();
 
 if ($item_id > 0 && $quantity > 0) {
     try {

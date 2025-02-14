@@ -1,39 +1,10 @@
 <?php
+// File: privacy.php
+// Author: Gabriel Sullivan
+// Purpose: Privacy page for BlueSky Homesteading
+declare(strict_types=1);
 
-/**
- * PHP Script for Displaying Privacy Policy on BlueSky Homesteading
- *
- * @package    BlueSkyHomesteading
- * @author     Gabriel Sullivan
- * @version    1.0
- * @date       Last updated: September 19, 2024
- * @created    September 2024
- *
- * This script generates the Privacy Policy page for the BlueSky Homesteading website.
- * It outlines how user data is collected, used, and protected, ensuring transparency
- * and compliance with privacy regulations.
- *
- * Includes:
- * - 'includes/head.php': For common head elements, SEO meta tags, and page title.
- * - 'includes/consentbanner.php': For managing user consent regarding cookies and tracking.
- * - 'includes/navbar.php': For site navigation links to other sections of the website.
- * - 'includes/footer.php': For common footer content displayed on all pages.
- *
- * Structure:
- * - Utilizes HTML5 and semantic tags for better accessibility and SEO.
- * - Includes a breadcrumb navigation for user orientation within the site.
- *
- * Content:
- * - Details the effective date, the type of information collected, usage, cookies,
- *   user consent, third-party links, data security measures, and how changes to the
- *   policy will be communicated.
- *
- * Compliance:
- * - Ensures users are informed about their rights regarding their personal information,
- *   adhering to best practices in privacy policy disclosures.
- */
-session_start();
-$session_id = session_id();
+require_once $_SERVER['DOCUMENT_ROOT'] . '/../../includes/blueskyhomesteading/session_starter.php';
 ?>
 
 <!DOCTYPE html>

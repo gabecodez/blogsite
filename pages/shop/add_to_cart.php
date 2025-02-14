@@ -1,6 +1,12 @@
 <?php
-session_start();
-include '../../includes/shop_databaseconnection.php';
+// File: add_to_cart.php
+// Author: Gabriel Sullivan
+// Purpose: Add to cart function for BlueSky Homesteading
+declare(strict_types=1);
+
+require_once $_SERVER['DOCUMENT_ROOT'] . '/../../includes/blueskyhomesteading/shop_databaseconnection.php';
+
+require_once $_SERVER['DOCUMENT_ROOT'] . '/../../includes/blueskyhomesteading/session_starter.php';
 
 $product_id = isset($_POST['product_id']) ? (int)$_POST['product_id'] : 0;
 $quantity = isset($_POST['quantity']) ? (int)$_POST['quantity'] : 1;

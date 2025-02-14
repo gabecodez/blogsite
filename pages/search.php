@@ -1,36 +1,10 @@
 <?php
+// File: search.php
+// Author: Gabriel Sullivan
+// Purpose: Search page for BlueSky Homesteading
+declare(strict_types=1);
 
-/**
- * PHP Script for Displaying Search Results on BlueSky Homesteading
- *
- * @package    BlueSkyHomesteading
- * @author     Gabriel Sullivan
- * @version    1.0
- * @date       Last updated: October 6, 2024
- * @created    October 2024
- *
- * This script generates the Search Results page for the BlueSky Homesteading website.
- * It provides users with search functionality to find relevant content across the site.
- *
- * Includes:
- * - 'includes/head.php': For common head elements, SEO meta tags, and page title.
- * - 'includes/consentbanner.php': For managing user consent regarding cookies and tracking.
- * - 'includes/navbar.php': For site navigation links to other sections of the website.
- * - 'includes/footer.php': For common footer content displayed on all pages.
- *
- * Structure:
- * - Utilizes HTML5 and semantic tags for better accessibility and SEO.
- * - Includes a breadcrumb navigation for user orientation within the site.
- *
- * Content:
- * - Displays search results based on the query input by the user.
- * - Provides pagination to manage large sets of search results.
- *
- * Compliance:
- * - Ensures users are informed about search functionalities, their data rights, and the use of cookies for tracking user behavior.
- */
-session_start();
-$session_id = session_id();
+require_once $_SERVER['DOCUMENT_ROOT'] . '/../../includes/blueskyhomesteading/session_starter.php';
 ?>
 
 <!DOCTYPE html>
@@ -38,7 +12,7 @@ $session_id = session_id();
 
 <head>
    <?php
-   include '../includes/head.php';
+   require_once $_SERVER['DOCUMENT_ROOT'] . '/../../includes/blueskyhomesteading/head.php';
    $pageTitle = "Search - BlueSky Homesteading";
    $pageDescription = "Search our website.";
    $imageURL = "https://www.blueskyhomesteading.com/images/social_media_previews/basic_white_bg_w_logo.jpeg";
@@ -83,8 +57,8 @@ $session_id = session_id();
 </head>
 
 <body>
-   <?php include '../includes/consentbanner.php'; ?>
-   <?php include '../includes/navbar.php'; ?>
+   <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/../../includes/blueskyhomesteading/consentbanner.php'; ?>
+   <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/../../includes/blueskyhomesteading/navbar.php'; ?>
 
    <main class="main-page">
       <div class="article-content">
@@ -101,7 +75,7 @@ $session_id = session_id();
          </div>
       </div>
    </main>
-   <?php include '../includes/footer.php'; ?>
+   <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/../../includes/blueskyhomesteading/footer.php'; ?>
 </body>
 
 </html>

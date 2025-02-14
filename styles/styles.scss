@@ -5,7 +5,7 @@ $text_font: Georgia, serif;
 
 $main_color: #ababd5;
 $sub_color: #7d6e56;
-$highlight_color: #6f1a07;
+$highlight_color: #17076f;
 $dark_color: #392f5a;
 $header_color: #0d1f22;
 $bg_color: #fff6f1;
@@ -688,8 +688,8 @@ nav[aria-label="breadcrumb"] {
 
 .banner-buttons {
   display: flex;
-  gap: 40px;
-  justify-content: center;
+  gap: 20px;
+  justify-content: left;
 
   .btn {
     position: relative;
@@ -710,8 +710,21 @@ nav[aria-label="breadcrumb"] {
     font-style: normal;
 
     &.secondary {
-      color: black;
-      background-color: white;
+      color: rgba(0, 0, 0, 0.632);
+      background-color: transparent;
+
+      &:hover {
+        background-color: transparent;
+        color: black;
+  
+        &::after {
+          background-color: rgb(0, 0, 0);
+        }
+  
+        &::before {
+          border-color: rgb(0, 0, 0);
+        }
+      }
     }
 
     &::after {
@@ -1717,6 +1730,7 @@ span[id^="item-price-"] {
   .text {
     padding: 1em;
     padding-top: 0.6em;
+    padding-bottom: 0.6em;
   }
 
   .name {
@@ -1904,7 +1918,8 @@ span[id^="item-price-"] {
   }
 
   .banner-buttons {
-    gap: 35px;
+    gap: 10px;
+    flex-direction: column;
 
     .btn {
       flex: 1;
@@ -1969,6 +1984,10 @@ span[id^="item-price-"] {
   }
 
   .product-info {
+    flex-direction: column;
+  }
+
+  .product-preview-section {
     flex-direction: column;
   }
 }
