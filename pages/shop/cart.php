@@ -43,7 +43,6 @@ try {
     }
 
     $stmt->close();
-    $shop_conn->close();
 } catch (Exception $e) {
     error_log($e->getMessage());
 }

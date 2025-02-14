@@ -69,7 +69,7 @@ if (!empty($product['preview_image_ids'])) {
 <html lang="en">
 
 <head>
-    <?php require_once '../../includes/head.php'; ?>
+    <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/../../includes/blueskyhomesteading/head.php'; ?>
     <title><?php echo htmlspecialchars($product['name']); ?> - Product Page</title>
     <link rel="stylesheet" href="https://www.blueskyhomesteading.com/styles/styles.css">
 </head>
