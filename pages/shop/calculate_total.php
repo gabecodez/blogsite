@@ -1,11 +1,14 @@
 <?php
-// calculate_total.php
+// File: calculate_total.php
+// Author: Gabriel Sullivan
+// Purpose: Calculate the total for BlueSky Homesteading
+declare(strict_types=1);
 
-session_start();
-include '../../includes/databaseconnection.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/../../includes/blueskyhomesteading/databaseconnection.php';
+
+require_once $_SERVER['DOCUMENT_ROOT'] . '/../../includes/blueskyhomesteading/session_starter.php';
 
 $item_data = json_decode($_POST['item_data'], true);
-$session_id = session_id();
 $totalPrice = 0;
 
 try {

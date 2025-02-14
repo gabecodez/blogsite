@@ -1,7 +1,10 @@
 <?php
-// checkout success page
-session_start();
-$session_id = session_id();
+// File: checkout_success.php
+// Author: Gabriel Sullivan
+// Purpose: Checkout success page for BlueSky Homesteading
+declare(strict_types=1);
+
+require_once $_SERVER['DOCUMENT_ROOT'] . '/../../includes/blueskyhomesteading/session_starter.php';
 ?>
 
 <!DOCTYPE html>
@@ -9,7 +12,7 @@ $session_id = session_id();
 
 <head>
    <?php
-   include '../../includes/head.php';
+   require_once $_SERVER['DOCUMENT_ROOT'] . '/../../includes/blueskyhomesteading/head.php';
    $pageTitle = "Order confirmed - BlueSky Homesteading";
    $pageDescription = "Learn more about BlueSky Homesteading and our mission to support sustainable living.";
    $imageURL = "https://www.blueskyhomesteading.com/images/social_media_previews/basic_white_bg_w_logo.jpeg";
@@ -54,8 +57,8 @@ $session_id = session_id();
 </head>
 
 <body>
-   <?php include '../../includes/consentbanner.php'; ?>
-   <?php include '../../includes/navbar.php'; ?>
+   <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/../../includes/blueskyhomesteading/consentbanner.php'; ?>
+   <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/../../includes/blueskyhomesteading/navbar.php'; ?>
    <main class="main-page">
       <div class="article-content">
          <header>
@@ -64,7 +67,7 @@ $session_id = session_id();
             <a href="https://www.blueskyhomesteading.com">Return Home</a>
       </div>
    </main>
-   <?php include '../../includes/footer.php'; ?>
+   <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/../../includes/blueskyhomesteading/footer.php'; ?>
 </body>
 
 </html>

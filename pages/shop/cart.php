@@ -1,12 +1,15 @@
 <?php
-// cart.php
+// File: cart.php
+// Author: Gabriel Sullivan
+// Purpose: Cart page for BlueSky Homesteading
+declare(strict_types=1);
 
-include '../../includes/shop_databaseconnection.php';
-include '../../includes/databaseconnection.php';
-session_start();
+require_once $_SERVER['DOCUMENT_ROOT'] . '/../../includes/blueskyhomesteading/databaseconnection.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/../../includes/blueskyhomesteading/shop_databaseconnection.php';
+
+require_once $_SERVER['DOCUMENT_ROOT'] . '/../../includes/blueskyhomesteading/session_starter.php';
 
 $status = filter_input(INPUT_GET, 'status', FILTER_VALIDATE_INT, ['options' => ['default' => 0, 'min_range' => 0, 'max_range' => 1]]);
-$session_id = session_id();
 $cart_items = [];
 
 try {
@@ -56,7 +59,7 @@ foreach ($cart_items as $item) {
 
 <head>
     <?php
-    include '../../includes/head.php';
+    require_once $_SERVER['DOCUMENT_ROOT'] . '/../../includes/blueskyhomesteading/head.php';
     $pageTitle = "Your Cart";
     $pageDescription = "Your shopping cart";
     $imageURL = "https://www.blueskyhomesteading.com/images/social_media_previews/basic_white_bg_w_logo.jpeg";
@@ -93,8 +96,8 @@ foreach ($cart_items as $item) {
 
 </head>
 <body>
-    <?php include '../../includes/consentbanner.php'; ?>
-    <?php include '../../includes/navbar.php'; ?>
+    <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/../../includes/blueskyhomesteading/consentbanner.php'; ?>
+    <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/../../includes/blueskyhomesteading/navbar.php'; ?>
 
     <div class="cart-page">
     <?php
@@ -216,6 +219,6 @@ foreach ($cart_items as $item) {
         }
     </script>
 
-    <?php include '../../includes/footer.php'; ?>
+    <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/../../includes/blueskyhomesteading/footer.php'; ?>
 </body>
 </html>

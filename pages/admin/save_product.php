@@ -1,8 +1,12 @@
 <?php
-// save_product.php
+// File: save_product.php
+// Author: Gabriel Sullivan
+// Purpose: Admin save product function for BlueSky Homesteading
 declare(strict_types=1);
-include '../../includes/admin_databaseconnection.php';
-session_start();
+
+require_once $_SERVER['DOCUMENT_ROOT'] . '/../../includes/blueskyhomesteading/admin_databaseconnection.php';
+
+require_once $_SERVER['DOCUMENT_ROOT'] . '/../../includes/blueskyhomesteading/session_starter.php';
 
 // Check that the user is authenticated.
 if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {

@@ -1,9 +1,12 @@
 <?php
-// checkout.php
+// File: checkout.php
+// Author: Gabriel Sullivan
+// Purpose: Checkout functionality for BlueSky Homesteading
+declare(strict_types=1);
 
 require '../../../../vendor/autoload.php'; // Ensure you have the Stripe PHP library installed via Composer
-include '../../includes/databaseconnection.php';
-include '../../includes/shop_databaseconnection.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/../../includes/blueskyhomesteading/databaseconnection.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/../../includes/blueskyhomesteading/shop_databaseconnection.php';
 
 \Stripe\Stripe::setApiKey('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');
 
