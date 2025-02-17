@@ -1,42 +1,10 @@
 <?php
-/**
- * PHP Script for Generating XML Sitemap for BlueSky Homesteading
- *
- * @package    BlueSkyHomesteading
- * @author     Gabriel Sullivan
- * @version    1.0
- * @date       Last updated: September 19, 2024
- * @created    July 2024
- *
- * This script connects to the database to retrieve articles along with their
- * categories, generating an XML sitemap that can be used by search engines
- * to better index the site. The sitemap includes URLs for the homepage,
- * articles, privacy policy, and other relevant pages.
- *
- * Database Connection:
- * - Requires 'includes/databaseconnection.php' to establish a connection to the database.
- *
- * SQL Query:
- * - Selects the article slug, published date, and associated category slug
- *   from the articles and categories tables using a JOIN on the category name.
- *
- * Output:
- * - Outputs an XML document conforming to the sitemap protocol.
- * - Each URL entry includes the location, last modification date,
- *   change frequency, and priority for search engines.
- * - If articles are found, their respective URLs are included in the sitemap.
- * - The script ensures that special characters are properly escaped for XML.
- *
- * Includes:
- * - 'includes/databaseconnection.php': For establishing the database connection.
- *
- * Frontend:
- * - Generates a valid XML document with appropriate headers.
- * - Ensures compatibility with search engines using the sitemap schema.
- */
+// File: sitemap.php
+// Author: Gabriel Sullivan
+// Purpose: Generates the sitemap.xml file for BlueSky Homesteading
+declare(strict_types=1);
 
-
-include 'includes/databaseconnection.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/../../includes/blueskyhomesteading/databaseconnection.php';
 
 // Query to get all articles with their categories
 $sql = "SELECT articles.slug AS article_slug, articles.published_date, categories.slug AS category_slug 
