@@ -1548,6 +1548,62 @@ span[id^=item-price-] {
   background-color: #17076f;
 }
 
+.share-buttons {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.share-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  color: white;
+  font-size: 20px;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.facebook {
+  background: #1877F2;
+}
+
+.twitter {
+  background: #1DA1F2;
+}
+
+.bluesky {
+  background: #0085FF;
+}
+
+.instagram {
+  background: #C13584;
+}
+
+.pinterest {
+  background: #E60023;
+}
+
+.flipboard {
+  background: #E12828;
+}
+
+.reddit {
+  background: #FF4500;
+}
+
+.mail {
+  background: #444;
+}
+
+.share-btn:hover {
+  opacity: 0.8;
+}
+
 /* Responsive Styles */
 @media (max-width: 700px) {
   .navbar-menu,

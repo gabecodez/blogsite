@@ -65,15 +65,15 @@ if ($result->num_rows > 0) {
     <meta name="linkedin:description" content="<?php echo htmlspecialchars($pageDescription); ?>">
     <meta name="linkedin:image" content="<?php echo htmlspecialchars($imageURL); ?>">
     <meta name="twitter:domain" content="blueskyhomesteading.com">
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "WebSite",
-        "name": "<?php echo $pageTitle; ?>",
-        "url": "<?php echo $pageURL; ?>",
-        "description": "<?php echo $pageDescription; ?>"
-    }
-    </script>
+    <?php echo '<script type="application/ld+json">
+      {
+         "@context": "https://schema.org",
+         "@type": "WebSite",
+         "name": "'.$pageTitle.'",
+         "url": "'.$pageURL.'",
+         "description": "'.$pageDescription.'"
+      }
+   </script>'; ?>
 </head>
 <body>
     <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/../../includes/blueskyhomesteading/consentbanner.php'; ?>

@@ -2,11 +2,7 @@
 // File: product.php
 // Author: Gabriel Sullivan
 // Purpose: Product template page for BlueSky Homesteading
-declare(strict_types=1);
-
-require_once $_SERVER['DOCUMENT_ROOT'] . '/../../includes/blueskyhomesteading/databaseconnection.php';
-
-require_once $_SERVER['DOCUMENT_ROOT'] . '/../../includes/blueskyhomesteading/session_starter.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/../../header_files/blueskyhomesteading/config.php';
 
 function show404()
 {
@@ -118,7 +114,7 @@ if (!empty($product['preview_image_ids'])) {
 
                 <a href="https://www.blueskyhomesteading.com/shop/checkout?product_id=<?php echo $product['id']; ?>" class="buy-now-button">Buy Now</a>
                 <p class="button-footnote">* This will bring you straight to checkout.</p>
-
+                <p class="button-footnote">* Checkout is handled by Stripe.</p>
                 <?php echo $product['description']; ?>
             </section>
         </div>

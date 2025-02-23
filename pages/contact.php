@@ -92,15 +92,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['ajax']) && $_POST['aja
     <meta name="linkedin:description" content="<?php echo htmlspecialchars($pageDescription); ?>">
     <meta name="linkedin:image" content="<?php echo htmlspecialchars($imageURL); ?>">
     <meta name="twitter:domain" content="blueskyhomesteading.com">
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "WebSite",
-        "name": "<?php echo $pageTitle; ?>",
-        "url": "<?php echo $pageURL; ?>",
-        "description": "<?php echo $pageDescription; ?>"
-    }
-    </script>
+    <?php echo '<script type="application/ld+json">
+      {
+         "@context": "https://schema.org",
+         "@type": "WebSite",
+         "name": "'.$pageTitle.'",
+         "url": "'.$pageURL.'",
+         "description": "'.$pageDescription.'"
+      }
+   </script>'; ?>
 
     <script src="https://www.google.com/recaptcha/api.js?render=6Lf9H28qAAAAAO9rrWq56gHZnn4gRoN3s5Ul-_OS"></script>
    <script>

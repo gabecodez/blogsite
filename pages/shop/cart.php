@@ -141,7 +141,10 @@ foreach ($cart_items as $item) {
                     <p class="small-note">Payment is securely handled by Stripe. Your satisfaction is our highest priority. Read about our <a href="https://www.blueskyhomesteading.com/refunds">refunds and returns policy.</a></p>
                 </div>
             <?php endif; ?>
+
         </div>
+
+        <p class="button-footnote">* Checkout is handled by Stripe.</p>
     </div>
 
     <?php

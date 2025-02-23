@@ -63,7 +63,7 @@ $conn->close();
    $pageTitle = "Articles in ".htmlspecialchars($category)." - BlueSky Homesteading";
    $pageDescription = htmlspecialchars($category_data['description']);
    $imageURL = "https://www.blueskyhomesteading.com/images/social_media_previews/basic_white_bg_w_logo.jpeg";
-   $pageURL = "https://www.blueskyhomesteading.com/blog/<?php echo htmlspecialchars($category_slug); ?>";
+   $pageURL = "https://www.blueskyhomesteading.com/blog/'.$category_slug.'";
    $siteName = "BlueSky Homesteading";
    $twitterHandle = "";
    $creatorHandle = "";
@@ -92,15 +92,15 @@ $conn->close();
    <meta name="linkedin:description" content="<?php echo htmlspecialchars($pageDescription); ?>">
    <meta name="linkedin:image" content="<?php echo htmlspecialchars($imageURL); ?>">
    <meta name="twitter:domain" content="blueskyhomesteading.com">
-   <script type="application/ld+json">
+   <?php echo '<script type="application/ld+json">
         {
             "@context": "https://schema.org",
             "@type": "WebSite",
-            "name": "Articles in <?php echo htmlspecialchars($category); ?> - BlueSky Homesteading",
-            "url": "https://www.blueskyhomesteading.com/blog<php echo htmlspecialchars($category_slug); ?>",
-            "description": "<?php echo htmlspecialchars($category_data['description']); ?>"
+            "name": "Articles in '.$category.' - BlueSky Homesteading",
+            "url": "https://www.blueskyhomesteading.com/blog/'.$category_slug.'",
+            "description": "'.$category_data['description'].'"
         }
-    </script>
+    </script>'; ?>
 </head>
 
 

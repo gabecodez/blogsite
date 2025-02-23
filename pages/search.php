@@ -45,15 +45,15 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/../../includes/blueskyhomesteading/se
    <meta name="linkedin:description" content="<?php echo htmlspecialchars($pageDescription); ?>">
    <meta name="linkedin:image" content="<?php echo htmlspecialchars($imageURL); ?>">
    <meta name="twitter:domain" content="blueskyhomesteading.com">
-   <script type="application/ld+json">
+   <?php echo '<script type="application/ld+json">
       {
          "@context": "https://schema.org",
          "@type": "WebSite",
-         "name": "<?php echo $pageTitle; ?>",
-         "url": "<?php echo $pageURL; ?>",
-         "description": "<?php echo $pageDescription; ?>"
+         "name": "'.$pageTitle.'",
+         "url": "'.$pageURL.'",
+         "description": "'.$pageDescription.'"
       }
-   </script>
+   </script>'; ?>
 </head>
 
 <body>
