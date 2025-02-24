@@ -100,7 +100,7 @@ foreach ($cart_items as $item) {
                 <div class="total-section">
                     <p class="total-price">Total: $<?php echo number_format($total_price, 2); ?></p>
                     <a href="https://www.blueskyhomesteading.com/shop/checkout" class="checkout-button" id="checkout-button">Checkout</a>
-                    <p class="small-note">Payment is securely handled by Stripe. Your satisfaction is our highest priority. Read about our <a href="https://www.blueskyhomesteading.com/refunds">refunds and returns policy.</a></p>
+                    <p class="small-note">Payment is securely handled by Stripe. Your satisfaction is our highest priority. Read about our <a href="https://www.blueskyhomesteading.com/shop/refunds">refunds and returns policy.</a></p>
                 </div>
             <?php endif; ?>
 

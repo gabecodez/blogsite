@@ -2,9 +2,7 @@
 // File: checkout_success.php
 // Author: Gabriel Sullivan
 // Purpose: Checkout success page for BlueSky Homesteading
-declare(strict_types=1);
-
-require_once $_SERVER['DOCUMENT_ROOT'] . '/../../includes/blueskyhomesteading/session_starter.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/../../header_files/blueskyhomesteading/config.php';
 ?>
 
 <!DOCTYPE html>
@@ -12,62 +10,32 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/../../includes/blueskyhomesteading/se
 
 <head>
    <?php
-   require_once $_SERVER['DOCUMENT_ROOT'] . '/../../includes/blueskyhomesteading/head.php';
-   $pageTitle = "Order confirmed - BlueSky Homesteading";
-   $pageDescription = "Learn more about BlueSky Homesteading and our mission to support sustainable living.";
-   $imageURL = "https://www.blueskyhomesteading.com/images/social_media_previews/basic_white_bg_w_logo.jpeg";
-   $pageURL = "https://www.blueskyhomesteading.com/shop/checkout/success";
-   $siteName = "BlueSky Homesteading";
-   $twitterHandle = "";
-   $creatorHandle = "";
+   require_once HEAD_PATH;
+   $pageMeta = new PageMeta(
+      "Order confirmed - " . SITE_NAME,
+      "Learn more about " . SITE_NAME . " and our mission to support sustainable living.",
+      "https://www.blueskyhomesteading.com/images/social_media_previews/basic_white_bg_w_logo.jpeg",
+      SITE_URL . "/checkout/success",
+      SITE_NAME
+   );
+   $pageMeta->render();
    ?>
-   <title><?php echo $pageTitle; ?></title>
-   <link rel="canonical" href="<?php echo $pageURL; ?>">
-   <meta name="description" content="<?php echo htmlspecialchars($pageDescription); ?>">
-   <meta name="keywords" content="homesteading, sustainable living, about us, mission">
-   <meta name="author" content="BlueSky Homesteading">
-   <meta property="og:title" content="<?php echo htmlspecialchars($pageTitle); ?>">
-   <meta property="og:description" content="<?php echo htmlspecialchars($pageDescription); ?>">
-   <meta property="og:image" content="<?php echo htmlspecialchars($imageURL); ?>">
-   <meta property="og:url" content="<?php echo htmlspecialchars($pageURL); ?>">
-   <meta property="og:type" content="website">
-   <meta property="og:site_name" content="<?php echo htmlspecialchars($siteName); ?>">
-   <meta property="og:locale" content="en_US">
-   <meta name="twitter:card" content="summary_large_image">
-   <meta name="twitter:site" content="<?php echo htmlspecialchars($twitterHandle); ?>">
-   <meta name="twitter:title" content="<?php echo htmlspecialchars($pageTitle); ?>">
-   <meta name="twitter:description" content="<?php echo htmlspecialchars($pageDescription); ?>">
-   <meta name="twitter:image" content="<?php echo htmlspecialchars($imageURL); ?>">
-   <meta name="twitter:url" content="<?php echo htmlspecialchars($pageURL); ?>">
-   <meta name="twitter:creator" content="<?php echo htmlspecialchars($creatorHandle); ?>">
-   <meta name="linkedin:card" content="summary_large_image">
-   <meta name="linkedin:title" content="<?php echo htmlspecialchars($pageTitle); ?>">
-   <meta name="linkedin:description" content="<?php echo htmlspecialchars($pageDescription); ?>">
-   <meta name="linkedin:image" content="<?php echo htmlspecialchars($imageURL); ?>">
-   <meta name="twitter:domain" content="blueskyhomesteading.com">
-   <script type="application/ld+json">
-      {
-         "@context": "https://schema.org",
-         "@type": "WebSite",
-         "name": "<?php echo $pageTitle; ?>",
-         "url": "<?php echo $pageURL; ?>",
-         "description": "<?php echo $pageDescription; ?>"
-      }
-   </script>
 </head>
 
 <body>
-   <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/../../includes/blueskyhomesteading/consentbanner.php'; ?>
-   <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/../../includes/blueskyhomesteading/navbar.php'; ?>
+   <?php
+   require_once CONSENT_BANNER_PATH;
+   require_once NAVBAR_PATH;
+   ?>
    <main class="main-page">
       <div class="article-content">
          <header>
             <h1>Your order has been confirmed!</h1>
          </header>
-            <a href="https://www.blueskyhomesteading.com">Return Home</a>
+         <a href="https://www.blueskyhomesteading.com">Return Home</a>
       </div>
    </main>
-   <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/../../includes/blueskyhomesteading/footer.php'; ?>
+   <?php require_once FOOTER_PATH; ?>
 </body>
 
 </html>
