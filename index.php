@@ -10,16 +10,16 @@ $on_homepage = true; // lets navbar know we are on the homepage
 <html lang="en">
 
 <head>
-    <?php require_once INCLUDES_PATH . 'head.php'; ?>
-    <title>BlueSky Homesteading - Your Guide to Sustainable Living</title>
+    <?php require_once HEAD_PATH; ?>
+    <title><?= SITE_NAME; ?> - Your Guide to Sustainable Living</title>
     <meta name="description" content="Explore articles and resources on homesteading, sustainable living, gardening, and self-sufficiency.">
     <meta name="keywords" content="homesteading, gardening, sustainable living, self-sufficiency, articles">
     <meta property="og:title" content="BlueSky Homesteading - Your Guide to Sustainable Living">
     <meta property="og:description" content="Explore articles and resources on homesteading, sustainable living, gardening, and self-sufficiency.">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://www.blueskyhomesteading.com">
+    <meta property="og:url" content="<?= SITE_URL; ?>">
     <meta name="twitter:card" content="summary_large_image">
-    <link rel="canonical" href="https://www.blueskyhomesteading.com">
+    <link rel="canonical" href="<?= SITE_URL; ?>">
     <script type="application/ld+json">
         {
             "@context": "https://schema.org",
@@ -33,8 +33,8 @@ $on_homepage = true; // lets navbar know we are on the homepage
 
 <body>
     <?php
-    require_once INCLUDES_PATH . 'consentbanner.php';
-    require_once INCLUDES_PATH . 'navbar.php';
+    require_once CONSENT_BANNER_PATH;
+    require_once NAVBAR_PATH;
     ?>
     <main>
         <section class="frontpage">
@@ -47,8 +47,8 @@ $on_homepage = true; // lets navbar know we are on the homepage
                         <h1>Harvest the life you love.</h1>
                         <p>Explore resources to inspire a healthy, sustainable homesteading lifestyle.</p>
                         <div class="banner-buttons">
-                            <a href="https://www.blueskyhomesteading.com/shop" class="btn">Shop our products</a>
-                            <a href="https://www.blueskyhomesteading.com/blog" class="btn secondary">Read our blog</a>
+                            <a href="<?= SITE_URL; ?>/shop" class="btn">Shop our products</a>
+                            <a href="<?= SITE_URL; ?>/blog" class="btn secondary">Read our blog</a>
                         </div>
                     </div>
 
@@ -78,7 +78,7 @@ $on_homepage = true; // lets navbar know we are on the homepage
                     $counter = 1;
                     foreach ($articles as $article) {
                         if ($counter == 1) {
-                            echo '<a class="top-article" href="https://www.blueskyhomesteading.com/blog/' . htmlspecialchars($article['category_slug']) . '/' . htmlspecialchars($article['article_slug']) . '">';
+                            echo '<a class="top-article" href="' . SITE_URL . '/blog/' . htmlspecialchars($article['category_slug']) . '/' . htmlspecialchars($article['article_slug']) . '">';
                             echo '<div class="frontpage-article-image-parent">';
                             if (!empty($article['image_url'])) {
                                 echo '<img src="' . htmlspecialchars($article['image_url']) . '" alt="' . htmlspecialchars($article['alttext']) . '" class="frontpage-article-image" loading="lazy">';
@@ -91,7 +91,7 @@ $on_homepage = true; // lets navbar know we are on the homepage
                             echo '</a>';
                         } else if ($counter == 2) {
                             echo '<div class="latest-part">';
-                            echo '<a class="top-article" href="https://www.blueskyhomesteading.com/blog/' . htmlspecialchars($article['category_slug']) . '/' . htmlspecialchars($article['article_slug']) . '">';
+                            echo '<a class="top-article" href="' . SITE_URL . '/blog/' . htmlspecialchars($article['category_slug']) . '/' . htmlspecialchars($article['article_slug']) . '">';
                             echo '<div class="frontpage-article-image-parent">';
                             if (!empty($article['image_url'])) {
                                 echo '<img src="' . htmlspecialchars($article['image_url']) . '" alt="' . htmlspecialchars($article['alttext']) . '" class="frontpage-article-image" loading="lazy">';
@@ -102,7 +102,7 @@ $on_homepage = true; // lets navbar know we are on the homepage
                             echo '</div>';
                             echo '</a>';
                         } else if ($counter > 2 && $counter <= 3) {
-                            echo '<a class="top-article" href="https://www.blueskyhomesteading.com/blog/' . htmlspecialchars($article['category_slug']) . '/' . htmlspecialchars($article['article_slug']) . '">';
+                            echo '<a class="top-article" href="' . SITE_URL . '/blog/' . htmlspecialchars($article['category_slug']) . '/' . htmlspecialchars($article['article_slug']) . '">';
                             echo '<div class="frontpage-article-image-parent">';
                             if (!empty($article['image_url'])) {
                                 echo '<img src="' . htmlspecialchars($article['image_url']) . '" alt="' . htmlspecialchars($article['alttext']) . '" class="frontpage-article-image" loading="lazy">';
@@ -153,7 +153,7 @@ $on_homepage = true; // lets navbar know we are on the homepage
                                 $image_data = $conn->fetchAll($images_sql, [$image_id]);
                             }
 
-                            echo '<a class="product-preview" href="https://www.blueskyhomesteading.com/shop/' . htmlspecialchars($product['category_slug']) . '/' . htmlspecialchars($product['product_slug']) . '">';
+                            echo '<a class="product-preview" href="' . SITE_URL . '/shop/' . htmlspecialchars($product['category_slug']) . '/' . htmlspecialchars($product['product_slug']) . '">';
                             foreach ($image_data as $image) {
                                 echo '<img src="' . htmlspecialchars($image['image_url']) . '" alt="' . htmlspecialchars($image['alttext']) . '">';
                             }
@@ -167,7 +167,7 @@ $on_homepage = true; // lets navbar know we are on the homepage
                     $conn->close();
                     ?>
 
-                    <a href="https://www.blueskyhomesteading.com/shop" class="see-more-btn">Explore all products</a>
+                    <a href="<?= SITE_URL; ?>/shop" class="see-more-btn">Explore all products</a>
                 </div>
             </div>
         </section>
@@ -184,7 +184,7 @@ $on_homepage = true; // lets navbar know we are on the homepage
             </div>
         </section>
     </main>
-    <?php require_once INCLUDES_PATH . 'footer.php'; ?>
+    <?php require_once FOOTER_PATH; ?>
 </body>
 
 </html>

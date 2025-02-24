@@ -19,61 +19,48 @@ if (!$category_slug || !$product_slug) {
 }
 
 try {
-    $stmt = $conn->prepare("SELECT p.id, p.name, p.description, p.meta_description, p.tags, p.price, p.terms, p.preview_image_ids, c.name AS category FROM products AS p JOIN shop_categories AS c ON c.slug = ? AND p.slug = ? AND p.category = c.name WHERE p.public = 1");
-    $stmt->bind_param("ss", $category_slug, $product_slug);
-    $stmt->execute();
-    $result = $stmt->get_result();
+    $product_data = $conn->fetchAll("SELECT p.id, p.name, p.description, p.meta_description, p.tags, p.price, p.terms, p.preview_image_ids, c.name AS category FROM products AS p JOIN shop_categories AS c ON c.slug = ? AND p.slug = ? AND p.category = c.name WHERE p.public = 1 LIMIT 1", [$category_slug, $product_slug]);
 
-    if ($result->num_rows > 0) {
-        $product = $result->fetch_assoc();
+    if (!empty($product_data)) {
+        $product = $product_data[0];
     } else {
         show404();
     }
 } catch (Exception $e) {
     error_log($e->getMessage());
     show404();
-} finally {
-    if ($stmt) {
-        $stmt->close();
-    }
 }
 
 // Fetch image details if there are any image IDs
 $image_data = [];
 if (!empty($product['preview_image_ids'])) {
     $image_ids = explode(',', $product['preview_image_ids']);
-
     foreach ($image_ids as $image_id) {
         $image_id = trim($image_id);
-        $stmt = $conn->prepare("SELECT image_url, caption, credit, credit_url, alttext, public FROM images WHERE id = ? AND public = 1");
-        $stmt->bind_param("i", $image_id);
-        $stmt->execute();
-        $image_result = $stmt->get_result();
-
-        if ($image_result->num_rows > 0) {
-            $image_data[] = $image_result->fetch_assoc();
+        $fetched_image = $conn->fetchAll("SELECT image_url, caption, credit, credit_url, alttext, public FROM images WHERE id = ? AND public = 1 LIMIT 1", [$image_id]);
+        if (!empty($fetched_image)) {
+            $image_data[] = $fetched_image[0]; // Append the image to the array
         }
-
-        $stmt->close();
     }
-
-    $conn->close();
 }
+
+
+$conn->close();
 
 ?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/../../includes/blueskyhomesteading/head.php'; ?>
+    <?php require_once HEAD_PATH; ?>
     <title><?php echo htmlspecialchars($product['name']); ?> - Product Page</title>
-    <link rel="stylesheet" href="https://www.blueskyhomesteading.com/styles/styles.css">
 </head>
 
 <body>
-    <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/../../includes/blueskyhomesteading/consentbanner.php'; ?>
-    <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/../../includes/blueskyhomesteading/navbar.php'; ?>
-
+    <?php
+   require_once CONSENT_BANNER_PATH;
+   require_once NAVBAR_PATH;
+   ?>
     <main class="main-page">
         <div class="product-info">
             <section class="carousel">
@@ -173,7 +160,7 @@ if (!empty($product['preview_image_ids'])) {
         }
     </script>
 
-    <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/../../includes/blueskyhomesteading/footer.php'; ?>
+    <?php require_once FOOTER_PATH; ?>
 </body>
 
 </html>

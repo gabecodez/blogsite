@@ -2,13 +2,11 @@
 // File: register.php
 // Author: Gabriel Sullivan
 // Purpose: (temporary) Register page for BlueSky Homesteading
-declare(strict_types=1);
 
 // if an account system is ever implemented this needs to be changed to prevent dangerous user perms
 // it should be changed so that its just for user creation
-require_once $_SERVER['DOCUMENT_ROOT'] . '/../../includes/blueskyhomesteading/admin_databaseconnection.php';
-
-require_once $_SERVER['DOCUMENT_ROOT'] . '/../../includes/blueskyhomesteading/session_starter.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/../../header_files/blueskyhomesteading/config.php';
+require_once INCLUDES_PATH . 'admin_databaseconnection.php';
 
 // this would then also be removed given these circumstances so that users can make users
 // but they should only be allowed to make normal users not admins
@@ -24,16 +22,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $password_hash = password_hash($password, PASSWORD_BCRYPT);
 
-    $stmt = $adm_conn->prepare("INSERT INTO users (username, password_hash, role) VALUES (?, ?, ?)");
-    $stmt->bind_param("sss", $username, $password_hash, $role);
+    $data = [
+        'username' => $username,
+        'password_hash' => $password_hash,
+        'role' => $role
+    ];
 
-    if ($stmt->execute()) {
+    $result = $adm_conn->insert('users', $data);
+
+    if ($result != -1) {
         $success = "User registered successfully!";
     } else {
         $error = "Error: " . $stmt->error;
     }
 
-    $stmt->close();
+    $adm_conn->close();
+    $conn->close();
 }
 ?>
 <!DOCTYPE html>

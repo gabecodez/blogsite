@@ -22,7 +22,7 @@ class ArticleController {
         $this->breadcrumb->addCrumb(ucfirst($this->article->category), '/blog/' . $category_slug);
         $this->breadcrumb->addCrumb($this->article->title);
 
-        $postURL = "https://www.blueskyhomesteading.com/blog/" . $this->article->slug;
+        $postURL = SITE_URL . "/blog/" . $this->article->slug;
         $this->socialShare = new SocialShare($this->article->title, $postURL, $this->article->meta_description, $this->image);
     }
 

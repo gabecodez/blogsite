@@ -2,6 +2,14 @@
 class Breadcrumb {
     private array $crumbs = [];
 
+    public function __construct(array $initialCrumbs = []) {
+        foreach ($initialCrumbs as $crumb) {
+            if (isset($crumb['label'])) {
+                $this->addCrumb($crumb['label'], $crumb['url'] ?? '');
+            }
+        }
+    }
+
     public function addCrumb(string $label, string $url = ''): void {
         $this->crumbs[] = [
             'label' => htmlspecialchars($label),

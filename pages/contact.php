@@ -2,9 +2,7 @@
 // File: contact.php
 // Author: Gabriel Sullivan
 // Purpose: Contact us page for BlueSky Homesteading
-declare(strict_types=1);
-
-require_once $_SERVER['DOCUMENT_ROOT'] . '/../../includes/blueskyhomesteading/session_starter.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/../../header_files/blueskyhomesteading/config.php';
 
 // reCAPTCHA secret key from Google reCAPTCHA admin console
 $secret_key = '6Lf9H28qAAAAAHyKNxZrBjY0apdVpfL-8LPFTWu-';
@@ -59,48 +57,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['ajax']) && $_POST['aja
 
 <head>
     <?php
-    require_once $_SERVER['DOCUMENT_ROOT'] . '/../../includes/blueskyhomesteading/head.php';
-    $pageTitle = "Contact Us - BlueSky Homesteading";
-    $pageDescription = "Get in touch with BlueSky Homesteading. We look forward to hearing from you!";
-    $imageURL = "https://www.blueskyhomesteading.com/images/social_media_previews/basic_white_bg_w_logo.jpeg";
-    $pageURL = "https://www.blueskyhomesteading.com/contact";
-    $siteName = "BlueSky Homesteading";
-    $creatorHandle = "";
-    $twitterHandle = "";
+    require_once HEAD_PATH;
+    $pageMeta = new PageMeta(
+       "Contact Us - " . SITE_NAME,
+       "Get in touch with " . SITE_NAME . ". We look forward to hearing from you!",
+       "https://www.blueskyhomesteading.com/images/social_media_previews/basic_white_bg_w_logo.jpeg",
+       SITE_URL . "/contact",
+       SITE_NAME
+    );
+    $pageMeta->render();
     ?>
-    <title><?php echo $pageTitle; ?></title>
-    <link rel="canonical" href="<?php echo $pageURL; ?>">
-    <meta name="description" content="<?php echo htmlspecialchars($pageDescription); ?>">
-    <meta name="keywords" content="homesteading, contact us, support, inquiries">
-    <meta name="author" content="BlueSky Homesteading">
-    <meta property="og:title" content="<?php echo htmlspecialchars($pageTitle); ?>">
-    <meta property="og:description" content="<?php echo htmlspecialchars($pageDescription); ?>">
-    <meta property="og:image" content="<?php echo htmlspecialchars($imageURL); ?>">
-    <meta property="og:url" content="<?php echo htmlspecialchars($pageURL); ?>">
-    <meta property="og:type" content="website">
-    <meta property="og:site_name" content="<?php echo htmlspecialchars($siteName); ?>">
-    <meta property="og:locale" content="en_US">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:site" content="<?php echo htmlspecialchars($twitterHandle); ?>">
-    <meta name="twitter:title" content="<?php echo htmlspecialchars($pageTitle); ?>">
-    <meta name="twitter:description" content="<?php echo htmlspecialchars($pageDescription); ?>">
-    <meta name="twitter:image" content="<?php echo htmlspecialchars($imageURL); ?>">
-    <meta name="twitter:url" content="<?php echo htmlspecialchars($pageURL); ?>">
-    <meta name="twitter:creator" content="<?php echo htmlspecialchars($creatorHandle); ?>">
-    <meta name="linkedin:card" content="summary_large_image">
-    <meta name="linkedin:title" content="<?php echo htmlspecialchars($pageTitle); ?>">
-    <meta name="linkedin:description" content="<?php echo htmlspecialchars($pageDescription); ?>">
-    <meta name="linkedin:image" content="<?php echo htmlspecialchars($imageURL); ?>">
-    <meta name="twitter:domain" content="blueskyhomesteading.com">
-    <?php echo '<script type="application/ld+json">
-      {
-         "@context": "https://schema.org",
-         "@type": "WebSite",
-         "name": "'.$pageTitle.'",
-         "url": "'.$pageURL.'",
-         "description": "'.$pageDescription.'"
-      }
-   </script>'; ?>
 
     <script src="https://www.google.com/recaptcha/api.js?render=6Lf9H28qAAAAAO9rrWq56gHZnn4gRoN3s5Ul-_OS"></script>
    <script>
@@ -144,9 +110,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['ajax']) && $_POST['aja
 </head>
 
 <body>
-   <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/../../includes/blueskyhomesteading/consentbanner.php'; ?>
-   <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/../../includes/blueskyhomesteading/navbar.php'; ?>
-
+   <?php
+   require_once CONSENT_BANNER_PATH;
+   require_once NAVBAR_PATH;
+   ?>
    <main class="main-page">
       <div class="article-content">
          <h1>Contact Us</h1>
@@ -174,7 +141,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['ajax']) && $_POST['aja
       </div>
    </main>
 
-   <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/../../includes/blueskyhomesteading/footer.php'; ?>
+   <?php require_once FOOTER_PATH; ?>
 </body>
 
 </html>
