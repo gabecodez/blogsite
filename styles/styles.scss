@@ -298,7 +298,7 @@ h1 {
   padding-bottom: 10px;
   font-family: $display_font;
   font-optical-sizing: auto;
-  font-weight: 700;
+  font-weight: 500;
   font-style: normal;
   line-height: 1;
 }
@@ -331,6 +331,22 @@ p {
   margin: 10px 0 20px;
   line-height: 1.8;
   color: #000000;
+}
+
+.dot-hr {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin: 40px 0;
+}
+
+.dot-hr span {
+  width: 5px;
+  height: 5px;
+  background-color: black;
+  border-radius: 50%;
+  display: inline-block;
 }
 
 .article-content {
@@ -562,9 +578,25 @@ nav[aria-label="breadcrumb"] {
 }
 
 .blog {
-  h2 {
-    color: $header_color;
-    text-align: center;
+  .blog-section {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+
+    .blog-header {
+      h2 {
+        font-size: 3em;
+        writing-mode: sideways-lr;
+        color: $header_color;
+        text-align: right;
+        margin-top: 0;
+      }
+    }
+
+    .blog-articles {
+      flex: 3;
+    }
   }
 }
 
@@ -621,9 +653,25 @@ nav[aria-label="breadcrumb"] {
   padding-top: 1em;
   padding-bottom: 1em;
 
-  h2 {
-    color: $header_color;
-    text-align: center;
+  .products-div {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+
+    .products-header {
+      h2 {
+        font-size: 3em;
+        writing-mode: sideways-lr;
+        color: $header_color;
+        text-align: right;
+        margin-top: 0;
+      }
+    }
+
+    .products-showcase {
+      flex: 3;
+    }
   }
 }
 
@@ -643,6 +691,8 @@ nav[aria-label="breadcrumb"] {
 .banner-image {
   flex: 1;
   height: 100%;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 20"><path d="M 0 10 Q 25 0, 50 10 T 100 10" stroke="black" fill="transparent" stroke-width="2"/></svg>') repeat-y;
+  background-size: 100px 20px;
 
   img {
     width: 100%;
@@ -716,11 +766,11 @@ nav[aria-label="breadcrumb"] {
       &:hover {
         background-color: transparent;
         color: black;
-  
+
         &::after {
           background-color: rgb(0, 0, 0);
         }
-  
+
         &::before {
           border-color: rgb(0, 0, 0);
         }
@@ -795,12 +845,13 @@ nav[aria-label="breadcrumb"] {
   max-height: 100%;
   align-items: stretch;
   justify-content: center;
-  gap: 20px;
+  gap: 10px;
 }
 
 .top-article {
   padding: 0;
-  margin: 16px 0;
+  margin: 0;
+  margin-bottom: 10px;
   background-color: none;
   width: 100%;
   display: flex;
@@ -812,9 +863,13 @@ nav[aria-label="breadcrumb"] {
   grid-area: top;
   background-color: #e4dbd7;
   border-radius: 10px;
+  border-style: solid;
+  border-color: transparent;
+  border-width: 1px;
 
   &:hover {
     background-color: #f6d5d5;
+    border-color: $header_color;
   }
 
   .frontpage-article-image-parent {
@@ -1718,6 +1773,7 @@ span[id^="item-price-"] {
   border-radius: 10px;
   text-decoration: none;
   transition: background-color 0.3s ease-in-out;
+  width: 100%;
 
   img {
     width: 100%;
@@ -1785,15 +1841,33 @@ span[id^="item-price-"] {
   text-decoration: none;
   transition: 0.3s;
 }
-.facebook { background: #1877F2; }
-.twitter { background: #1DA1F2; }
-.bluesky { background: #0085FF; }
-.instagram { background: #C13584; }
-.pinterest { background: #E60023; }
-.flipboard { background: #E12828; }
-.reddit { background: #FF4500; }
-.mail { background: #444; }
-.share-btn:hover { opacity: 0.8; }
+.facebook {
+  background: #1877f2;
+}
+.twitter {
+  background: #1da1f2;
+}
+.bluesky {
+  background: #0085ff;
+}
+.instagram {
+  background: #c13584;
+}
+.pinterest {
+  background: #e60023;
+}
+.flipboard {
+  background: #e12828;
+}
+.reddit {
+  background: #ff4500;
+}
+.mail {
+  background: #444;
+}
+.share-btn:hover {
+  opacity: 0.8;
+}
 
 /* Responsive Styles */
 @media (max-width: 700px) {
@@ -1934,6 +2008,8 @@ span[id^="item-price-"] {
 
     &.mobile {
       display: block;
+
+      min-height: 300px;
     }
 
     &.desktop {
@@ -1952,6 +2028,7 @@ span[id^="item-price-"] {
     .btn {
       flex: 1;
       display: block;
+      padding: 1em;
     }
   }
 
@@ -2009,6 +2086,18 @@ span[id^="item-price-"] {
 
   .frontpage-article-text p {
     display: none;
+  }
+
+  .blog-section {
+    .blog-header {
+      h2 {
+        font-size: 0.5em;
+      }
+    }
+
+    .blog-articles {
+      flex: 1;
+    }
   }
 
   .product-info {

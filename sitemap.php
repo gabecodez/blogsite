@@ -11,6 +11,8 @@ $sql = "SELECT articles.slug AS article_slug, articles.published_date, categorie
         WHERE articles.public = 1"; // Match article category name with categories table
 $result = $conn->fetchAll($sql);
 
+
+
 // Prepare the XML document
 header('Content-Type: application/xml; charset=utf-8');
 echo '<?xml version="1.0" encoding="UTF-8"?>';
@@ -50,6 +52,8 @@ if (!empty($result)) {
         echo '</url>';
     }
 }
+
+
 
 // Close the XML document
 echo '</urlset>';

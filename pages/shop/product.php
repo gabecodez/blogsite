@@ -44,7 +44,6 @@ if (!empty($product['preview_image_ids'])) {
     }
 }
 
-
 $conn->close();
 
 ?>
@@ -52,15 +51,24 @@ $conn->close();
 <html lang="en">
 
 <head>
-    <?php require_once HEAD_PATH; ?>
-    <title><?php echo htmlspecialchars($product['name']); ?> - Product Page</title>
+    <?php
+    require_once HEAD_PATH;
+    $pageMeta = new PageMeta(
+        $product['name'],
+        $product['meta_description'],
+        !empty($image_data) ? $image_data[0]['image_url'] : 'https://www.blueskyhomesteading.com/images/social_media_previews/basic_white_bg_w_logo.jpeg',
+        SITE_URL . "/shop/product/{$category_slug}/{$product_slug}",
+        SITE_NAME
+    );
+    $pageMeta->render();
+    ?>
 </head>
 
 <body>
     <?php
-   require_once CONSENT_BANNER_PATH;
-   require_once NAVBAR_PATH;
-   ?>
+    require_once CONSENT_BANNER_PATH;
+    require_once NAVBAR_PATH;
+    ?>
     <main class="main-page">
         <div class="product-info">
             <section class="carousel">
