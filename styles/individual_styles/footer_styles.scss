@@ -1,0 +1,75 @@
+/* Site Links and footer Styles */
+
+.site-links ul {
+  list-style-type: none;
+  padding: 0;
+
+  li {
+    margin-bottom: 10px;
+
+    a {
+      text-decoration: none;
+      color: #3498db;
+      transition: color 0.3s ease;
+
+      &:hover {
+        color: #e74c3c;
+      }
+    }
+  }
+}
+
+footer {
+  display: block;
+  width: 100%;
+  overflow: hidden;
+  border-top-style: solid;
+  border-top-color: black;
+  border-top-width: 0.0625rem;
+  padding: 0;
+  text-align: center;
+  padding-bottom: 1rem;
+}
+
+.footer-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+  padding: 10px 0;
+
+  a {
+    color: black;
+    text-decoration: none;
+    font-size: 16px;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.footer-bottom {
+  margin-top: 15px;
+  font-size: 14px;
+}
+
+/* Responsive Styles */
+@media (max-width: 700px) {
+  .footer-container {
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 0 40px;
+  }
+
+  .footer-links {
+    justify-content: flex-start;
+  }
+}

@@ -1,0 +1,50 @@
+.article-content {
+  width: 100%;
+  max-width: 600px;
+  float: left;
+  display: block;
+  overflow: hidden;
+  margin-bottom: 40px;
+  margin-top: 40px;
+}
+
+/* Image container styling */
+
+.article-image {
+  max-width: 100%;
+  margin: 1.5em 0;
+  text-align: center;
+
+  img.responsive-img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  figcaption {
+    font-size: 0.9em;
+    color: #555;
+    margin-top: 0.5em;
+    font-style: italic;
+  }
+}
+
+/* Caption styling */
+
+/* Credit styling */
+
+.image-credit {
+  font-size: 0.8em;
+  color: #888;
+  margin-top: 0.3em;
+
+  a {
+    color: #0066cc;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}

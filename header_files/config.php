@@ -19,6 +19,7 @@ require_once BASE_PATH . '/../../header_files/blueskyhomesteading/autoload.php';
 
 // Database Connection
 require_once INCLUDES_PATH . 'databaseconnection.php';
+require_once INCLUDES_PATH . 'shop_databaseconnection.php';
 
 // Session Handling
 require_once INCLUDES_PATH . 'session_starter.php';

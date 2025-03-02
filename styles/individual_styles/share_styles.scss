@@ -1,0 +1,45 @@
+.share-buttons {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .share-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    color: white;
+    font-size: 20px;
+    text-decoration: none;
+    transition: 0.3s;
+  }
+  .facebook {
+    background: #1877f2;
+  }
+  .twitter {
+    background: #1da1f2;
+  }
+  .bluesky {
+    background: #0085ff;
+  }
+  .instagram {
+    background: #c13584;
+  }
+  .pinterest {
+    background: #e60023;
+  }
+  .flipboard {
+    background: #e12828;
+  }
+  .reddit {
+    background: #ff4500;
+  }
+  .mail {
+    background: #444;
+  }
+  .share-btn:hover {
+    opacity: 0.8;
+  }

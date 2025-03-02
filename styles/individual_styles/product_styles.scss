@@ -1,0 +1,257 @@
+/* Quantity and Buttons */
+
+label[for="quantity"] {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+#quantity {
+  width: 100%;
+  padding: 8px;
+  font-size: 1rem;
+  border-color: black;
+  border-width: 1px;
+  border-radius: 8px;
+  border-style: solid;
+  margin-bottom: 15px;
+  font-family: $main_font;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+}
+
+.atc-quantity-section {
+  display: flex;
+  gap: 5px;
+}
+
+.atc-quantity-selector {
+  flex: 2;
+}
+
+.atc-quantity-label {
+  flex: 1;
+  font-family: $main_font;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+  padding: 0.3em;
+  padding-left: 0;
+  font-size: 1em;
+  text-align: right;
+}
+
+.add-to-cart-button {
+  display: block;
+  flex: 2;
+  width: 100%;
+  padding: 1em;
+  font-size: 1em;
+  line-height: 1em;
+  color: #fff;
+  background-color: $highlight_color;
+  border: none;
+  border-radius: 99999px;
+  cursor: pointer;
+  text-align: center;
+  margin-bottom: 10px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+  font-family: $main_font;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+
+  &:hover {
+    background-color: $header_color;
+    text-decoration: none;
+  }
+}
+
+.small-hr-separator {
+  width: 20px;
+  height: 1px;
+  background-color: black;
+  display: block;
+  margin: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  border-style: none;
+}
+
+.buy-now-button {
+  display: block;
+  width: 100%;
+  padding: 1em;
+  font-size: 1em;
+  line-height: 1em;
+  color: #fff;
+  background-color: $header_color;
+  border: none;
+  border-radius: 99999px;
+  cursor: pointer;
+  text-align: center;
+  margin-bottom: 10px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+  font-family: $main_font;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+
+  &:hover {
+    background-color: #1a1a1a;
+    text-decoration: none;
+  }
+}
+
+.button-footnote {
+  width: 100%;
+  text-align: right;
+  font-size: 0.7em;
+  font-family: "JetBrains Mono", monospace;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+}
+
+.product-preview-section {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+}
+
+.see-more-btn {
+  position: relative;
+  padding: 8px 20px;
+  font-size: 1em;
+  color: black;
+  text-decoration: none;
+  text-align: center;
+  display: block;
+  cursor: pointer;
+  font-family: $main_font;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+  flex: 1;
+}
+
+.product-preview {
+  display: block;
+  flex: 2;
+  overflow: hidden;
+  padding: 0;
+  background-color: #e4dbd7;
+  border-radius: 10px;
+  text-decoration: none;
+  transition: background-color 0.3s ease-in-out;
+  width: 100%;
+
+  img {
+    width: 100%;
+    max-height: 200px;
+    overflow: hidden;
+    object-fit: cover;
+    margin-bottom: 0;
+  }
+
+  .text {
+    padding: 1em;
+    padding-top: 0.6em;
+    padding-bottom: 0.6em;
+  }
+
+  .name {
+    width: 100%;
+    display: block;
+    font-family: $display_font;
+    font-size: 1.2em;
+    font-weight: 600;
+    color: $header_color;
+    margin-bottom: 0.8em;
+    margin-top: 0;
+  }
+
+  .buy-btn {
+    width: 100%;
+    display: block;
+    background-color: $line_color;
+    text-align: center;
+    padding: 0.5em;
+    font-family: $main_font;
+    font-weight: 600;
+    font-size: 1em;
+    color: white;
+    border-radius: 99999px;
+    transition: background-color 0.3s ease-in-out;
+  }
+
+  &:hover {
+    background-color: #f6d5d5;
+
+    .buy-btn {
+      background-color: $highlight_color;
+    }
+  }
+}
+
+.product-info {
+  display: flex;
+  flex-direction: row;
+  gap: 40px;
+  align-items: flex-start;
+  margin-top: 20px;
+  margin-bottom: 40px;
+
+  .carousel {
+    flex: 1;
+    border-radius: 10px;
+  }
+}
+
+.product-action {
+  flex: 1;
+
+  h1 {
+    font-size: 1.8em;
+    margin: 0;
+    padding: 0;
+    text-align: left;
+    color: #000000;
+  }
+}
+
+/* Header */
+
+.product-price {
+  font-size: 1.4rem;
+  color: #27ae60;
+  font-weight: bold;
+  text-align: left;
+  margin: 0;
+  margin-bottom: 1em;
+  font-family: $main_font;
+  font-optical-sizing: auto;
+  font-weight: 700;
+  font-style: normal;
+}
+
+/* Images */
+
+.product-images {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+/* Responsive Styles */
+@media (max-width: 700px) {
+  .product-images {
+    flex-wrap: nowrap;
+    gap: 15px;
+  }
+}

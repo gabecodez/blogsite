@@ -107,8 +107,8 @@ $products = $conn->fetchAll($sql);
     ?>
 
     <header class="shop-hero">
-        <h1>Welcome to Our Shop</h1>
-        <p>Discover sustainable products curated for a healthier lifestyle.</p>
+        <h1>Pure, natural goodness for you skin.</h1>
+        <p>Discover sustainable skincare free of synthetic fragrances and toxins.</p>
     </header>
 
     <section class="frontpage products_section">

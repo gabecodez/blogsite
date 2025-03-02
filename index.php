@@ -33,29 +33,78 @@ $on_homepage = true; // lets navbar know we are on the homepage
             <div class="page-indent">
                 <div class="banner">
                     <div class="banner-image mobile">
+                        <img src="https://www.blueskyhomesteading.com/images/lavender.jpg" alt="Homestead garden" loading="lazy">
                     </div>
                     <div class="banner-content">
                         <h1>Harvest the life you love.</h1>
-                        <p>Explore resources to inspire a healthy, sustainable homesteading lifestyle.</p>
+                        <p>Explore Nature's gifts for healthier skin and a healthier life.</p>
                         <div class="banner-buttons">
-                            <a href="<?= SITE_URL; ?>/shop" class="btn">Shop our products</a>
+                            <a href="<?= SITE_URL; ?>/shop" class="btn">Shop skincare</a>
                             <a href="<?= SITE_URL; ?>/blog" class="btn secondary">Read our blog</a>
                         </div>
                     </div>
 
                     <div class="banner-image desktop">
-                        
+                        <img src="https://www.blueskyhomesteading.com/images/lavender.jpg" alt="Homestead garden" loading="lazy">
                     </div>
                 </div>
             </div>
-
-            <div class="dot-hr">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
         </section>
 
+        <section class="frontpage products_section">
+            <div class="page-indent">
+                <div class="products-div">
+
+                    <div class="products-header">
+                        <h2>Our products</h2>
+                    </div>
+                    <div class="products-showcase">
+                        <div class="product-preview-section">
+                            <?php
+                            // Fetch latest products (e.g., the last 3 entries)
+                            $products_sql = "SELECT products.slug AS product_slug, products.name, products.meta_description, products.preview_image_ids, shop_categories.slug AS category_slug
+                    FROM products 
+                    JOIN shop_categories ON products.category = shop_categories.name
+                    WHERE products.public = 1 
+                    LIMIT 3";
+                            $products = $conn->fetchAll($products_sql);
+
+                            if (!empty($products)) {
+                                foreach ($products as $product) {
+                                    // Fetch image details if there are any image IDs
+                                    $image_data = [];
+                                    if (!empty($product['preview_image_ids'])) {
+                                        $image_ids = explode(',', $product['preview_image_ids']);
+
+                                        $image_id = trim($image_ids[0]);
+                                        // Fetch first image
+                                        $images_sql = "SELECT image_url, alttext, public FROM images WHERE id = ? AND public = 1 LIMIT 1";
+                                        $image_data = $conn->fetchAll($images_sql, [$image_id]);
+                                    }
+
+                                    echo '<a class="product-preview" href="' . SITE_URL . '/shop/' . htmlspecialchars($product['category_slug']) . '/' . htmlspecialchars($product['product_slug']) . '">';
+                                    foreach ($image_data as $image) {
+                                        echo '<img src="' . htmlspecialchars($image['image_url']) . '" alt="' . htmlspecialchars($image['alttext']) . '">';
+                                    }
+                                    echo '<div class="text">';
+                                    echo '<span class="name">' . $product['name'] . '</span>';
+                                    echo '</div>';
+                                    echo '</a>';
+                                }
+                            }
+                            ?>
+
+                            <a href="<?= SITE_URL; ?>/shop" class="see-more-btn">Explore all products</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div class="dot-hr">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
         <section class="frontpage blog">
             <div class="page-indent">
                 <div class="blog-section">
@@ -133,58 +182,6 @@ $on_homepage = true; // lets navbar know we are on the homepage
             </div>
         </section>
 
-        <section class="frontpage products_section">
-            <div class="page-indent">
-                <div class="products-div">
-
-                    <div class="products-header">
-                        <h2>Our products</h2>
-                    </div>
-                    <div class="products-showcase">
-                        <div class="product-preview-section">
-                            <?php
-                            // Fetch latest products (e.g., the last 3 entries)
-                            $products_sql = "SELECT products.slug AS product_slug, products.name, products.meta_description, products.preview_image_ids, shop_categories.slug AS category_slug
-                    FROM products 
-                    JOIN shop_categories ON products.category = shop_categories.name
-                    WHERE products.public = 1 
-                    LIMIT 3";
-                            $products = $conn->fetchAll($products_sql);
-
-                            if (!empty($products)) {
-                                foreach ($products as $product) {
-                                    // Fetch image details if there are any image IDs
-                                    $image_data = [];
-                                    if (!empty($product['preview_image_ids'])) {
-                                        $image_ids = explode(',', $product['preview_image_ids']);
-
-                                        $image_id = trim($image_ids[0]);
-                                        // Fetch first image
-                                        $images_sql = "SELECT image_url, alttext, public FROM images WHERE id = ? AND public = 1 LIMIT 1";
-                                        $image_data = $conn->fetchAll($images_sql, [$image_id]);
-                                    }
-
-                                    echo '<a class="product-preview" href="' . SITE_URL . '/shop/' . htmlspecialchars($product['category_slug']) . '/' . htmlspecialchars($product['product_slug']) . '">';
-                                    foreach ($image_data as $image) {
-                                        echo '<img src="' . htmlspecialchars($image['image_url']) . '" alt="' . htmlspecialchars($image['alttext']) . '">';
-                                    }
-                                    echo '<div class="text">';
-                                    echo '<span class="name">' . $product['name'] . '</span>';
-                                    echo '</div>';
-                                    echo '</a>';
-                                }
-                            }
-
-                            $conn->close();
-                            ?>
-
-                            <a href="<?= SITE_URL; ?>/shop" class="see-more-btn">Explore all products</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
         <section class="frontpage as_seen_at">
             <div class="page-indent">
                 <h2>As featured at</h2>
@@ -198,6 +195,7 @@ $on_homepage = true; // lets navbar know we are on the homepage
         </section>
     </main>
     <?php require_once FOOTER_PATH; ?>
+    <?php $conn->close(); ?>
 </body>
 
 </html>

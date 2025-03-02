@@ -1,0 +1,108 @@
+/* General Reset and Layout */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  font-family: $text_font;
+  line-height: 1.6;
+  color: $header_color;
+  background-color: $bg_color;
+}
+
+/* Headings */
+
+h1 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  color: $header_color;
+  padding-bottom: 10px;
+  font-family: $display_font;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+  line-height: 1;
+}
+
+h2 {
+  font-size: 2rem;
+  margin: 20px 0;
+  color: $header_color;
+  font-family: $display_font;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+  line-height: 1;
+}
+
+h3 {
+  font-size: 1.75rem;
+  margin: 15px 0;
+  color: $header_color;
+  font-family: $display_font;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+  line-height: 1;
+}
+
+/* Paragraphs */
+
+p {
+  margin: 10px 0 20px;
+  line-height: 1.8;
+  color: #000000;
+}
+
+.dot-hr {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin: 40px 0;
+}
+
+.dot-hr span {
+  width: 5px;
+  height: 5px;
+  background-color: black;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+/* Page formatting code */
+
+.main-page {
+  max-width: 1100px;
+  width: 92%;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  overflow: visible;
+}
+
+.page-indent {
+  max-width: 1100px;
+  width: 92%;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  overflow: visible;
+}
+
+/* Basic styles for ul and li */
+
+ul {
+  list-style: none;
+
+  /* Remove default bullets */
+  padding: 0;
+
+  /* Remove default padding */
+  margin: 0;
+
+  /* Remove default margin */
+}

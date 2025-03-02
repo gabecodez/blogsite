@@ -1,0 +1,98 @@
+/* Form Styling */
+
+.contact-form {
+    label {
+      display: block;
+      font-weight: bold;
+      margin-top: 15px;
+      color: $header_color;
+      font-family: "JetBrains Mono", monospace;
+      font-optical-sizing: auto;
+      font-weight: 500;
+      font-style: normal;
+    }
+  
+    input {
+      &[type="text"],
+      &[type="email"] {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid $line_color;
+        border-radius: 4px;
+        margin-top: 5px;
+        box-sizing: border-box;
+        transition: border-color 0.3s;
+      }
+    }
+  
+    textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid $line_color;
+      border-radius: 4px;
+      margin-top: 5px;
+      box-sizing: border-box;
+      transition: border-color 0.3s;
+  
+      &:focus {
+        border-color: #4a7c59;
+        outline: none;
+      }
+  
+      resize: vertical;
+      min-height: 120px;
+    }
+  
+    button[type="submit"] {
+      display: inline-block;
+      background-color: $highlight_color;
+      color: $bg_color;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-top: 15px;
+      font-size: 1rem;
+      transition: background-color 0.3s;
+      font-family: "JetBrains Mono", monospace;
+      font-optical-sizing: auto;
+      font-weight: 500;
+      font-style: normal;
+  
+      &:hover {
+        background-color: $line_color;
+      }
+    }
+  }
+  
+  /* Submit Button */
+  
+  /* Success and Error Messages */
+  
+  .success-message {
+    color: #4a7c59;
+    background-color: #e8f5e9;
+    border: 1px solid #4a7c59;
+    padding: 10px;
+    margin-top: 15px;
+    border-radius: 4px;
+    text-align: center;
+    font-family: $main_font;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+  }
+  
+  .error-message {
+    color: #c62828;
+    background-color: #ffebee;
+    border: 1px solid #c62828;
+    padding: 10px;
+    margin-top: 15px;
+    border-radius: 4px;
+    text-align: center;
+    font-family: $main_font;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+  }
