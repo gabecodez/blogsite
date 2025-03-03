@@ -2,9 +2,10 @@
 
 .carousel {
   position: relative;
+  max-width: 400px;
   width: 100%;
   overflow: hidden;
-  max-height: 500px;
+  max-height: 800px;
 }
 
 .carousel-images {

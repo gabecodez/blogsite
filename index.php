@@ -29,89 +29,94 @@ $on_homepage = true; // lets navbar know we are on the homepage
     require_once NAVBAR_PATH;
     ?>
     <main>
-        <section class="frontpage">
+        <section class="frontpage hero_section">
             <div class="page-indent">
                 <div class="banner">
-                    <div class="banner-image mobile">
-                        <img src="https://www.blueskyhomesteading.com/images/lavender.jpg" alt="Homestead garden" loading="lazy">
-                    </div>
                     <div class="banner-content">
-                        <h1>Harvest the life you love.</h1>
-                        <p>Explore Nature's gifts for healthier skin and a healthier life.</p>
+                        <h1>Explore Nature’s gifts for healthier skin and a healthier life.</h1>
+                    </div>
+                    <div class="banner-action">
                         <div class="banner-buttons">
                             <a href="<?= SITE_URL; ?>/shop" class="btn">Shop skincare</a>
                             <a href="<?= SITE_URL; ?>/blog" class="btn secondary">Read our blog</a>
                         </div>
                     </div>
-
-                    <div class="banner-image desktop">
-                        <img src="https://www.blueskyhomesteading.com/images/lavender.jpg" alt="Homestead garden" loading="lazy">
-                    </div>
                 </div>
             </div>
         </section>
 
-        <section class="frontpage products_section">
+        <a href="https://www.blueskyhomesteading.com/shop/skincare/tallow-cream" class="frontpage split_section">
+            <div class="text_side">
+                <h2>Grass-Fed Whipped Tallow</h2>
+                <p>Experience the nourishing power of all-natural skincare.</p>
+                <span>Shop now</span>
+            </div>
+            <div class="image_side">
+                <img src="https://www.blueskyhomesteading.com/images/whipped_tallow.jpg" alt="Shop Preview" loading="lazy">
+            </div>
+        </a>
+
+        <a href="https://www.blueskyhomesteading.com/shop/skincare/tallow-lip-balm" class="frontpage split_section">
+            <div class="image_side">
+                <img src="https://www.blueskyhomesteading.com/images/tallow_balms.jpg" alt="Shop Preview" loading="lazy">
+            </div>
+            <div class="text_side">
+                <h2>Beef Tallow Lip Balms</h2>
+                <p>Nourish your lips.</p>
+                <span>Shop now</span>
+            </div>
+        </a>
+
+        <section class="frontpage header_section three-tiled">
             <div class="page-indent">
-                <div class="products-div">
+                <h2>Our values</h2>
 
-                    <div class="products-header">
-                        <h2>Our products</h2>
+                <div class="content_section">
+                    <div class="value">
+                        <div class="value-image">
+                            <img src="https://www.blueskyhomesteading.com/images/icons/cross.svg" alt="Crpss icon" loading="lazy">
+                        </div>
+                        <div class="value-text">
+                            <h3>Pure health</h3>
+                            <p>Our products are made with natural, organic ingredients that are good for you and the environment.</p>
+                        </div>
                     </div>
-                    <div class="products-showcase">
-                        <div class="product-preview-section">
-                            <?php
-                            // Fetch latest products (e.g., the last 3 entries)
-                            $products_sql = "SELECT products.slug AS product_slug, products.name, products.meta_description, products.preview_image_ids, shop_categories.slug AS category_slug
-                    FROM products 
-                    JOIN shop_categories ON products.category = shop_categories.name
-                    WHERE products.public = 1 
-                    LIMIT 3";
-                            $products = $conn->fetchAll($products_sql);
-
-                            if (!empty($products)) {
-                                foreach ($products as $product) {
-                                    // Fetch image details if there are any image IDs
-                                    $image_data = [];
-                                    if (!empty($product['preview_image_ids'])) {
-                                        $image_ids = explode(',', $product['preview_image_ids']);
-
-                                        $image_id = trim($image_ids[0]);
-                                        // Fetch first image
-                                        $images_sql = "SELECT image_url, alttext, public FROM images WHERE id = ? AND public = 1 LIMIT 1";
-                                        $image_data = $conn->fetchAll($images_sql, [$image_id]);
-                                    }
-
-                                    echo '<a class="product-preview" href="' . SITE_URL . '/shop/' . htmlspecialchars($product['category_slug']) . '/' . htmlspecialchars($product['product_slug']) . '">';
-                                    foreach ($image_data as $image) {
-                                        echo '<img src="' . htmlspecialchars($image['image_url']) . '" alt="' . htmlspecialchars($image['alttext']) . '">';
-                                    }
-                                    echo '<div class="text">';
-                                    echo '<span class="name">' . $product['name'] . '</span>';
-                                    echo '</div>';
-                                    echo '</a>';
-                                }
-                            }
-                            ?>
-
-                            <a href="<?= SITE_URL; ?>/shop" class="see-more-btn">Explore all products</a>
+                    <div class="value">
+                        <div class="value-image">
+                            <img src="https://www.blueskyhomesteading.com/images/icons/lips.svg" alt="Lips icon" loading="lazy">
+                        </div>
+                        <div class="value-text">
+                            <h3>All-natural beauty</h3>
+                            <p>Embrace the power of nature with our pure and organic skincare products.</p>
+                        </div>
+                    </div>
+                    <div class="value">
+                        <div class="value-image">
+                            <img src="https://www.blueskyhomesteading.com/images/icons/leaf.svg" alt="Leaf icon" loading="lazy">
+                        </div>
+                        <div class="value-text">
+                            <h3>Self-sustainability</h3>
+                            <p>We believe in living in harmony with nature, using resources responsibly, and promoting practices that ensure the well-being of future generations.</p>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-        <div class="dot-hr">
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
-        <section class="frontpage blog">
-            <div class="page-indent">
-                <div class="blog-section">
-                    <div class="blog-header">
-                        <h2>Latest articles</h2>
-                    </div>
 
+        <section class="frontpage split_section">
+            <div class="text_side">
+                <h2>From our family to yours.</h2>
+                <p>All our products are handcrafted with that small business love you can’t find anywhere else.</p>
+            </div>
+            <div class="image_side">
+                <img src="https://www.blueskyhomesteading.com/images/shop_shelves.jpg" alt="Shop Preview" loading="lazy">
+            </div>
+        </section>
+
+        <section class="frontpage header_section">
+            <div class="page-indent">
+                <h2>Latest articles</h2>
+                <div class="content_section">
                     <div class="blog-articles">
 
                         <?php

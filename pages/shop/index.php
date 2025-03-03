@@ -111,35 +111,49 @@ $products = $conn->fetchAll($sql);
         <p>Discover sustainable skincare free of synthetic fragrances and toxins.</p>
     </header>
 
-    <section class="frontpage products_section">
+    <section class="frontpage header_section">
         <div class="page-indent">
             <h2>Our products</h2>
-            <div class="product-preview-section">
-                <?php
-                if (!empty($products)) {
-                    foreach ($products as $product) {
-                        // Fetch image details if there are any image IDs
-                        $image_data = [];
-                        if (!empty($product['preview_image_ids'])) {
-                            $image_ids = explode(',', $product['preview_image_ids']);
+            <div class="content_section">
+                <div class="products-showcase">
+                    <div class="product-preview-section">
+                        <?php
+                        // Fetch latest products (e.g., the last 3 entries)
+                        $products_sql = "SELECT products.slug AS product_slug, products.name, products.meta_description, products.preview_image_ids, shop_categories.slug AS category_slug
+                    FROM products 
+                    JOIN shop_categories ON products.category = shop_categories.name
+                    WHERE products.public = 1 
+                    LIMIT 3";
+                        $products = $conn->fetchAll($products_sql);
 
-                            $image_id = trim($image_ids[0]);
-                            $image_data = $conn->fetchAll("SELECT image_url, alttext, public FROM images WHERE id = ? AND public = 1 LIMIT 4", [$image_id]);
+                        if (!empty($products)) {
+                            foreach ($products as $product) {
+                                // Fetch image details if there are any image IDs
+                                $image_data = [];
+                                if (!empty($product['preview_image_ids'])) {
+                                    $image_ids = explode(',', $product['preview_image_ids']);
+
+                                    $image_id = trim($image_ids[0]);
+                                    // Fetch first image
+                                    $images_sql = "SELECT image_url, alttext, public FROM images WHERE id = ? AND public = 1 LIMIT 1";
+                                    $image_data = $conn->fetchAll($images_sql, [$image_id]);
+                                }
+
+                                echo '<a class="product-preview" href="' . SITE_URL . '/shop/' . htmlspecialchars($product['category_slug']) . '/' . htmlspecialchars($product['product_slug']) . '">';
+                                foreach ($image_data as $image) {
+                                    echo '<img src="' . htmlspecialchars($image['image_url']) . '" alt="' . htmlspecialchars($image['alttext']) . '">';
+                                }
+                                echo '<div class="text">';
+                                echo '<span class="name">' . $product['name'] . '</span>';
+                                echo '</div>';
+                                echo '</a>';
+                            }
                         }
+                        ?>
 
-                        echo '<a class="product-preview" href="https://www.blueskyhomesteading.com/shop/' . htmlspecialchars($product['category_slug']) . '/' . htmlspecialchars($product['product_slug']) . '">';
-                        foreach ($image_data as $image) {
-                            echo '<img src="' . htmlspecialchars($image['image_url']) . '" alt="' . htmlspecialchars($image['alttext']) . '">';
-                        }
-                        echo '<div class="text">';
-                        echo '<span class="name">' . $product['name'] . '</span>';
-                        echo '</div>';
-                        echo '</a>';
-                    }
-                }
-
-                $conn->close();
-                ?>
+                        <a href="<?= SITE_URL; ?>/shop" class="see-more-btn">Explore all products</a>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
