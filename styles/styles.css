@@ -554,6 +554,91 @@ nav[aria-label=breadcrumb] li:last-child a {
     margin-right: 5px;
   }
 }
+/* Form Styling */
+.contact-form label {
+  display: block;
+  font-weight: bold;
+  margin-top: 15px;
+  color: #0d1f22;
+  font-family: "JetBrains Mono", monospace;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+}
+.contact-form input[type=text], .contact-form input[type=email] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #0d1f22;
+  border-radius: 4px;
+  margin-top: 5px;
+  box-sizing: border-box;
+  transition: border-color 0.3s;
+}
+.contact-form textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #0d1f22;
+  border-radius: 4px;
+  margin-top: 5px;
+  box-sizing: border-box;
+  transition: border-color 0.3s;
+  resize: vertical;
+  min-height: 120px;
+}
+.contact-form textarea:focus {
+  border-color: #4a7c59;
+  outline: none;
+}
+.contact-form button[type=submit] {
+  display: inline-block;
+  background-color: #17076f;
+  color: #fff6f1;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 15px;
+  font-size: 1rem;
+  transition: background-color 0.3s;
+  font-family: "JetBrains Mono", monospace;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+}
+.contact-form button[type=submit]:hover {
+  background-color: #0d1f22;
+}
+
+/* Submit Button */
+/* Success and Error Messages */
+.success-message {
+  color: #4a7c59;
+  background-color: #e8f5e9;
+  border: 1px solid #4a7c59;
+  padding: 10px;
+  margin-top: 15px;
+  border-radius: 4px;
+  text-align: center;
+  font-family: "Inter", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+}
+
+.error-message {
+  color: #c62828;
+  background-color: #ffebee;
+  border: 1px solid #c62828;
+  padding: 10px;
+  margin-top: 15px;
+  border-radius: 4px;
+  text-align: center;
+  font-family: "Inter", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+}
+
 .frontpage {
   width: 100%;
 }
