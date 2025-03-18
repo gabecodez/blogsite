@@ -5,12 +5,14 @@
 
 require_once $_SERVER['DOCUMENT_ROOT'] . '/../../header_files/blueskyhomesteading/config.php';
 
-class Navbar {
+class Navbar
+{
     protected $shop_conn;
     protected $session_id;
     protected $cartCount;
 
-    public function __construct($shop_conn, $session_id) {
+    public function __construct($shop_conn, $session_id)
+    {
         $this->shop_conn = $shop_conn;
         $this->session_id = $session_id;
         $this->cartCount = $this->getCartCount();
@@ -19,9 +21,10 @@ class Navbar {
     /**
      * Retrieves the total number of items in the cart for the current session.
      */
-    protected function getCartCount() {
+    protected function getCartCount()
+    {
         $result = $this->shop_conn->fetchAll(
-            "SELECT SUM(quantity) AS total_items FROM cart WHERE session_id = ?", 
+            "SELECT SUM(quantity) AS total_items FROM cart WHERE session_id = ?",
             [$this->session_id]
         );
         return $result[0]['total_items'] ?? 0;
@@ -30,9 +33,10 @@ class Navbar {
     /**
      * Renders the full navbar HTML.
      */
-    public function render() {
+    public function render()
+    {
         ob_start();
-        ?>
+?>
         <nav class="navbar homepage" id="navbar" aria-label="Main Navigation">
             <div class="navbar-indent">
                 <div class="navbar-brand">
@@ -47,24 +51,24 @@ class Navbar {
                     <span class="bar"></span>
                 </div>
                 <ul class="navbar-menu">
-                    <?php 
-                        echo $this->renderMenuItem(
-                            "Blog", 
-                            "https://www.blueskyhomesteading.com/blog", 
-                            [
-                                "Gardening" => "https://www.blueskyhomesteading.com/blog/gardening",
-                                "Recipes" => "https://www.blueskyhomesteading.com/blog/recipes",
-                                "Sustainability" => "https://www.blueskyhomesteading.com/blog/sustainability"
-                            ], 
-                            true
-                        ); 
+                    <?php
+                    echo $this->renderMenuItem(
+                        "Blog",
+                        "https://www.blueskyhomesteading.com/blog",
+                        [
+                            "Gardening" => "https://www.blueskyhomesteading.com/blog/gardening",
+                            "Recipes" => "https://www.blueskyhomesteading.com/blog/recipes",
+                            "Sustainability" => "https://www.blueskyhomesteading.com/blog/sustainability"
+                        ],
+                        true
+                    );
                     ?>
                     <?php echo $this->renderMenuItem("Shop", "https://www.blueskyhomesteading.com/shop"); ?>
                     <?php echo $this->renderMenuItem(
-                        "Search", 
-                        "https://www.blueskyhomesteading.com/search", 
-                        [], 
-                        false, 
+                        "Search",
+                        "https://www.blueskyhomesteading.com/search",
+                        [],
+                        false,
                         true
                     ); ?>
                     <?php if ($this->cartCount > 0): ?>
@@ -74,7 +78,7 @@ class Navbar {
             </div>
             <?php echo $this->renderMobilePanel(); ?>
         </nav>
-        <?php
+    <?php
         return ob_get_clean();
     }
 
@@ -89,7 +93,8 @@ class Navbar {
      * @param bool $isIcon Whether to include an icon (for example, the search icon).
      * @return string HTML markup for the menu item.
      */
-    protected function renderMenuItem($title, $url, $dropdownItems = [], $hasDropdown = false, $isIcon = false) {
+    protected function renderMenuItem($title, $url, $dropdownItems = [], $hasDropdown = false, $isIcon = false)
+    {
         // Set the icon if needed.
         $icon = '';
         if ($hasDropdown) {
@@ -103,7 +108,7 @@ class Navbar {
         }
 
         ob_start();
-        ?>
+    ?>
         <li class="navbar-item <?php echo (!empty($dropdownItems) ? 'dropdown' : ''); ?>">
             <a href="<?php echo $url; ?>" class="nav-link <?php echo (!empty($dropdownItems) ? 'dropdown-toggle' : ''); ?>" <?php echo (!empty($dropdownItems) ? 'aria-haspopup="true" aria-expanded="false"' : ''); ?>>
                 <span><?php echo $title; ?></span>
@@ -117,18 +122,22 @@ class Navbar {
                 </ul>
             <?php endif; ?>
         </li>
-        <?php
+    <?php
         return ob_get_clean();
     }
 
     /**
      * Renders the mobile navigation panel.
      */
-    protected function renderMobilePanel() {
+    protected function renderMobilePanel()
+    {
         ob_start();
-        ?>
+    ?>
         <div class="mobile-nav-panel" id="mobile-nav-panel">
-            <button class="close-panel" aria-label="Close navigation">✖</button>
+            <button class="close-panel" aria-label="Close navigation">
+                <span class="x-bar"></span>
+                <span class="x-bar"></span>
+            </button>
             <ul>
                 <li>
                     <a href="https://www.blueskyhomesteading.com/blog">Blog</a>
@@ -172,7 +181,7 @@ class Navbar {
                     <li>
                         <a href="https://www.blueskyhomesteading.com/shop/cart">
                             <svg style="vertical-align: middle;" xmlns="http://www.w3.org/2000/svg" height="40px" viewBox="0 -960 960 960" width="40px" fill="black">
-                                <path d="M280-80q-33 0-56.5-23.5T200-160q0-33 23.5-56.5T280-240q33 0 56.5 23.5T360-160q0 33-23.5 56.5T280-80Zm400 0q-33 0-56.5-23.5T600-160q0-33 23.5-56.5T680-240q33 0 56.5 23.5T760-160q0 33-23.5 56.5T680-80ZM246-720l96 200h280l110-200H246Zm-38-80h590q23 0 35 20.5t1 41.5L692-482q-11 20-29.5 31T622-440H324l-44 80h480v80H280q-45 0-68-39.5t-2-78.5l54-98-144-304H40v-80h130l38 80Z"/>
+                                <path d="M280-80q-33 0-56.5-23.5T200-160q0-33 23.5-56.5T280-240q33 0 56.5 23.5T360-160q0 33-23.5 56.5T280-80Zm400 0q-33 0-56.5-23.5T600-160q0-33 23.5-56.5T680-240q33 0 56.5 23.5T760-160q0 33-23.5 56.5T680-80ZM246-720l96 200h280l110-200H246Zm-38-80h590q23 0 35 20.5t1 41.5L692-482q-11 20-29.5 31T622-440H324l-44 80h480v80H280q-45 0-68-39.5t-2-78.5l54-98-144-304H40v-80h130l38 80Z" />
                             </svg>
                             Cart
                         </a>
@@ -180,7 +189,7 @@ class Navbar {
                 <?php endif; ?>
             </ul>
         </div>
-        <?php
+<?php
         return ob_get_clean();
     }
 }

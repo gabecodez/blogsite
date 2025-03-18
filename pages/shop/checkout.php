@@ -6,9 +6,13 @@ declare(strict_types=1);
 
 require '../../../../vendor/autoload.php'; // Ensure you have the Stripe PHP library installed via Composer
 require_once $_SERVER['DOCUMENT_ROOT'] . '/../../header_files/blueskyhomesteading/config.php';
-require_once INCLUDES_PATH . 'shop_databaseconnection.php';
 
 \Stripe\Stripe::setApiKey('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');
+
+function getProductById($conn, $id)
+{
+    return $conn->fetchAll("SELECT name, price FROM products WHERE id = ?", [$id]);
+}
 
 session_start();
 $session_id = session_id();
@@ -20,7 +24,7 @@ try {
         $product_id = (int)$_GET['product_id'];
 
         // Fetch product details
-        $product = $conn->fetchAll("SELECT name, price FROM products WHERE id = ?", [$product_id]);
+        $product = getProductById($conn, $product_id);
 
         if (!empty($product)) {
             $product = $product[0];
@@ -42,7 +46,7 @@ try {
         if (!empty($cart_items)) {
             foreach ($cart_items as $cart_item) {
                 // Fetch product details
-                $product = $conn->fetchAll("SELECT name, price FROM products WHERE id = ?", [$cart_item['product_id']]);
+                $product = getProductById($conn, $cart_item['product_id']);
 
                 if (!empty($product)) {
                     $product = $product[0];

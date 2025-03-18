@@ -370,15 +370,18 @@ nav[aria-label="breadcrumb"] {
 
 .navbar-toggle {
   display: none;
+  top: 35px;
+  right: 35px;
+  position: fixed;
   flex-direction: column;
   cursor: pointer;
 }
 
 .bar {
-  width: 25px;
-  height: 2px;
+  width: 35px;
+  height: 1px;
   background-color: rgb(0, 0, 0);
-  margin: 3px 0;
+  margin: 4px 0;
   transition: all 0.3s;
 
   &:nth-child(1) {
@@ -444,6 +447,7 @@ nav[aria-label="breadcrumb"] {
     z-index: 9999;
     padding-top: 60px;
     overflow-y: auto;
+    font-family: $display_font;
 
     &.open {
       pointer-events: auto;
@@ -469,7 +473,7 @@ nav[aria-label="breadcrumb"] {
           text-decoration: none;
           display: block;
           font-size: 2em;
-          font-weight: 800;
+          font-weight: 400;
           line-height: 1em;
         }
       }
@@ -477,13 +481,32 @@ nav[aria-label="breadcrumb"] {
 
     .close-panel {
       position: absolute;
-      top: 20px;
-      right: 20px;
+      top: 27px;
+      right: 35px;
       background: none;
       border: none;
       color: rgb(0, 0, 0);
       font-size: 24px;
+      width: 35px;
+      height: 35px;
+
       cursor: pointer;
+      .x-bar {
+        width: 35px;
+        height: 1px;
+        background-color: rgb(0, 0, 0);
+        margin: 4px 0;
+        display: block;
+        position: fixed;
+
+        &:nth-child(1) {
+          transform: rotate(45deg);
+        }
+
+        &:nth-child(2) {
+          transform: rotate(-45deg);
+        }
+      }
     }
   }
 

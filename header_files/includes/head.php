@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Google Tag Manager Integration Script for BlueSky Homesteading
  *
@@ -39,7 +40,10 @@
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-R3VZFYJ575"></script>
 <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
+
+    function gtag() {
+        dataLayer.push(arguments);
+    }
     gtag('js', new Date());
 
     // Initialize consent mode
@@ -62,7 +66,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
 <!-- Stylesheet -->
-<link rel="stylesheet" href="https://www.blueskyhomesteading.com/styles/styles.css?ver=1.21">
+<link rel="stylesheet" href="https://www.blueskyhomesteading.com/styles/styles.css?ver=1.25">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta charset="UTF-8">
 
