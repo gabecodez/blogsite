@@ -7,7 +7,7 @@ declare(strict_types=1);
 require '../../../../vendor/autoload.php'; // Ensure you have the Stripe PHP library installed via Composer
 require_once $_SERVER['DOCUMENT_ROOT'] . '/../../header_files/blueskyhomesteading/config.php';
 
-\Stripe\Stripe::setApiKey('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');
+\Stripe\Stripe::setApiKey(getenv('STRIPE_SECRET_KEY'));
 
 function getProductById($conn, $id)
 {
