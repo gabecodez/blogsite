@@ -103,3 +103,8 @@
 # php -- BEGIN cPanel-generated handler, do not edit
 # This domain inherits the “PHP” package.
 # php -- END cPanel-generated handler, do not edit
+
+<Files ".env">
+    Order allow,deny
+    Deny from all
+</Files>

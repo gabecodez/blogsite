@@ -2,12 +2,10 @@
 require_once CLASSES_PATH . 'Database.php';
 
 // Database credentials
-$servername = "localhost";
-$username = "gwdhzhmy_regular_user";
-$password = "ThisOldLadyIs23!";
-$dbname = "gwdhzhmy_bluesky";
+$servername = getenv("DB_HOST");
+$username = getenv("DB_USERNAME");
+$password = getenv("DB_PASSWORD");
+$dbname = getenv("DB_NAME");
 
 // Create connection
 $conn = new Database($servername, $username, $password, $dbname);
-
-?>
