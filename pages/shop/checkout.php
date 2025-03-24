@@ -4,10 +4,10 @@
 // Purpose: Checkout functionality for BlueSky Homesteading
 declare(strict_types=1);
 
-require '../../../../vendor/autoload.php'; // Ensure you have the Stripe PHP library installed via Composer
+require $_SERVER['DOCUMENT_ROOT'] . '/../../vendor/autoload.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/../../header_files/blueskyhomesteading/config.php';
 
-\Stripe\Stripe::setApiKey(getenv('STRIPE_SECRET_KEY'));
+\Stripe\Stripe::setApiKey($_ENV['STRIPE_SECRET_KEY']);
 
 function getProductById($conn, $id)
 {

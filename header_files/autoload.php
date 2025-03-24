@@ -1,4 +1,6 @@
 <?php
+// custom autoload.php
+
 spl_autoload_register(function ($class) {
     // Define base directory for class files
     $baseDir = $_SERVER['DOCUMENT_ROOT'] . '/../../header_files/blueskyhomesteading/classes/';
@@ -11,4 +13,3 @@ spl_autoload_register(function ($class) {
         require_once $file;
     }
 });
-?>

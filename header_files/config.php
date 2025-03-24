@@ -1,4 +1,5 @@
 <?php
+// config.php
 declare(strict_types=1);
 
 define('BASE_PATH', $_SERVER['DOCUMENT_ROOT']); // Adjust based on your structure
@@ -14,6 +15,13 @@ define('NAVBAR_PATH', INCLUDES_PATH . 'navbar.php');
 define('CONSENT_BANNER_PATH', INCLUDES_PATH . 'consentbanner.php');
 define('FOOTER_PATH', INCLUDES_PATH . 'footer.php');
 
+require BASE_PATH . '/../../vendor/autoload.php';
+
+use Dotenv\Dotenv;
+
+$dotenv = Dotenv::createImmutable(__DIR__);
+$dotenv->load();
+
 // Load autoloader
 require_once BASE_PATH . '/../../header_files/blueskyhomesteading/autoload.php';
 
@@ -23,4 +31,3 @@ require_once INCLUDES_PATH . 'shop_databaseconnection.php';
 
 // Session Handling
 require_once INCLUDES_PATH . 'session_starter.php';
-?>
