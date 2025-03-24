@@ -52,6 +52,12 @@
 
     # Redirect to the custom 404 page
     ErrorDocument 404 /404.php
+
+    # Redirect to the custom 404 page
+    ErrorDocument 403 /404.php
+
+    RewriteCond %{REQUEST_STATUS} =403
+    RewriteRule .* - [R=404,L]
 </IfModule>
 
 # BEGIN Caching Rules
