@@ -26,22 +26,8 @@
       text-decoration: none;
     }
 
-    span {
-      font-size: 1em;
-      font-family: $main_font;
-      font-weight: 500;
-      text-align: center;
-      color: white;
-      background-color: $highlight_color;
-      padding: 0.5em;
-      text-align: center;
-      text-decoration: none;
-      display: block;
-      width: 120px;
-      margin-left: auto;
-      margin-right: auto;
-      border-radius: 8px;
-      transition: background-color 0.3s ease;
+    .banner-buttons {
+      justify-content: center;
     }
   }
 
@@ -62,6 +48,22 @@
     .text_side {
       span {
         background-color: $header_color;
+      }
+
+      .banner-buttons {
+        .btn {
+          background-color: black;
+          color: white;
+          padding-right: 40px;
+
+          &::after {
+            background-color: rgb(255, 255, 255);
+          }
+
+          &::before {
+            border-color: rgb(255, 255, 255);
+          }
+        }
       }
     }
 
@@ -249,7 +251,7 @@
 .top-article {
   padding: 0;
   margin: 0;
-  background-color: none;
+  background-color: $header_color;
   width: 100%;
   display: flex;
   align-items: stretch;
@@ -258,11 +260,18 @@
   transition: background-color 0.3s ease;
   text-decoration: none;
   grid-area: top;
-  background-color: #e4dbd7;
+  color: $bg_color;
 
   &:hover {
-    background-color: #f6d5d5;
+    background-color: black;
     border-color: $header_color;
+
+    .frontpage-article-image-parent {
+      img {
+        transform: scale(1.1);
+        filter: brightness(70%);
+      }
+    }
   }
 
   .frontpage-article-image-parent {
@@ -272,6 +281,10 @@
     justify-content: center;
     overflow: hidden;
     display: flex;
+
+    img {
+      transition: transform 1.3s ease, filter 1.3s ease;
+    }
   }
 
   .frontpage-article-image {
@@ -299,25 +312,18 @@
   flex: 1;
   padding: 0.5em;
   margin: 16px 0;
-  background-color: $header_color;
+  padding: 1em;
+  border-radius: 10px;
+  background-color: $bg_color;
   width: 100%;
   display: block;
   overflow: hidden;
   transition: background-color 0.3s ease;
   text-decoration: none;
-  color: white;
+  color: $header_color;
 
   &:hover {
-    background-color: black;
-
-    .top-article {
-      color: white;
-    }
-  }
-
-  .top-article {
-    background-color: $header_color;
-    color: white;
+    background-color: #f6d5d5;
   }
 }
 
@@ -335,8 +341,8 @@
   font-size: 1.5em;
   margin-bottom: 8px;
   margin-top: 0;
-  color: black;
   transition: color 0.3s ease;
+  color: $bg_color;
 }
 
 /* Styling the meta description */
@@ -348,7 +354,6 @@
 }
 
 /* Styling the link */
-
 .top-article a,
 .latest-article a {
   text-decoration: none;
@@ -356,8 +361,6 @@
 }
 
 /* Styling the title */
-
-.top-article h3,
 .latest-article h3 {
   font-size: 1.5em;
   margin-bottom: 8px;

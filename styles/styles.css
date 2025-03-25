@@ -120,10 +120,7 @@ ul {
   transition: border-bottom-color 0.3s;
 }
 .navbar.scrolled {
-  border-bottom-color: #0d1f22;
-}
-.navbar.scrolled .tagline {
-  color: #0d1f22;
+  border-bottom-color: black;
 }
 
 .navbar-indent {
@@ -171,9 +168,8 @@ ul {
   /* Standard property, currently not supported by any major browser */
 }
 .navbar-brand .tagline {
-  color: rgb(0, 0, 0);
   font-size: 14px;
-  color: transparent;
+  color: black;
   transition: color 0.3s ease;
 }
 
@@ -366,7 +362,7 @@ nav[aria-label=breadcrumb] li:last-child a {
   border: none;
   cursor: pointer;
   border-radius: 4px;
-  font-family: "JetBrains Mono", monospace;
+  font-family: "Inter", sans-serif;
   font-optical-sizing: auto;
   font-weight: 500;
   font-style: normal;
@@ -385,7 +381,7 @@ nav[aria-label=breadcrumb] li:last-child a {
   border: none;
   cursor: pointer;
   border-radius: 4px;
-  font-family: "JetBrains Mono", monospace;
+  font-family: "Inter", sans-serif;
   font-optical-sizing: auto;
   font-weight: 500;
   font-style: normal;
@@ -416,7 +412,7 @@ nav[aria-label=breadcrumb] li:last-child a {
   display: none;
   top: 35px;
   right: 35px;
-  position: fixed;
+  position: absolute;
   flex-direction: column;
   cursor: pointer;
 }
@@ -671,22 +667,8 @@ nav[aria-label=breadcrumb] li:last-child a {
   text-align: center;
   text-decoration: none;
 }
-.split_section .text_side span {
-  font-size: 1em;
-  font-family: "Inter", sans-serif;
-  font-weight: 500;
-  text-align: center;
-  color: white;
-  background-color: #17076f;
-  padding: 0.5em;
-  text-align: center;
-  text-decoration: none;
-  display: block;
-  width: 120px;
-  margin-left: auto;
-  margin-right: auto;
-  border-radius: 8px;
-  transition: background-color 0.3s ease;
+.split_section .text_side .banner-buttons {
+  justify-content: center;
 }
 .split_section .image_side {
   flex: 1;
@@ -702,6 +684,17 @@ nav[aria-label=breadcrumb] li:last-child a {
 }
 .split_section:hover .text_side span {
   background-color: #0d1f22;
+}
+.split_section:hover .text_side .banner-buttons .btn {
+  background-color: black;
+  color: white;
+  padding-right: 40px;
+}
+.split_section:hover .text_side .banner-buttons .btn::after {
+  background-color: rgb(255, 255, 255);
+}
+.split_section:hover .text_side .banner-buttons .btn::before {
+  border-color: rgb(255, 255, 255);
 }
 .split_section:hover .image_side img {
   transform: scale(1.1);
@@ -853,7 +846,7 @@ nav[aria-label=breadcrumb] li:last-child a {
 .top-article {
   padding: 0;
   margin: 0;
-  background-color: none;
+  background-color: #0d1f22;
   width: 100%;
   display: flex;
   align-items: stretch;
@@ -862,11 +855,15 @@ nav[aria-label=breadcrumb] li:last-child a {
   transition: background-color 0.3s ease;
   text-decoration: none;
   grid-area: top;
-  background-color: #e4dbd7;
+  color: #ffffff;
 }
 .top-article:hover {
-  background-color: #f6d5d5;
+  background-color: black;
   border-color: #0d1f22;
+}
+.top-article:hover .frontpage-article-image-parent img {
+  transform: scale(1.1);
+  filter: brightness(70%);
 }
 .top-article .frontpage-article-image-parent {
   flex: 1;
@@ -875,6 +872,9 @@ nav[aria-label=breadcrumb] li:last-child a {
   justify-content: center;
   overflow: hidden;
   display: flex;
+}
+.top-article .frontpage-article-image-parent img {
+  transition: transform 1.3s ease, filter 1.3s ease;
 }
 .top-article .frontpage-article-image {
   height: 100%;
@@ -900,23 +900,18 @@ nav[aria-label=breadcrumb] li:last-child a {
   flex: 1;
   padding: 0.5em;
   margin: 16px 0;
-  background-color: #0d1f22;
+  padding: 1em;
+  border-radius: 10px;
+  background-color: #ffffff;
   width: 100%;
   display: block;
   overflow: hidden;
   transition: background-color 0.3s ease;
   text-decoration: none;
-  color: white;
+  color: #0d1f22;
 }
 .latest-article:hover {
-  background-color: black;
-}
-.latest-article:hover .top-article {
-  color: white;
-}
-.latest-article .top-article {
-  background-color: #0d1f22;
-  color: white;
+  background-color: #f6d5d5;
 }
 
 /* Styling the link */
@@ -931,8 +926,8 @@ nav[aria-label=breadcrumb] li:last-child a {
   font-size: 1.5em;
   margin-bottom: 8px;
   margin-top: 0;
-  color: black;
   transition: color 0.3s ease;
+  color: #ffffff;
 }
 
 /* Styling the meta description */
@@ -950,7 +945,6 @@ nav[aria-label=breadcrumb] li:last-child a {
 }
 
 /* Styling the title */
-.top-article h3,
 .latest-article h3 {
   font-size: 1.5em;
   margin-bottom: 8px;

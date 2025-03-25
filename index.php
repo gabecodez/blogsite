@@ -29,27 +29,11 @@ $on_homepage = true; // lets navbar know we are on the homepage
     require_once NAVBAR_PATH;
     ?>
     <main>
-        <section class="frontpage hero_section">
-            <div class="page-indent">
-                <div class="banner">
-                    <div class="banner-content">
-                        <h1>Explore Nature’s gifts for health.</h1>
-                    </div>
-                    <div class="banner-action">
-                        <div class="banner-buttons">
-                            <a href="<?= SITE_URL; ?>/shop" class="btn">Shop skincare</a>
-                            <a href="<?= SITE_URL; ?>/blog" class="btn secondary">Read our blog</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
         <a href="https://www.blueskyhomesteading.com/shop/skincare/tallow-cream" class="frontpage split_section mobile_column_reverse">
             <div class="text_side">
-                <h2>Grass-Fed Whipped Tallow</h2>
+                <h1>Grass-Fed Whipped Tallow</h1>
                 <p>Experience the nourishing power of all-natural skincare.</p>
-                <span>Shop now</span>
+                <div class="banner-buttons"><span class="btn">Shop now</span></div>
             </div>
             <div class="image_side">
                 <img src="https://www.blueskyhomesteading.com/images/whipped_tallow.jpg" alt="Shop Preview" loading="lazy">
@@ -63,7 +47,7 @@ $on_homepage = true; // lets navbar know we are on the homepage
             <div class="text_side">
                 <h2>Beef Tallow Lip Balms</h2>
                 <p>Nourish your lips.</p>
-                <span>Shop now</span>
+                <div class="banner-buttons"><span class="btn">Shop now</span></div>
             </div>
         </a>
 
@@ -109,11 +93,11 @@ $on_homepage = true; // lets navbar know we are on the homepage
             </div>
         </section>
 
-        <a href="https://www.blueskyhomesteading.com/about" class="frontpage split_section">
+        <a href="https://www.blueskyhomesteading.com/about" class="frontpage split_section mobile_column_reverse">
             <div class="text_side">
                 <h2>From our family to yours.</h2>
                 <p>All our products are handcrafted with that small business love you can’t find anywhere else.</p>
-                <span>About</span>
+                <div class="banner-buttons"><span class="btn">About</span></div>
             </div>
             <div class="image_side">
                 <img src="https://www.blueskyhomesteading.com/images/shop_shelves.jpg" alt="Shop Preview" loading="lazy">

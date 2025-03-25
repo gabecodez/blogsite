@@ -17,11 +17,7 @@
   transition: border-bottom-color 0.3s;
 
   &.scrolled {
-    border-bottom-color: $line_color;
-
-    .tagline {
-      color: $header_color;
-    }
+    border-bottom-color: black;
   }
 }
 
@@ -89,9 +85,8 @@
   }
 
   .tagline {
-    color: rgb(0, 0, 0);
     font-size: 14px;
-    color: transparent;
+    color: black;
     transition: color 0.3s ease;
   }
 }
@@ -312,7 +307,7 @@ nav[aria-label="breadcrumb"] {
     border: none;
     cursor: pointer;
     border-radius: 4px;
-    font-family: "JetBrains Mono", monospace;
+    font-family: $main_font;
     font-optical-sizing: auto;
     font-weight: 500;
     font-style: normal;
@@ -333,7 +328,7 @@ nav[aria-label="breadcrumb"] {
     border: none;
     cursor: pointer;
     border-radius: 4px;
-    font-family: "JetBrains Mono", monospace;
+    font-family: $main_font;
     font-optical-sizing: auto;
     font-weight: 500;
     font-style: normal;
@@ -372,7 +367,7 @@ nav[aria-label="breadcrumb"] {
   display: none;
   top: 35px;
   right: 35px;
-  position: fixed;
+  position: absolute;
   flex-direction: column;
   cursor: pointer;
 }

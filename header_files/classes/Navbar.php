@@ -43,7 +43,7 @@ class Navbar
                     <a href="https://www.blueskyhomesteading.com" aria-label="BlueSky Homesteading Home">
                         <img src="https://www.blueskyhomesteading.com/images/logos/blueskylogoblack.svg" alt="BlueSky Homesteading Logo" class="logo">
                     </a>
-                    <span class="tagline">Your Homesteading Hub</span>
+                    <span class="tagline">Explore Nature’s gifts for health.</span>
                 </div>
                 <div class="navbar-toggle" id="mobile-menu" aria-expanded="false" aria-controls="mobile-nav-panel" aria-label="Toggle navigation">
                     <span class="bar"></span>
@@ -168,7 +168,7 @@ class Navbar
                         </li>
                     </ul>
                 </li>
-                <li><a href="https://www.blueskyhomesteading.com/shop">Shop</a></li>
+                <li><a href="https://www.blueskyhomesteading.com/shop">Shop Skincare</a></li>
                 <li>
                     <a href="https://www.blueskyhomesteading.com/search">
                         <svg style="vertical-align: middle;" xmlns="http://www.w3.org/2000/svg" height="40px" viewBox="0 -960 960 960" width="40px" fill="black">
