@@ -11,37 +11,69 @@ function show404()
     exit();
 }
 
-$category_slug = isset($_GET['category_slug']) ? preg_replace('/[^a-zA-Z0-9_-]/', '', $_GET['category_slug']) : '';
-$product_slug = isset($_GET['product_slug']) ? preg_replace('/[^a-zA-Z0-9_-]/', '', $_GET['product_slug']) : '';
-
-if (!$category_slug || !$product_slug) {
-    show404();
-}
-
-try {
+function fetch_product($conn, $category_slug, $product_slug)
+{
     $product_data = $conn->fetchAll("SELECT p.id, p.name, p.description, p.meta_description, p.tags, p.price, p.terms, p.preview_image_ids, c.name AS category FROM products AS p JOIN shop_categories AS c ON c.slug = ? AND p.slug = ? AND p.category = c.name WHERE p.public = 1 LIMIT 1", [$category_slug, $product_slug]);
-
-    if (!empty($product_data)) {
-        $product = $product_data[0];
-    } else {
-        show404();
-    }
-} catch (Exception $e) {
-    error_log($e->getMessage());
-    show404();
+    return $product_data[0]; // set the product to the first product
 }
 
-// Fetch image details if there are any image IDs
-$image_data = [];
-if (!empty($product['preview_image_ids'])) {
-    $image_ids = explode(',', $product['preview_image_ids']);
+function fetch_images($conn, $image_ids)
+{
+    $image_data = [];
+    // loop through them
     foreach ($image_ids as $image_id) {
-        $image_id = trim($image_id);
-        $fetched_image = $conn->fetchAll("SELECT image_url, caption, credit, credit_url, alttext, public FROM images WHERE id = ? AND public = 1 LIMIT 1", [$image_id]);
-        if (!empty($fetched_image)) {
-            $image_data[] = $fetched_image[0]; // Append the image to the array
+        $image_id = trim($image_id); // clean up the id
+        $fetched_image = new Image($conn); // create the image object
+        $fetched_image->fetchImage($image_id); // fetch the image details
+        // check if exists
+        if ($fetched_image->url) {
+            $image_data[] = $fetched_image; // Append the image to the array
         }
     }
+
+    return $image_data;
+}
+
+function fetch_options($conn, $product_id)
+{
+    $options = $conn->fetchAll("SELECT id, name FROM product_options WHERE product_id = ?", [$product_id]);
+    return $options;
+}
+
+function fetch_choices($conn, $options)
+{
+    $choices = [];
+    foreach ($options as $option) {
+        $choices_data = $conn->fetchAll("SELECT id, name FROM product_options_choices WHERE option_id = ?", [$option['id']]);
+        // Ensure each option is mapped to its choices
+        $choices[$option['id']] = $choices_data;
+    }
+    return $choices;
+}
+
+
+$category_slug = isset($_GET['category_slug']) ? preg_replace('/[^a-zA-Z0-9_-]/', '', $_GET['category_slug']) : ''; // sanitize/get the category slug
+$product_slug = isset($_GET['product_slug']) ? preg_replace('/[^a-zA-Z0-9_-]/', '', $_GET['product_slug']) : ''; // sanitize/get the product slug
+
+if (!$category_slug || !$product_slug) show404(); // Check if the category and product slugs are empty
+
+// fetch the product
+$product = fetch_product($conn, $category_slug, $product_slug);
+if (!$product) show404();
+
+// fetch the options
+$options = fetch_options($conn, $product['id']);
+
+// fetch the options
+$choices = fetch_choices($conn, $options);
+
+// check if there even are any images to fetch
+if (!empty($product['preview_image_ids'])) {
+    // separate out the image ids
+    $image_ids = explode(',', $product['preview_image_ids']);
+
+    // Fetch image details if there are any image IDs
+    $image_data = fetch_images($conn, $image_ids);
 }
 
 $conn->close();
@@ -56,7 +88,7 @@ $conn->close();
     $pageMeta = new PageMeta(
         $product['name'],
         $product['meta_description'],
-        !empty($image_data) ? $image_data[0]['image_url'] : 'https://www.blueskyhomesteading.com/images/social_media_previews/basic_white_bg_w_logo.jpeg',
+        !empty($image_data) ? $image_data[0]->url : 'https://www.blueskyhomesteading.com/images/social_media_previews/basic_white_bg_w_logo.jpeg',
         SITE_URL . "/shop/product/{$category_slug}/{$product_slug}",
         SITE_NAME
     );
@@ -75,14 +107,14 @@ $conn->close();
                 <div class="carousel-images">
                     <?php foreach ($image_data as $image) : ?>
                         <div class="carousel-image">
-                            <img src="<?php echo htmlspecialchars($image['image_url']); ?>" alt="<?php echo htmlspecialchars($image['alttext']); ?>">
-                            <?php if (!empty($image['caption'])) : ?>
-                                <p class="caption"><?php echo htmlspecialchars($image['caption']); ?></p>
+                            <img src="<?php echo htmlspecialchars($image->url); ?>" alt="<?php echo htmlspecialchars($image->alttext); ?>">
+                            <?php if (!empty($image->caption)) : ?>
+                                <p class="caption"><?php echo htmlspecialchars($image->caption); ?></p>
                             <?php endif; ?>
-                            <?php if (!empty($image['credit'])) : ?>
+                            <?php if (!empty($image->credit)) : ?>
                                 <p class="credit">
-                                    Credit: <a href="<?php echo htmlspecialchars($image['credit_url']); ?>" target="_blank">
-                                        <?php echo htmlspecialchars($image['credit']); ?>
+                                    Credit: <a href="<?php echo htmlspecialchars($image->credit_url); ?>" target="_blank">
+                                        <?php echo htmlspecialchars($image->credit); ?>
                                     </a>
                                 </p>
                             <?php endif; ?>
@@ -97,20 +129,45 @@ $conn->close();
                 <h1><?php echo htmlspecialchars($product['name']); ?></h1>
                 <p class="product-price">$<?php echo number_format($product['price'], 2); ?> each</p>
                 <div class="atc-section">
+                    <?php
+                    // Render tile-based options
+                    foreach ($options as $option) {
+                        echo "<div class='atc-option-section'>";
+                        echo "<label class='atc-option-label'>{$option['name']}:</label>";
+                        echo "<div class='atc-tile-container' data-option-id='{$option['id']}'>";
+
+                        // Render each selection choice as a tile
+                        if (!empty($choices[$option['id']])) {
+                            foreach ($choices[$option['id']] as $choice) {
+                                echo "<label class='atc-tile-option'>";
+                                echo "<input type='radio' name='{$option['name']}' value='{$choice['id']}'>";
+                                echo htmlspecialchars($choice['name']);
+                                echo "</label>";
+                            }
+                        }
+
+                        echo "</div>";
+                        echo "</div>";
+                    }
+                    ?>
+
                     <div class="atc-quantity-section">
-                        <label class="atc-quantity-label" for="quantity">Quantity:</label>
-                        <input class="atc-quantity-selector" type="number" id="quantity" name="quantity" value="1" min="1">
+                        <label class="atc-quantity-label">Quantity:</label>
+                        <div class="quantity-container">
+                            <button class="quantity-btn minus">-</button>
+                            <input type="number" class="quantity-input" value="1" min="1" max="99">
+                            <button class="quantity-btn plus">+</button>
+                        </div>
                     </div>
 
                     <button class="add-to-cart-button" onclick="addToCart(<?php echo $product['id']; ?>)">Add to Cart</button>
                 </div>
-
-                <hr class="small-hr-separator" />
-
-                <a href="https://www.blueskyhomesteading.com/shop/checkout?product_id=<?php echo $product['id']; ?>" class="buy-now-button">Buy Now</a>
-                <p class="button-footnote">* This will bring you straight to checkout.</p>
-                <p class="button-footnote">* Checkout is handled by Stripe.</p>
-                <?php echo $product['description']; ?>
+                <?php
+                // render out the terms and conditions
+                echo $product['terms'];
+                // render out the description
+                echo $product['description'];
+                ?>
             </section>
         </div>
     </main>
@@ -148,8 +205,68 @@ $conn->close();
         // Initialize carousel
         updateCarousel();
 
+        // Tile Selection Script
+        document.querySelectorAll('.atc-tile-container').forEach(container => {
+            container.addEventListener('click', function(e) {
+                const clickedTile = e.target.closest('.atc-tile-option');
+                if (!clickedTile) return;
+
+                // Remove 'selected' class from all tiles in this container
+                container.querySelectorAll('.atc-tile-option').forEach(tile => {
+                    tile.classList.remove('selected');
+                });
+
+                // Add 'selected' class to clicked tile
+                clickedTile.classList.add('selected');
+
+                // Check the radio button
+                const radio = clickedTile.querySelector('input');
+                radio.checked = true;
+            });
+        });
+
+        // Enhanced Quantity Selector Script
+        document.addEventListener('DOMContentLoaded', () => {
+            const quantityInput = document.querySelector('.quantity-input');
+            const minusBtn = document.querySelector('.minus');
+            const plusBtn = document.querySelector('.plus');
+
+            minusBtn.addEventListener('click', () => {
+                let currentValue = parseInt(quantityInput.value);
+                if (currentValue > 1) {
+                    quantityInput.value = currentValue - 1;
+                }
+            });
+
+            plusBtn.addEventListener('click', () => {
+                let currentValue = parseInt(quantityInput.value);
+                if (currentValue < 99) {
+                    quantityInput.value = currentValue + 1;
+                }
+            });
+
+            // Input validation
+            quantityInput.addEventListener('change', () => {
+                let value = parseInt(quantityInput.value);
+                if (isNaN(value) || value < 1) {
+                    quantityInput.value = 1;
+                } else if (value > 99) {
+                    quantityInput.value = 99;
+                }
+            });
+        });
+
         function addToCart(productId) {
-            const quantity = document.getElementById('quantity').value || 1;
+            const quantity = document.querySelector('.quantity-input').value || 1;
+            const options = document.querySelectorAll('.atc-tile-container input:checked');
+            const selectedOptions = {};
+
+            options.forEach(option => {
+                const container = option.closest('.atc-tile-container');
+                const optionName = container.previousElementSibling.textContent.trim();
+                selectedOptions[optionName] = option.value;
+            });
+
             fetch('https://www.blueskyhomesteading.com/shop/add-to-cart', {
                     method: 'POST',
                     headers: {
@@ -157,12 +274,13 @@ $conn->close();
                     },
                     body: new URLSearchParams({
                         'product_id': productId,
-                        'quantity': quantity
+                        'quantity': quantity,
+                        'options': JSON.stringify(selectedOptions)
                     })
                 })
                 .then(response => response.json())
                 .then(data => {
-                    window.location.href = "https://www.blueskyhomesteading.com/shop/cart"; // Redirects to Google
+                    window.location.href = "https://www.blueskyhomesteading.com/shop/cart";
                 })
                 .catch(error => alert('An error occurred.'));
         }

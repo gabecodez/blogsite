@@ -22,8 +22,8 @@ label[for="quantity"] {
 }
 
 .atc-quantity-section {
-  display: flex;
   gap: 5px;
+  margin-bottom: 10px;
 }
 
 .atc-quantity-selector {
@@ -199,6 +199,9 @@ label[for="quantity"] {
   align-items: flex-start;
   margin-top: 20px;
   margin-bottom: 40px;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 1000px;
 
   .carousel {
     flex: 1;
@@ -266,6 +269,104 @@ label[for="quantity"] {
   }
 }
 
+/* New Tile Selection Styles */
+.atc-option-section {
+  margin-bottom: 20px;
+  font-family: $main_font;
+}
+
+.atc-option-label {
+  display: block;
+  margin-bottom: 15px;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.atc-tile-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.atc-tile-option {
+  flex: 0 1 calc(33.333% - 10px);
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 10px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.atc-tile-option input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.atc-tile-option:hover {
+  border-color: #4a90e2;
+  background-color: #f5f5f5;
+}
+
+.atc-tile-option.selected {
+  border-color: #4a90e2;
+  background-color: #e6f2ff;
+  box-shadow: 0 0 0 2px #4a90e2;
+}
+
+/* Quantity Selector Styles */
+.quantity-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 180px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.quantity-btn {
+  width: 50px;
+  height: 50px;
+  background-color: #f4f4f4;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 20px;
+  color: #333;
+  transition: background-color 0.2s ease;
+}
+
+.quantity-btn:hover {
+  background-color: #e0e0e0;
+}
+
+.quantity-btn:active {
+  background-color: #d0d0d0;
+}
+
+.quantity-input {
+  width: 80px;
+  height: 50px;
+  text-align: center;
+  border: none;
+  font-size: 18px;
+  appearance: none;
+  -moz-appearance: textfield;
+}
+
+.quantity-input::-webkit-outer-spin-button,
+.quantity-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
 /* Responsive Styles */
 @media (max-width: 700px) {
   .product-images {
@@ -275,5 +376,13 @@ label[for="quantity"] {
 
   .product-preview-section {
     flex-direction: column;
+  }
+
+  .product-info {
+    flex-direction: column;
+  }
+
+  .atc-tile-option {
+    flex: 0 1 calc(50% - 10px);
   }
 }

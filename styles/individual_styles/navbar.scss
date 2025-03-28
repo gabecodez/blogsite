@@ -109,30 +109,11 @@
   padding: 10px 15px;
   display: block;
   transition: background-color 0.3s ease;
-  border-color: transparent;
-  border-style: solid;
-  border-width: 1px 1px 0 1px;
   z-index: 2;
   position: relative;
 
-  &.dropdown-toggle:hover {
-    border-color: black;
-  }
-}
-
-.dropdown:hover .nav-link.dropdown-toggle {
-  border-color: black;
-  background-color: white;
-
   &:hover {
-    background-color: #eddfdb;
-  }
-}
-
-.nav-link {
-  &:hover,
-  &:focus {
-    background-color: #eddfdb;
+    text-decoration: underline;
   }
 }
 
@@ -168,9 +149,6 @@
   background-color: #ffffff;
   padding: 0;
   min-width: 200px;
-  border-style: solid;
-  border-color: black;
-  border-width: 1px;
   animation: dropdown 0.3s ease;
   list-style-type: none;
   z-index: 1;
@@ -181,10 +159,11 @@
     display: block;
     transition: background-color 0.3s ease;
     z-index: 1;
+    text-decoration: none;
 
     &:hover,
     &:focus {
-      background-color: #e7cfc7;
+      text-decoration: underline;
     }
   }
 }

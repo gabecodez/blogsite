@@ -4,7 +4,13 @@
 // Purpose: Homepage for BlueSky Homesteading
 require_once $_SERVER['DOCUMENT_ROOT'] . '/../../header_files/blueskyhomesteading/config.php';
 
-$on_homepage = true; // lets navbar know we are on the homepage
+// Query for all public products
+$sql = "SELECT p.id, p.name, p.price, p.preview_image_ids, p.slug AS product_slug, c.slug AS category_slug 
+        FROM products AS p 
+        JOIN shop_categories AS c ON p.category = c.name 
+        WHERE p.public = 1 
+        ORDER BY p.id DESC";
+$products = $conn->fetchAll($sql);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -29,27 +35,61 @@ $on_homepage = true; // lets navbar know we are on the homepage
     require_once NAVBAR_PATH;
     ?>
     <main>
-        <a href="https://www.blueskyhomesteading.com/shop/skincare/tallow-cream" class="frontpage split_section mobile_column_reverse">
+        <a href="https://www.blueskyhomesteading.com/shop" class="frontpage split_section mobile_column_reverse">
             <div class="text_side">
-                <h1>Grass-Fed Whipped Tallow</h1>
-                <p>Experience the nourishing power of all-natural skincare.</p>
-                <div class="banner-buttons"><span class="btn">Shop now</span></div>
+                <h1>Nourish your skin</h1>
+                <p>Experience the healing power of all-natural skincare.</p>
+                <div class="banner-buttons"><span class="btn">Shop skincare</span></div>
             </div>
             <div class="image_side">
-                <img src="https://www.blueskyhomesteading.com/images/whipped_tallow.jpg" alt="Shop Preview" loading="lazy">
+                <img src="https://www.blueskyhomesteading.com/images/shop_shelves.jpg" alt="Shop Preview" loading="lazy">
             </div>
         </a>
 
-        <a href="https://www.blueskyhomesteading.com/shop/skincare/tallow-lip-balm" class="frontpage split_section">
-            <div class="image_side">
-                <img src="https://www.blueskyhomesteading.com/images/tallow_balms.jpg" alt="Shop Preview" loading="lazy">
+        <section class="frontpage header_section">
+            <div class="page-indent">
+                <h2>Some of our most popular picks</h2>
+                <div class="content_section">
+                    <div class="products-showcase">
+                        <div class="product-preview-section">
+                            <?php
+                            // Fetch latest products (e.g., the last 3 entries)
+                            $products_sql = "SELECT products.slug AS product_slug, products.name, products.meta_description, products.preview_image_ids, shop_categories.slug AS category_slug
+                    FROM products 
+                    JOIN shop_categories ON products.category = shop_categories.name
+                    WHERE products.public = 1 
+                    LIMIT 3";
+                            $products = $conn->fetchAll($products_sql);
+
+                            if (!empty($products)) {
+                                foreach ($products as $product) {
+                                    // Fetch image details if there are any image IDs
+                                    $image_data = [];
+                                    if (!empty($product['preview_image_ids'])) {
+                                        $image_ids = explode(',', $product['preview_image_ids']);
+
+                                        $image_id = trim($image_ids[0]);
+                                        // Fetch first image
+                                        $images_sql = "SELECT image_url, alttext, public FROM images WHERE id = ? AND public = 1 LIMIT 1";
+                                        $image_data = $conn->fetchAll($images_sql, [$image_id]);
+                                    }
+
+                                    echo '<a class="product-preview" href="' . SITE_URL . '/shop/' . htmlspecialchars($product['category_slug']) . '/' . htmlspecialchars($product['product_slug']) . '">';
+                                    foreach ($image_data as $image) {
+                                        echo '<img src="' . htmlspecialchars($image['image_url']) . '" alt="' . htmlspecialchars($image['alttext']) . '">';
+                                    }
+                                    echo '<div class="text">';
+                                    echo '<span class="name">' . $product['name'] . '</span>';
+                                    echo '</div>';
+                                    echo '</a>';
+                                }
+                            }
+                            ?>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="text_side">
-                <h2>Beef Tallow Lip Balms</h2>
-                <p>Nourish your lips.</p>
-                <div class="banner-buttons"><span class="btn">Shop now</span></div>
-            </div>
-        </a>
+        </section>
 
         <section class="frontpage header_section three-tiled">
             <div class="page-indent">
@@ -96,11 +136,11 @@ $on_homepage = true; // lets navbar know we are on the homepage
         <a href="https://www.blueskyhomesteading.com/about" class="frontpage split_section mobile_column_reverse">
             <div class="text_side">
                 <h2>From our family to yours.</h2>
-                <p>All our products are handcrafted with that small business love you can’t find anywhere else.</p>
+                <p>All our hand-crafted products are handcrafted with that small business love you can’t find anywhere else.</p>
                 <div class="banner-buttons"><span class="btn">About</span></div>
             </div>
             <div class="image_side">
-                <img src="https://www.blueskyhomesteading.com/images/shop_shelves.jpg" alt="Shop Preview" loading="lazy">
+                <img src="https://www.blueskyhomesteading.com/images/whipped_tallow.jpg" alt="Shop Preview" loading="lazy">
             </div>
         </a>
 
@@ -121,50 +161,17 @@ $on_homepage = true; // lets navbar know we are on the homepage
                     $articles = $conn->fetchAll($sql);
 
                     if (!empty($articles)) {
-                        $counter = 1;
                         foreach ($articles as $article) {
-                            if ($counter == 1) {
-                                echo '<a class="top-article" href="' . SITE_URL . '/blog/' . htmlspecialchars($article['category_slug']) . '/' . htmlspecialchars($article['article_slug']) . '">';
-                                echo '<div class="frontpage-article-image-parent">';
-                                if (!empty($article['image_url'])) {
-                                    echo '<img src="' . htmlspecialchars($article['image_url']) . '" alt="' . htmlspecialchars($article['alttext']) . '" class="frontpage-article-image" loading="lazy">';
-                                }
-                                echo '</div>';
-                                echo '<div class="frontpage-article-text">';
-                                echo '<h3>' . htmlspecialchars($article['title']) . '</h3>';
-                                echo '<p>' . htmlspecialchars($article['meta_description']) . '</p>';
-                                echo '</div>';
-                                echo '</a>';
-                            } else if ($counter == 2) {
-                                echo '<div class="latest-part">';
-                                echo '<a class="top-article" href="' . SITE_URL . '/blog/' . htmlspecialchars($article['category_slug']) . '/' . htmlspecialchars($article['article_slug']) . '">';
-                                echo '<div class="frontpage-article-image-parent">';
-                                if (!empty($article['image_url'])) {
-                                    echo '<img src="' . htmlspecialchars($article['image_url']) . '" alt="' . htmlspecialchars($article['alttext']) . '" class="frontpage-article-image" loading="lazy">';
-                                }
-                                echo '</div>';
-                                echo '<div class="frontpage-article-text">';
-                                echo '<h3>' . htmlspecialchars($article['title']) . '</h3>';
-                                echo '</div>';
-                                echo '</a>';
-                            } else if ($counter > 2 && $counter <= 3) {
-                                echo '<a class="top-article" href="' . SITE_URL . '/blog/' . htmlspecialchars($article['category_slug']) . '/' . htmlspecialchars($article['article_slug']) . '">';
-                                echo '<div class="frontpage-article-image-parent">';
-                                if (!empty($article['image_url'])) {
-                                    echo '<img src="' . htmlspecialchars($article['image_url']) . '" alt="' . htmlspecialchars($article['alttext']) . '" class="frontpage-article-image" loading="lazy">';
-                                }
-                                echo '</div>';
-                                echo '<div class="frontpage-article-text">';
-                                echo '<h3>' . htmlspecialchars($article['title']) . '</h3>';
-                                echo '</div>';
-                                echo '</a>';
+                            echo '<a class="top-article" href="' . SITE_URL . '/blog/' . htmlspecialchars($article['category_slug']) . '/' . htmlspecialchars($article['article_slug']) . '">';
+                            echo '<div class="frontpage-article-image-parent">';
+                            if (!empty($article['image_url'])) {
+                                echo '<img src="' . htmlspecialchars($article['image_url']) . '" alt="' . htmlspecialchars($article['alttext']) . '" class="frontpage-article-image" loading="lazy">';
                             }
-
-                            if ($counter == 3) {
-                                echo '</div>';
-                            }
-
-                            $counter++;
+                            echo '</div>';
+                            echo '<div class="frontpage-article-text">';
+                            echo '<h3>' . htmlspecialchars($article['title']) . '</h3>';
+                            echo '</div>';
+                            echo '</a>';
                         }
                     } else {
                         echo "No articles found.";

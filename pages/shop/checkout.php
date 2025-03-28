@@ -19,54 +19,57 @@ $session_id = session_id();
 $line_items = [];
 
 try {
-    // Check if a product_id is passed for direct purchase
-    if (isset($_GET['product_id'])) {
-        $product_id = (int)$_GET['product_id'];
+    // Retrieve cart items for this session
+    $cart_items = $shop_conn->fetchAll("SELECT product_id, quantity, options FROM cart WHERE session_id = ?", [$session_id]);
 
-        // Fetch product details
-        $product = getProductById($conn, $product_id);
+    if (!empty($cart_items)) {
+        foreach ($cart_items as $cart_item) {
+            // Fetch product details
+            $product = getProductById($conn, $cart_item['product_id']);
 
-        if (!empty($product)) {
-            $product = $product[0];
-            $line_items[] = [
-                'price_data' => [
-                    'currency' => 'usd',
-                    'product_data' => [
-                        'name' => $product['name'],
+            if (!empty($product)) {
+                $product = $product[0];
+
+                // Fetch the selected options for this product
+                $selected_options = json_decode($cart_item['options'], true);
+                $options_description = '';
+
+                // Build a description of the selected options
+                foreach ($selected_options as $option_id => $choice_id) {
+                    // Validate the selected choices
+                    $choice_data = $conn->fetchAll("SELECT name FROM product_options_choices WHERE id = ?", [$choice_id]);
+                    if (!empty($choice_data)) {
+                        $options_description .= $choice_data[0]['name'] . ', ';
+                    }
+                }
+
+                // Trim the trailing comma and space
+                $options_description = rtrim($options_description, ', ');
+
+                $line_item = [
+                    'price_data' => [
+                        'currency' => 'usd',
+                        'product_data' => [
+                            'name' => $product['name'],
+                        ],
+                        'unit_amount' => $product['price'] * 100, // Stripe expects the amount in cents
                     ],
-                    'unit_amount' => $product['price'] * 100, // Stripe expects the amount in cents
-                ],
-                'quantity' => 1, // Default quantity for direct purchases
-            ];
+                    'quantity' => $cart_item['quantity'],
+                ];
+
+                // Only add 'description' if $options_description is not empty
+                if (!empty($options_description)) {
+                    $line_item['price_data']['product_data']['description'] = $options_description;
+                }
+
+                $line_items[] = $line_item;
+            }
         }
     } else {
-        // Retrieve cart items for this session
-        $cart_items = $shop_conn->fetchAll("SELECT product_id, quantity FROM cart WHERE session_id = ?", [$session_id]);
-
-        if (!empty($cart_items)) {
-            foreach ($cart_items as $cart_item) {
-                // Fetch product details
-                $product = getProductById($conn, $cart_item['product_id']);
-
-                if (!empty($product)) {
-                    $product = $product[0];
-                    $line_items[] = [
-                        'price_data' => [
-                            'currency' => 'usd',
-                            'product_data' => [
-                                'name' => $product['name'],
-                            ],
-                            'unit_amount' => $product['price'] * 100, // Stripe expects the amount in cents
-                        ],
-                        'quantity' => $cart_item['quantity'],
-                    ];
-                }
-            }
-        } else {
-            echo 'An error has occurred.';
-            exit();
-        }
+        echo 'An error has occurred.';
+        exit();
     }
+    //}
 
     // Create Stripe Checkout Session
     $session = \Stripe\Checkout\Session::create([

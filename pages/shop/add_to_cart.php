@@ -5,14 +5,20 @@
 require_once $_SERVER['DOCUMENT_ROOT'] . '/../../header_files/blueskyhomesteading/config.php';
 require_once INCLUDES_PATH . 'shop_databaseconnection.php';
 
-$product_id = isset($_POST['product_id']) ? (int)$_POST['product_id'] : 0;
-$quantity = isset($_POST['quantity']) ? (int)$_POST['quantity'] : 1;
+$product_id = isset($_POST['product_id']) ? (int)$_POST['product_id'] : 0; // get the product to be added
+$quantity = isset($_POST['quantity']) ? (int)$_POST['quantity'] : 1; // get the quantity of said product
+$selected_options = isset($_POST['options']) ? json_decode($_POST['options'], true) : []; // get the options
 
 if ($product_id > 0) {
     $session_id = session_id();
     try {
-        // Fetch the cart result using the $database instance
-        $cart_result = $shop_conn->fetchAll("SELECT id, quantity FROM cart WHERE session_id = ? AND product_id = ?", [$session_id, $product_id]);
+        $options_json = json_encode($selected_options);
+
+        // Fetch the cart item that matches product ID AND options
+        $cart_result = $shop_conn->fetchAll(
+            "SELECT id, quantity FROM cart WHERE session_id = ? AND product_id = ? AND options = ?",
+            [$session_id, $product_id, $options_json]
+        );
 
         // Check if cart_result is not empty
         if (!empty($cart_result)) {
@@ -20,7 +26,7 @@ if ($product_id > 0) {
             $new_quantity = $cart_item['quantity'] + $quantity;
 
             // Update the cart quantity using the update method
-            $data = ['quantity' => $new_quantity];
+            $data = ['quantity' => $new_quantity, 'options' => json_encode($selected_options)];
             $where = "id = ?";
             $shop_conn->update('cart', $data, $where, [$cart_item['id']]);
         } else {
@@ -31,8 +37,10 @@ if ($product_id > 0) {
                 'session_id' => $session_id,
                 'product_id' => $product_id,
                 'quantity' => $quantity,
-                'include_for_checkout' => $include_for_checkout
+                'include_for_checkout' => $include_for_checkout,
+                'options' => json_encode($selected_options) // Store as JSON
             ];
+
             $shop_conn->insert('cart', $data);
         }
 
