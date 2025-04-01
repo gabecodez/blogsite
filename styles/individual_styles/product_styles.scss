@@ -369,6 +369,10 @@ label[for="quantity"] {
 
 /* Responsive Styles */
 @media (max-width: 700px) {
+  .product-info {
+    flex-direction: column;
+  }
+
   .product-images {
     flex-wrap: nowrap;
     gap: 15px;
@@ -376,6 +380,10 @@ label[for="quantity"] {
 
   .product-preview-section {
     flex-direction: column;
+  }
+
+  .product-preview {
+    max-width: 100%;
   }
 
   .product-info {

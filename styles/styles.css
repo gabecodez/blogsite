@@ -830,6 +830,7 @@ nav[aria-label=breadcrumb] li:last-child a {
 
 .blog-articles {
   display: flex;
+  gap: 10px;
 }
 
 .top-article {
@@ -847,13 +848,12 @@ nav[aria-label=breadcrumb] li:last-child a {
   grid-area: top;
   color: #0d1f22;
 }
-.top-article:hover {
-  background-color: #f6d5d5;
-  border-color: #0d1f22;
-}
 .top-article:hover .frontpage-article-image-parent img {
   transform: scale(1.1);
   filter: brightness(70%);
+}
+.top-article:hover .frontpage-article-text {
+  text-decoration: underline;
 }
 .top-article .frontpage-article-image-parent {
   flex: 1;
@@ -868,21 +868,17 @@ nav[aria-label=breadcrumb] li:last-child a {
 }
 .top-article .frontpage-article-image {
   height: 100%;
-  max-width: 100%;
-  width: auto;
+  width: 100%;
   -o-object-fit: cover;
      object-fit: cover;
 }
 .top-article .frontpage-article-text {
-  flex: 2;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  flex: initial;
   width: 100%;
-  height: 100%;
-  padding: 3em;
-  padding-left: 2.5em;
-  padding-right: 2.5em;
+  height: auto;
+  padding: 1em;
+  padding-left: 0;
+  padding-right: 0;
   font-size: 1.5em;
 }
 
@@ -913,7 +909,7 @@ nav[aria-label=breadcrumb] li:last-child a {
 
 /* Styling the title */
 .top-article h3 {
-  font-size: 1.5em;
+  font-size: 1em;
   margin-bottom: 8px;
   margin-top: 0;
   transition: color 0.3s ease;
@@ -1149,23 +1145,17 @@ nav[aria-label=breadcrumb] li:last-child a {
   .top-article {
     flex-direction: column;
   }
-  .top-article .frontpage-article-text {
-    padding: 1.8em;
-  }
   .frontpage-article-text p {
     display: none;
+  }
+  .top-article .frontpage-article-image {
+    height: 340px;
   }
   .blog-section .blog-header h2 {
     font-size: 0.5em;
   }
-  .blog-section .blog-articles {
+  .blog-articles {
     flex: 1;
-    flex-direction: column;
-  }
-  .product-info {
-    flex-direction: column;
-  }
-  .product-preview-section {
     flex-direction: column;
   }
 }
@@ -1626,12 +1616,18 @@ label[for=quantity] {
 
 /* Responsive Styles */
 @media (max-width: 700px) {
+  .product-info {
+    flex-direction: column;
+  }
   .product-images {
     flex-wrap: nowrap;
     gap: 15px;
   }
   .product-preview-section {
     flex-direction: column;
+  }
+  .product-preview {
+    max-width: 100%;
   }
   .product-info {
     flex-direction: column;

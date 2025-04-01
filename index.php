@@ -37,7 +37,7 @@ $products = $conn->fetchAll($sql);
     <main>
         <a href="https://www.blueskyhomesteading.com/shop" class="frontpage split_section mobile_column_reverse">
             <div class="text_side">
-                <h1>Nourish your skin</h1>
+                <h1>Nourish your skin.</h1>
                 <p>Experience the healing power of all-natural skincare.</p>
                 <div class="banner-buttons"><span class="btn">Shop skincare</span></div>
             </div>
@@ -48,7 +48,7 @@ $products = $conn->fetchAll($sql);
 
         <section class="frontpage header_section">
             <div class="page-indent">
-                <h2>Some of our most popular picks</h2>
+                <h2>Our top picks</h2>
                 <div class="content_section">
                     <div class="products-showcase">
                         <div class="product-preview-section">
@@ -145,7 +145,8 @@ $products = $conn->fetchAll($sql);
         </a>
 
         <section class="frontpage header_section">
-            <div class="content_section">
+            <div class="page-indent">
+                <h2>From our blog</h2>
                 <div class="blog-articles">
 
                     <?php
