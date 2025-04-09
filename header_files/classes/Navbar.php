@@ -56,9 +56,9 @@ class Navbar
                         "Blog",
                         "https://www.blueskyhomesteading.com/blog",
                         [
-                            "Gardening" => "https://www.blueskyhomesteading.com/blog/gardening",
-                            "Recipes" => "https://www.blueskyhomesteading.com/blog/recipes",
-                            "Sustainability" => "https://www.blueskyhomesteading.com/blog/sustainability"
+                            "Skincare" => "https://www.blueskyhomesteading.com/blog/skincare",
+                            "Resources" => "https://www.blueskyhomesteading.com/blog/resources",
+                            "Chickens" => "https://www.blueskyhomesteading.com/blog/chickens"
                         ],
                         true
                     );
@@ -143,27 +143,27 @@ class Navbar
                     <a href="https://www.blueskyhomesteading.com/blog">Blog</a>
                     <ul>
                         <li>
-                            <a href="https://www.blueskyhomesteading.com/blog/gardening">
+                            <a href="https://www.blueskyhomesteading.com/blog/skincare">
                                 <svg style="vertical-align: middle;" xmlns="http://www.w3.org/2000/svg" height="40px" viewBox="0 -960 960 960" width="40px" fill="black">
                                     <path d="m576-192-51-51 129-129H240v-444h72v372h342L525-573l51-51 216 216-216 216Z" />
                                 </svg>
-                                Gardening
+                                Skincare
                             </a>
                         </li>
                         <li>
-                            <a href="https://www.blueskyhomesteading.com/blog/recipes">
+                            <a href="https://www.blueskyhomesteading.com/blog/resources">
                                 <svg style="vertical-align: middle;" xmlns="http://www.w3.org/2000/svg" height="40px" viewBox="0 -960 960 960" width="40px" fill="black">
                                     <path d="m576-192-51-51 129-129H240v-444h72v372h342L525-573l51-51 216 216-216 216Z" />
                                 </svg>
-                                Recipes
+                                Resources
                             </a>
                         </li>
                         <li>
-                            <a href="https://www.blueskyhomesteading.com/blog/sustainability">
+                            <a href="https://www.blueskyhomesteading.com/blog/chickens">
                                 <svg style="vertical-align: middle;" xmlns="http://www.w3.org/2000/svg" height="40px" viewBox="0 -960 960 960" width="40px" fill="black">
                                     <path d="m576-192-51-51 129-129H240v-444h72v372h342L525-573l51-51 216 216-216 216Z" />
                                 </svg>
-                                Sustainability
+                                Chickens
                             </a>
                         </li>
                     </ul>

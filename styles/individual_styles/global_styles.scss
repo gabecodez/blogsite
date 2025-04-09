@@ -106,3 +106,30 @@ ul {
 
   /* Remove default margin */
 }
+
+::selection {
+  background-color: $highlight_color; /* background of selected text */
+  color: white; /* color of the text when selected */
+}
+
+/* Width and height */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+/* Track (background) */
+::-webkit-scrollbar-track {
+  background: $bg_color;
+}
+
+/* Handle (thumb) */
+::-webkit-scrollbar-thumb {
+  background: $header_color;
+  border-radius: 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}

@@ -144,20 +144,24 @@ label[for="quantity"] {
   overflow: hidden;
   padding: 0;
   background-color: transparent;
-  border-radius: 10px;
   text-decoration: none;
   transition: background-color 0.3s ease-in-out;
   width: 100%;
   max-width: 300px;
 
-  img {
+  .product-image-container {
+    overflow: hidden;
     width: 100%;
     height: 400px;
-    overflow: hidden;
-    object-fit: cover;
     margin-bottom: 0;
-    border-radius: 10px;
-    object-fit: cover;
+
+    img {
+      width: 100%;
+      height: 400px;
+      overflow: hidden;
+      object-fit: cover;
+      transition: transform 1.3s ease, filter 1.3s ease;
+    }
   }
 
   .text {
@@ -189,6 +193,17 @@ label[for="quantity"] {
     color: white;
     border-radius: 99999px;
     transition: background-color 0.3s ease-in-out;
+  }
+
+  &:hover {
+    .text {
+      text-decoration: underline;
+    }
+
+    img {
+      transform: scale(1.1);
+      filter: brightness(70%);
+    }
   }
 }
 
@@ -365,6 +380,24 @@ label[for="quantity"] {
 .quantity-input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
+}
+
+.shop-hero {
+  background: url("https://www.blueskyhomesteading.com/images/shop-hero.jpg")
+    center/cover no-repeat;
+  padding: 20px 0;
+  text-align: center;
+  color: #fff;
+}
+
+.shop-hero h1 {
+  font-size: 3em;
+  margin-bottom: 20px;
+}
+
+.shop-hero p {
+  font-size: 1.2em;
+  margin-bottom: 30px;
 }
 
 /* Responsive Styles */

@@ -76,7 +76,9 @@ $products = $conn->fetchAll($sql);
 
                                     echo '<a class="product-preview" href="' . SITE_URL . '/shop/' . htmlspecialchars($product['category_slug']) . '/' . htmlspecialchars($product['product_slug']) . '">';
                                     foreach ($image_data as $image) {
+                                        echo '<div class="product-image-container">';
                                         echo '<img src="' . htmlspecialchars($image['image_url']) . '" alt="' . htmlspecialchars($image['alttext']) . '">';
+                                        echo '</div>';
                                     }
                                     echo '<div class="text">';
                                     echo '<span class="name">' . $product['name'] . '</span>';

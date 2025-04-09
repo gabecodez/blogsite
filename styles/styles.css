@@ -102,6 +102,38 @@ ul {
   /* Remove default margin */
 }
 
+::-moz-selection {
+  background-color: #17076f; /* background of selected text */
+  color: white; /* color of the text when selected */
+}
+
+::selection {
+  background-color: #17076f; /* background of selected text */
+  color: white; /* color of the text when selected */
+}
+
+/* Width and height */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+/* Track (background) */
+::-webkit-scrollbar-track {
+  background: #ffffff;
+}
+
+/* Handle (thumb) */
+::-webkit-scrollbar-thumb {
+  background: #0d1f22;
+  border-radius: 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
 /* Basic Navbar Styles */
 .navbar {
   background-color: #ffffff;
@@ -839,6 +871,7 @@ nav[aria-label=breadcrumb] li:last-child a {
   margin: 0;
   background-color: #ffffff;
   width: 100%;
+  max-width: 480px;
   display: flex;
   align-items: stretch;
   flex-direction: column;
@@ -869,6 +902,7 @@ nav[aria-label=breadcrumb] li:last-child a {
 .top-article .frontpage-article-image {
   height: 100%;
   width: 100%;
+  aspect-ratio: 1/1;
   -o-object-fit: cover;
      object-fit: cover;
 }
@@ -1401,21 +1435,24 @@ label[for=quantity] {
   overflow: hidden;
   padding: 0;
   background-color: transparent;
-  border-radius: 10px;
   text-decoration: none;
   transition: background-color 0.3s ease-in-out;
   width: 100%;
   max-width: 300px;
 }
-.product-preview img {
+.product-preview .product-image-container {
+  overflow: hidden;
+  width: 100%;
+  height: 400px;
+  margin-bottom: 0;
+}
+.product-preview .product-image-container img {
   width: 100%;
   height: 400px;
   overflow: hidden;
   -o-object-fit: cover;
      object-fit: cover;
-  margin-bottom: 0;
-  border-radius: 10px;
-  object-fit: cover;
+  transition: transform 1.3s ease, filter 1.3s ease;
 }
 .product-preview .text {
   padding: 1em;
@@ -1444,6 +1481,13 @@ label[for=quantity] {
   color: white;
   border-radius: 99999px;
   transition: background-color 0.3s ease-in-out;
+}
+.product-preview:hover .text {
+  text-decoration: underline;
+}
+.product-preview:hover img {
+  transform: scale(1.1);
+  filter: brightness(70%);
 }
 
 .product-info {
@@ -1612,6 +1656,23 @@ label[for=quantity] {
 .quantity-input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
+}
+
+.shop-hero {
+  background: url("https://www.blueskyhomesteading.com/images/shop-hero.jpg") center/cover no-repeat;
+  padding: 20px 0;
+  text-align: center;
+  color: #fff;
+}
+
+.shop-hero h1 {
+  font-size: 3em;
+  margin-bottom: 20px;
+}
+
+.shop-hero p {
+  font-size: 1.2em;
+  margin-bottom: 30px;
 }
 
 /* Responsive Styles */
@@ -1915,7 +1976,6 @@ footer {
 .image-container img {
   width: 100%;
   height: auto;
-  border-radius: 5px;
 }
 
 .caption {
