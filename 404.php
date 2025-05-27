@@ -9,32 +9,35 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/../../header_files/blueskyhomesteadin
 <html lang="en">
 
 <head>
-    <?php require_once HEAD_PATH; ?>
-    <title>404 Not Found - BlueSky Homesteading</title>
-    <meta name="description" content="Oops! The page you're looking for cannot be found. Discover our resources and articles on sustainable living and homesteading.">
-    <meta name="keywords" content="404, not found, error, page missing, homesteading, sustainable living">
-    <meta property="og:title" content="404 Not Found - BlueSky Homesteading">
-    <meta property="og:description" content="Oops! The page you're looking for cannot be found. Discover our resources and articles on sustainable living and homesteading.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="<?= SITE_URL; ?>/404">
-    <meta name="twitter:card" content="summary_large_image">
-    <link rel="canonical" href="<?= SITE_URL; ?>/404">
-    <script type="application/ld+json">
-        {
-            "@context": "https://schema.org",
-            "@type": "WebPage",
-            "name": "404 Not Found - BlueSky Homesteading",
-            "url": "https://www.blueskyhomesteading.com/404",
-            "description": "Oops! The page you're looking for cannot be found."
-        }
-    </script>
+    <?php
+    require_once HEAD_PATH;
+    $pageMeta = new PageMeta(
+        "404 Not Found - " . SITE_NAME,
+        "Oops! The page you're looking for cannot be found. Discover our resources and articles on sustainable living and homesteading.",
+        "https://www.blueskyhomesteading.com/images/social_media_previews/basic_white_bg_w_logo.jpeg",
+        SITE_URL . "/404",
+        SITE_NAME
+    );
+    $pageMeta->render();
+    ?>
 </head>
 
 <body>
     <?php
     require_once CONSENT_BANNER_PATH;
-    require_once NAVBAR_PATH;
     ?>
+    <nav class="navbar homepage" id="navbar" aria-label="Main Navigation">
+        <div class="navbar-indent">
+            <div class="navbar-brand">
+                <a href="https://www.blueskyhomesteading.com" aria-label="BlueSky Homesteading Home">
+                    <img src="https://www.blueskyhomesteading.com/images/logos/blueskylogoblack.svg" alt="BlueSky Homesteading Logo" class="logo">
+                </a>
+                <span class="tagline">Explore Nature’s gifts for health.</span>
+            </div>
+            </ul>
+        </div>
+    </nav>
+
     <header class="error-page-header">
         <h1>404</h1>
         <h2>Oops! Page Not Found</h2>

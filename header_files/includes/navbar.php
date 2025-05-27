@@ -7,5 +7,3 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/../../header_files/blueskyhomesteadin
 
 $navbar = new Navbar($shop_conn, $session_id);
 echo $navbar->render();
-
-?>

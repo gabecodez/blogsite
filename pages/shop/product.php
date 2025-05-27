@@ -13,7 +13,17 @@ function show404()
 
 function fetch_product($conn, $category_slug, $product_slug)
 {
-    $product_data = $conn->fetchAll("SELECT p.id, p.name, p.description, p.meta_description, p.tags, p.price, p.terms, p.preview_image_ids, c.name AS category FROM products AS p JOIN shop_categories AS c ON c.slug = ? AND p.slug = ? AND p.category = c.name WHERE p.public = 1 LIMIT 1", [$category_slug, $product_slug]);
+    $product_data = $conn->fetchAll(
+        "SELECT p.id, p.name, p.description, p.meta_description, p.tags, p.price, p.terms, p.preview_image_ids, c.name AS category
+         FROM products AS p
+         JOIN shop_categories AS c ON p.category = c.name
+         WHERE c.slug = ? AND p.slug = ? AND p.public = 1
+         LIMIT 1",
+        [$category_slug, $product_slug]
+    );
+
+    if (empty($product_data[0])) show404();
+
     return $product_data[0]; // set the product to the first product
 }
 
