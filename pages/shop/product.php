@@ -89,7 +89,7 @@ $conn->close();
         $product['name'],
         $product['meta_description'],
         !empty($image_data) ? $image_data[0]->url : 'https://www.blueskyhomesteading.com/images/social_media_previews/basic_white_bg_w_logo.jpeg',
-        SITE_URL . "/shop/product/{$category_slug}/{$product_slug}",
+        SITE_URL . "/shop/{$category_slug}/{$product_slug}",
         SITE_NAME
     );
     $pageMeta->render();
