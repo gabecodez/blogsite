@@ -85,10 +85,13 @@ foreach ($cart_items as $item) {
                     <?php foreach ($cart_items as $item): ?>
                         <div class="cart-item" data-item-id="<?php echo $item['id']; ?>">
                             <?php
-                            $item_product = $conn->fetchAll("SELECT slug FROM shop_categories WHERE public = 1 AND name = ?", [$item['category']]);
+                            $item_product = $conn->fetchAll("SELECT slug FROM shop_categories WHERE public = 1 AND name = ? LIMIT 1", [$item['category']]);
+                            if (!empty($item_product)) {
+                                echo '<a href="https://www.blueskyhomesteading.com/shop/' . $item_product[0]['slug'] . '/' . $item['slug'] . '">' . htmlspecialchars($item['name']) . '</a>';
+                            } else {
+                                echo '<a href=""></a>';
+                            }
                             ?>
-                            <a href="https://www.blueskyhomesteading.com/shop/<?php echo $item_product['slug'] . "/";
-                                                                                echo $item['slug']; ?>"><?php echo htmlspecialchars($item['name']); ?></a>
                             <input type="number" class="item-quantity" data-item-id="<?php echo $item['id']; ?>" value="<?php echo $item['quantity']; ?>" min="1">
                             <span id="item-price-<?php echo $item['id']; ?>">$<?php echo number_format($item['price'] * $item['quantity'], 2); ?></span>
                             <button onclick="removeItem(<?php echo $item['id']; ?>)"><svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#d81a1a" style="vertical-align: middle;">

@@ -143,14 +143,15 @@ $conn->close();
                     // Render tile-based options
                     foreach ($options as $option) {
                         echo "<div class='atc-option-section'>";
-                        echo "<label class='atc-option-label'>{$option['name']}:</label>";
+                        echo "<label class='atc-option-label' data-name='{$option['name']}'>{$option['name']}:</label>";
                         echo "<div class='atc-tile-container' data-option-id='{$option['id']}'>";
 
                         // Render each selection choice as a tile
                         if (!empty($choices[$option['id']])) {
-                            foreach ($choices[$option['id']] as $choice) {
+                            foreach ($choices[$option['id']] as $index => $choice) {
+                                $checked = ($index === 0) ? 'checked' : ''; // Automatically check the first choice
                                 echo "<label class='atc-tile-option'>";
-                                echo "<input type='radio' name='{$option['name']}' value='{$choice['id']}'>";
+                                echo "<input type='radio' name='{$option['name']}' value='{$choice['id']}' $checked>";
                                 echo htmlspecialchars($choice['name']);
                                 echo "</label>";
                             }
@@ -237,6 +238,13 @@ $conn->close();
 
         // Enhanced Quantity Selector Script
         document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.atc-tile-container').forEach(container => {
+                const checked = container.querySelector('input:checked');
+                if (checked) {
+                    checked.closest('.atc-tile-option').classList.add('selected');
+                }
+            });
+
             const quantityInput = document.querySelector('.quantity-input');
             const minusBtn = document.querySelector('.minus');
             const plusBtn = document.querySelector('.plus');
@@ -268,14 +276,22 @@ $conn->close();
 
         function addToCart(productId) {
             const quantity = document.querySelector('.quantity-input').value || 1;
-            const options = document.querySelectorAll('.atc-tile-container input:checked');
+            const optionContainers = document.querySelectorAll('.atc-tile-container');
             const selectedOptions = {};
 
-            options.forEach(option => {
-                const container = option.closest('.atc-tile-container');
-                const optionName = container.previousElementSibling.textContent.trim();
-                selectedOptions[optionName] = option.value;
-            });
+            // Validation: ensure each option group has a selected input
+            for (const container of optionContainers) {
+                const checked = container.querySelector('input:checked');
+                const optionLabel = container.previousElementSibling;
+                const optionName = optionLabel.dataset.name;
+
+                if (!checked) {
+                    alert(`Please select a choice for "${optionName}".`);
+                    return; // Stop if any required option is not selected
+                }
+
+                selectedOptions[optionName] = checked.value;
+            }
 
             fetch('https://www.blueskyhomesteading.com/shop/add-to-cart', {
                     method: 'POST',
