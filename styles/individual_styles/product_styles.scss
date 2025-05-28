@@ -154,6 +154,7 @@ label[for="quantity"] {
     width: 100%;
     height: 400px;
     margin-bottom: 0;
+    border-radius: 6px;
 
     img {
       width: 100%;
@@ -174,11 +175,23 @@ label[for="quantity"] {
     width: 100%;
     display: block;
     font-family: $display_font;
-    font-size: 1.2em;
+    font-size: 1.4em;
     font-weight: 600;
     color: $header_color;
     margin-bottom: 0.8em;
     margin-top: 0;
+  }
+
+  .price {
+    width: 100%;
+    display: block;
+    font-family: $display_font;
+    font-size: 1em;
+    font-weight: 600;
+    color: $highlight_color;
+    margin-bottom: 0.8em;
+    margin-top: 0;
+    text-decoration: none;
   }
 
   .buy-btn {
@@ -198,6 +211,10 @@ label[for="quantity"] {
   &:hover {
     .text {
       text-decoration: underline;
+
+      .price {
+        text-decoration: none;
+      }
     }
 
     img {
@@ -411,12 +428,16 @@ label[for="quantity"] {
     gap: 15px;
   }
 
-  .product-preview-section {
-    flex-direction: column;
-  }
-
   .product-preview {
-    max-width: 100%;
+    max-width: 200px;
+
+    .product-image-container {
+      height: 300px;
+    }
+
+    .text {
+      font-size: 1em;
+    }
   }
 
   .product-info {

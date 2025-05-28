@@ -54,11 +54,11 @@ $products = $conn->fetchAll($sql);
                         <div class="product-preview-section">
                             <?php
                             // Fetch latest products (e.g., the last 3 entries)
-                            $products_sql = "SELECT products.slug AS product_slug, products.name, products.meta_description, products.preview_image_ids, shop_categories.slug AS category_slug
-                    FROM products 
-                    JOIN shop_categories ON products.category = shop_categories.name
-                    WHERE products.public = 1 
-                    LIMIT 3";
+                            $products_sql = "SELECT products.slug AS product_slug, products.name, products.price, products.meta_description, products.preview_image_ids, shop_categories.slug AS category_slug
+                                FROM products 
+                                JOIN shop_categories ON products.category = shop_categories.name
+                                WHERE products.public = 1 
+                                LIMIT 3";
                             $products = $conn->fetchAll($products_sql);
 
                             if (!empty($products)) {
@@ -82,6 +82,7 @@ $products = $conn->fetchAll($sql);
                                     }
                                     echo '<div class="text">';
                                     echo '<span class="name">' . $product['name'] . '</span>';
+                                    echo '<span class="price">' . '$' . number_format($product['price'], 2) . '</span>';
                                     echo '</div>';
                                     echo '</a>';
                                 }
@@ -181,18 +182,6 @@ $products = $conn->fetchAll($sql);
                     }
                     ?>
 
-                </div>
-            </div>
-        </section>
-
-        <section class="frontpage as_seen_at">
-            <div class="page-indent">
-                <h2>As featured at</h2>
-
-                <div class="company_logos">
-                    <a href="https://www.facebook.com/PebblesandLaceGifts/" class="company_logo">
-                        <img src="https://www.blueskyhomesteading.com/images/spotlight_logos/pebbles_and_lace.jpg" alt="Pebbles and Lace logo" />
-                    </a>
                 </div>
             </div>
         </section>

@@ -1,40 +1,16 @@
 <?php
-/**
- * HTML Structure for Footer and JavaScript Includes on BlueSky Homesteading
- *
- * @package    BlueSkyHomesteading
- * @author     Gabriel Sullivan
- * @version    1.0
- * @date       Last updated: September 19, 2024
- * @created    July 2024
- *
- * This HTML snippet provides the footer for the website and includes
- * necessary JavaScript files for functionality, such as the consent banner
- * and navigation bar.
- *
- * Footer:
- * - Contains a paragraph (`<p>`) that displays the copyright notice,
- *   dynamically generating the current year using PHP.
- * - The copyright notice states that all rights are reserved by LangCentral.
- *
- * JavaScript Includes:
- * - Two script tags are included to load external JavaScript files asynchronously:
- *   - `consentbannercode.js`: Handles the logic for displaying and managing
- *     the consent banner on the website.
- *   - `navbarcode.js`: Manages the behavior and appearance of the website's
- *     navigation bar, ensuring a smooth user experience.
- *
- * Performance:
- * - The `async` attribute on the script tags allows the scripts to load
- *   without blocking the rendering of the page, improving overall performance.
- */
-
+// Filename: footer.php
+// Purpose: handles the rendering of the footer for the UI
 ?>
 
 <footer>
     <div class="footer-container">
         <!-- Use a <nav> element for better SEO as it's a set of navigation links -->
         <nav aria-label="Footer navigation">
+            <a href="https://www.blueskyhomesteading.com" class="footer-footer-logo">
+                <img src="https://www.blueskyhomesteading.com/images/logos/blueskylogoblack.svg" alt="BlueSky Homesteading Logo" class="logo">
+            </a>
+
             <ul class="footer-links">
                 <li><a href="https://www.blueskyhomesteading.com/about" title="About Us">About Us</a></li>
                 <li><a href="https://www.blueskyhomesteading.com/contact" title="Contact Us">Contact</a></li>

@@ -197,7 +197,7 @@
       width: 14px;
 
       /* Length of the arrow shaft */
-      height: 1.5px;
+      height: 2px;
 
       /* Thickness of the arrow shaft */
       background-color: rgba(255, 255, 255, 0);
@@ -606,6 +606,7 @@
       flex: 1;
       display: block;
       padding: 1em;
+      max-width: 200px;
     }
   }
 
