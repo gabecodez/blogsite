@@ -46,9 +46,9 @@ if (!empty($category_data) && isset($category_data[0]['name'])) {
     ?>
     <main class="page-indent">
         <header class="article__list__header">
-            <h1><?php echo htmlspecialchars($category); ?></h1>
-            <h3><?php echo htmlspecialchars($category_row['subheading']); ?></h3>
-            <p><?php echo htmlspecialchars($category_row['description']); ?></p>
+            <h1><?= htmlspecialchars($category) ?></h1>
+            <h3><?= htmlspecialchars($category_row['subheading']) ?></h3>
+            <p><?= htmlspecialchars($category_row['description']) ?></p>
         </header>
         <div class="blog-articles">
             <?php
@@ -60,24 +60,8 @@ if (!empty($category_data) && isset($category_data[0]['name'])) {
                 WHERE articles.category = ? AND articles.public = 1
                 ORDER BY articles.published_date DESC 
                 LIMIT 10";
-            $articles = $conn->fetchAll($sql, [$category]);
-
-            if (!empty($articles)) {
-                foreach ($articles as $article) {
-                    echo '<a class="top-article" href="' . SITE_URL . '/blog/' . htmlspecialchars($article['category_slug']) . '/' . htmlspecialchars($article['article_slug']) . '">';
-                    echo '<div class="frontpage-article-image-parent">';
-                    if (!empty($article['image_url'])) {
-                        echo '<img src="' . htmlspecialchars($article['image_url']) . '" alt="' . htmlspecialchars($article['alttext']) . '" class="frontpage-article-image" loading="lazy">';
-                    }
-                    echo '</div>';
-                    echo '<div class="frontpage-article-text">';
-                    echo '<h3>' . htmlspecialchars($article['title']) . '</h3>';
-                    echo '</div>';
-                    echo '</a>';
-                }
-            } else {
-                echo "No articles found.";
-            }
+            $blogPostList = new BlogPostList($conn);
+            $blogPostList->render($sql, [$category]);
 
             // Close the database connection
             $conn->close();

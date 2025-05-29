@@ -33,31 +33,15 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/../../header_files/blueskyhomesteadin
                 <?php
                 // Query to get the latest articles along with their category slugs and image data
                 $sql = "SELECT articles.slug AS article_slug, articles.title, articles.meta_description, articles.image_id, categories.slug AS category_slug, 
-                images.image_url, images.alttext, images.caption, images.credit, images.credit_url 
-                FROM articles 
-                JOIN categories ON articles.category = categories.name 
-                LEFT JOIN images ON articles.image_id = images.id 
-                WHERE articles.public = 1
-                ORDER BY articles.published_date DESC 
-                LIMIT 10";
-                $articles = $conn->fetchAll($sql);
-
-                if (!empty($articles)) {
-                    foreach ($articles as $article) {
-                        echo '<a class="top-article" href="' . SITE_URL . '/blog/' . htmlspecialchars($article['category_slug']) . '/' . htmlspecialchars($article['article_slug']) . '">';
-                        echo '<div class="frontpage-article-image-parent">';
-                        if (!empty($article['image_url'])) {
-                            echo '<img src="' . htmlspecialchars($article['image_url']) . '" alt="' . htmlspecialchars($article['alttext']) . '" class="frontpage-article-image" loading="lazy">';
-                        }
-                        echo '</div>';
-                        echo '<div class="frontpage-article-text">';
-                        echo '<h3>' . htmlspecialchars($article['title']) . '</h3>';
-                        echo '</div>';
-                        echo '</a>';
-                    }
-                } else {
-                    echo "No articles found.";
-                }
+                    images.image_url, images.alttext, images.caption, images.credit, images.credit_url 
+                    FROM articles 
+                    JOIN categories ON articles.category = categories.name 
+                    LEFT JOIN images ON articles.image_id = images.id 
+                    WHERE articles.public = 1
+                    ORDER BY articles.published_date DESC 
+                    LIMIT 10";
+                $blogPostList = new BlogPostList($conn);
+                $blogPostList->render($sql);
                 ?>
             </div>
             </main>

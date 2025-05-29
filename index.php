@@ -3,14 +3,6 @@
 // Author: Gabriel Sullivan
 // Purpose: Homepage for BlueSky Homesteading
 require_once $_SERVER['DOCUMENT_ROOT'] . '/../../header_files/blueskyhomesteading/config.php';
-
-// Query for all public products
-$sql = "SELECT p.id, p.name, p.price, p.preview_image_ids, p.slug AS product_slug, c.slug AS category_slug 
-        FROM products AS p 
-        JOIN shop_categories AS c ON p.category = c.name 
-        WHERE p.public = 1 
-        ORDER BY p.id DESC";
-$products = $conn->fetchAll($sql);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -53,40 +45,8 @@ $products = $conn->fetchAll($sql);
                     <div class="products-showcase">
                         <div class="product-preview-section">
                             <?php
-                            // Fetch latest products (e.g., the last 3 entries)
-                            $products_sql = "SELECT products.slug AS product_slug, products.name, products.price, products.meta_description, products.preview_image_ids, shop_categories.slug AS category_slug
-                                FROM products 
-                                JOIN shop_categories ON products.category = shop_categories.name
-                                WHERE products.public = 1 
-                                LIMIT 3";
-                            $products = $conn->fetchAll($products_sql);
-
-                            if (!empty($products)) {
-                                foreach ($products as $product) {
-                                    // Fetch image details if there are any image IDs
-                                    $image_data = [];
-                                    if (!empty($product['preview_image_ids'])) {
-                                        $image_ids = explode(',', $product['preview_image_ids']);
-
-                                        $image_id = trim($image_ids[0]);
-                                        // Fetch first image
-                                        $images_sql = "SELECT image_url, alttext, public FROM images WHERE id = ? AND public = 1 LIMIT 1";
-                                        $image_data = $conn->fetchAll($images_sql, [$image_id]);
-                                    }
-
-                                    echo '<a class="product-preview" href="' . SITE_URL . '/shop/' . htmlspecialchars($product['category_slug']) . '/' . htmlspecialchars($product['product_slug']) . '">';
-                                    foreach ($image_data as $image) {
-                                        echo '<div class="product-image-container">';
-                                        echo '<img src="' . htmlspecialchars($image['image_url']) . '" alt="' . htmlspecialchars($image['alttext']) . '">';
-                                        echo '</div>';
-                                    }
-                                    echo '<div class="text">';
-                                    echo '<span class="name">' . $product['name'] . '</span>';
-                                    echo '<span class="price">' . '$' . number_format($product['price'], 2) . '</span>';
-                                    echo '</div>';
-                                    echo '</a>';
-                                }
-                            }
+                            $productList = new ProductList($conn);
+                            $productList->render();
                             ?>
                         </div>
                     </div>
@@ -155,31 +115,15 @@ $products = $conn->fetchAll($sql);
                     <?php
                     // Query to get the latest articles along with their category slugs and image data
                     $sql = "SELECT articles.slug AS article_slug, articles.title, articles.meta_description, articles.image_id, categories.slug AS category_slug, 
-                images.image_url, images.alttext, images.caption, images.credit, images.credit_url 
-                FROM articles 
-                JOIN categories ON articles.category = categories.name 
-                LEFT JOIN images ON articles.image_id = images.id 
-                WHERE articles.public = 1
-                ORDER BY articles.published_date DESC 
-                LIMIT 10";
-                    $articles = $conn->fetchAll($sql);
-
-                    if (!empty($articles)) {
-                        foreach ($articles as $article) {
-                            echo '<a class="top-article" href="' . SITE_URL . '/blog/' . htmlspecialchars($article['category_slug']) . '/' . htmlspecialchars($article['article_slug']) . '">';
-                            echo '<div class="frontpage-article-image-parent">';
-                            if (!empty($article['image_url'])) {
-                                echo '<img src="' . htmlspecialchars($article['image_url']) . '" alt="' . htmlspecialchars($article['alttext']) . '" class="frontpage-article-image" loading="lazy">';
-                            }
-                            echo '</div>';
-                            echo '<div class="frontpage-article-text">';
-                            echo '<h3>' . htmlspecialchars($article['title']) . '</h3>';
-                            echo '</div>';
-                            echo '</a>';
-                        }
-                    } else {
-                        echo "No articles found.";
-                    }
+                        images.image_url, images.alttext, images.caption, images.credit, images.credit_url 
+                        FROM articles 
+                        JOIN categories ON articles.category = categories.name 
+                        LEFT JOIN images ON articles.image_id = images.id 
+                        WHERE articles.public = 1
+                        ORDER BY articles.published_date DESC 
+                        LIMIT 10";
+                    $blogPostList = new BlogPostList($conn);
+                    $blogPostList->render($sql);
                     ?>
 
                 </div>

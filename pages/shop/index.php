@@ -40,32 +40,8 @@ $products = $conn->fetchAll($sql);
                 <div class="products-showcase">
                     <div class="product-preview-section">
                         <?php
-                        if (!empty($products)) {
-                            foreach ($products as $product) {
-                                // Fetch image details if there are any image IDs
-                                $image_data = [];
-                                if (!empty($product['preview_image_ids'])) {
-                                    $image_ids = explode(',', $product['preview_image_ids']);
-
-                                    $image_id = trim($image_ids[0]);
-                                    // Fetch first image
-                                    $images_sql = "SELECT image_url, alttext, public FROM images WHERE id = ? AND public = 1 LIMIT 1";
-                                    $image_data = $conn->fetchAll($images_sql, [$image_id]);
-                                }
-
-                                echo '<a class="product-preview" href="' . SITE_URL . '/shop/' . htmlspecialchars($product['category_slug']) . '/' . htmlspecialchars($product['product_slug']) . '">';
-                                foreach ($image_data as $image) {
-                                    echo '<div class="product-image-container">';
-                                    echo '<img src="' . htmlspecialchars($image['image_url']) . '" alt="' . htmlspecialchars($image['alttext']) . '">';
-                                    echo '</div>';
-                                }
-                                echo '<div class="text">';
-                                echo '<span class="name">' . $product['name'] . '</span>';
-                                echo '<span class="price">' . '$' . number_format($product['price'], 2) . '</span>';
-                                echo '</div>';
-                                echo '</a>';
-                            }
-                        }
+                        $productList = new ProductList($conn);
+                        $productList->render();
                         ?>
                     </div>
                 </div>
