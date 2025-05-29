@@ -8,17 +8,25 @@ class Article
     public $meta_description;
     public $meta_keywords;
     public $category;
-    public $image_id;
+    public $image_id; // contains image IDs to then query with
     public $content;
     public $slug;
 
-    private $conn;
+    private Database $conn; // the database connection
 
+    // Constructor
+    // Input: $conn - the database connection
+    // Output: none
+    // Raises: none
     public function __construct($conn)
     {
         $this->conn = $conn;
     }
 
+    // Function name: fetch_article
+    // Purpose: fetches the article from the database
+    // Input: string $category_slug - the category part of the URL
+    // Output: string $article_slug - the article part of the URL
     public function fetch_article(string $category_slug, string $article_slug): bool
     {
         try {

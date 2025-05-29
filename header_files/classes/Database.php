@@ -1,4 +1,7 @@
 <?php
+// Filename: Database.php
+// Purpose: handles the Database and DatabaseException classes
+
 class DatabaseException extends Exception {}
 
 class Database
@@ -76,11 +79,12 @@ class Database
     }
 
     // Method for deleting data from the database
-    public function delete($table, $where, $params) {
+    public function delete($table, $where, $params)
+    {
         $sql = "DELETE FROM $table WHERE $where"; // Ensure $where uses placeholders
         $this->query($sql, $params);
     }
-    
+
 
 
 
