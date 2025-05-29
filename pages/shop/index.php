@@ -40,14 +40,6 @@ $products = $conn->fetchAll($sql);
                 <div class="products-showcase">
                     <div class="product-preview-section">
                         <?php
-                        // Fetch latest products (e.g., the last 3 entries)
-                        $products_sql = "SELECT products.slug AS product_slug, products.name, products.meta_description, products.preview_image_ids, shop_categories.slug AS category_slug
-                    FROM products 
-                    JOIN shop_categories ON products.category = shop_categories.name
-                    WHERE products.public = 1 
-                    LIMIT 3";
-                        $products = $conn->fetchAll($products_sql);
-
                         if (!empty($products)) {
                             foreach ($products as $product) {
                                 // Fetch image details if there are any image IDs
@@ -69,6 +61,7 @@ $products = $conn->fetchAll($sql);
                                 }
                                 echo '<div class="text">';
                                 echo '<span class="name">' . $product['name'] . '</span>';
+                                echo '<span class="price">' . '$' . number_format($product['price'], 2) . '</span>';
                                 echo '</div>';
                                 echo '</a>';
                             }

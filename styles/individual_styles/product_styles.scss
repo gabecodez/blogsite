@@ -431,6 +431,10 @@ label[for="quantity"] {
   .product-preview {
     max-width: 200px;
 
+    .name {
+      font-size: 1.1em;
+    }
+
     .product-image-container {
       height: 260px;
 
