@@ -53,9 +53,10 @@ if (!empty($category_data) && isset($category_data[0]['name'])) {
         <div class="blog-articles">
             <?php
             // Query to get the latest articles along with their category slugs and image data
-            $sql = "SELECT articles.slug AS article_slug, articles.title, articles.meta_description, articles.image_id, 
+            $sql = "SELECT articles.slug AS article_slug, articles.title, articles.meta_description, articles.image_id, categories.slug AS category_slug,
                 images.image_url, images.alttext, images.caption, images.credit, images.credit_url 
                 FROM articles
+                JOIN categories ON articles.category = categories.name 
                 LEFT JOIN images ON articles.image_id = images.id 
                 WHERE articles.category = ? AND articles.public = 1
                 ORDER BY articles.published_date DESC 
