@@ -140,7 +140,7 @@ $products = $conn->fetchAll($sql);
             <div class="text_side">
                 <h2>From our family to yours.</h2>
                 <p>All our hand-crafted products are handcrafted with that small business love you can’t find anywhere else.</p>
-                <div class="banner-buttons"><span class="btn">About</span></div>
+                <div class="banner-buttons"><span class="btn secondary">Read more</span></div>
             </div>
             <div class="image_side">
                 <img src="https://www.blueskyhomesteading.com/images/whipped_tallow.jpg" alt="Shop Preview" loading="lazy">

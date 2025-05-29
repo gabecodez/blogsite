@@ -713,6 +713,17 @@ nav[aria-label=breadcrumb] li:last-child a {
 .split_section:hover .text_side .banner-buttons .btn::before {
   border-color: rgb(255, 255, 255);
 }
+.split_section:hover .text_side .banner-buttons .btn.secondary {
+  background-color: transparent;
+  color: black;
+  padding-right: 50px;
+}
+.split_section:hover .text_side .banner-buttons .btn.secondary::after {
+  background-color: rgb(0, 0, 0);
+}
+.split_section:hover .text_side .banner-buttons .btn.secondary::before {
+  border-color: rgb(0, 0, 0);
+}
 .split_section:hover .image_side img {
   transform: scale(1.1);
   filter: brightness(70%);
@@ -800,16 +811,13 @@ nav[aria-label=breadcrumb] li:last-child a {
 .banner-buttons .btn.secondary {
   color: rgba(0, 0, 0, 0.632);
   background-color: transparent;
+  padding: 40px;
 }
-.banner-buttons .btn.secondary:hover {
-  background-color: transparent;
-  color: black;
+.banner-buttons .btn.secondary::after {
+  background-color: rgba(0, 0, 0, 0.632);
 }
-.banner-buttons .btn.secondary:hover::after {
-  background-color: rgb(0, 0, 0);
-}
-.banner-buttons .btn.secondary:hover::before {
-  border-color: rgb(0, 0, 0);
+.banner-buttons .btn.secondary::before {
+  border-color: rgba(0, 0, 0, 0.632);
 }
 .banner-buttons .btn::after {
   content: "";
@@ -1163,6 +1171,17 @@ nav[aria-label=breadcrumb] li:last-child a {
     padding: 1em;
     max-width: 200px;
   }
+  .banner-buttons .btn.secondary {
+    color: black;
+    padding-right: 40px;
+    max-width: 180px;
+  }
+  .banner-buttons .btn.secondary::after {
+    background-color: rgb(0, 0, 0);
+  }
+  .banner-buttons .btn.secondary::before {
+    border-color: rgb(0, 0, 0);
+  }
   .banner-action {
     width: 100%;
   }
@@ -1445,13 +1464,13 @@ label[for=quantity] {
 .product-preview .product-image-container {
   overflow: hidden;
   width: 100%;
-  height: 400px;
+  height: 300px;
   margin-bottom: 0;
   border-radius: 6px;
 }
 .product-preview .product-image-container img {
   width: 100%;
-  height: 400px;
+  height: 300px;
   overflow: hidden;
   -o-object-fit: cover;
      object-fit: cover;
@@ -1705,7 +1724,10 @@ label[for=quantity] {
     max-width: 200px;
   }
   .product-preview .product-image-container {
-    height: 300px;
+    height: 260px;
+  }
+  .product-preview .product-image-container img {
+    height: 260px;
   }
   .product-preview .text {
     font-size: 1em;
@@ -1906,13 +1928,13 @@ footer {
 .footer-footer-logo {
   display: block;
   width: 100%;
-  max-width: 300px;
+  max-width: 250px;
+  margin: 1em;
   margin-left: auto;
   margin-right: auto;
 }
 .footer-footer-logo img {
   width: 100%;
-  margin: 1em;
 }
 
 .footer-links {
