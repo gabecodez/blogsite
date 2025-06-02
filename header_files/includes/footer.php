@@ -5,7 +5,6 @@
 
 <footer>
     <div class="footer-container">
-        <!-- Use a <nav> element for better SEO as it's a set of navigation links -->
         <nav aria-label="Footer navigation">
             <a href="https://www.blueskyhomesteading.com" class="footer-footer-logo">
                 <img src="https://www.blueskyhomesteading.com/images/logos/blueskylogoblack.svg" alt="BlueSky Homesteading Logo" class="logo">
