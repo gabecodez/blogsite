@@ -2,9 +2,6 @@
 // config.php
 declare(strict_types=1);
 
-header("Content-Security-Policy: default-src 'self'; script-src 'self' https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' https://fonts.googleapis.com https://fonts.gstatic.com;");
-
-
 define('BASE_PATH', $_SERVER['DOCUMENT_ROOT']); // Adjust based on your structure
 define('INCLUDES_PATH', BASE_PATH . '/../../header_files/blueskyhomesteading/includes/');
 define('CLASSES_PATH', BASE_PATH . '/../../header_files/blueskyhomesteading/classes/');
