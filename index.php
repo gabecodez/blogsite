@@ -19,6 +19,8 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/../../header_files/blueskyhomesteadin
     );
     $pageMeta->render();
     ?>
+
+    <meta name="google-site-verification" content="lBXG7wwzAleZH_lB6c1zVMg8T9pHAuGWQe6n-LNRT6Q" />
 </head>
 
 <body>
