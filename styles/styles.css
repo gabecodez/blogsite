@@ -1313,6 +1313,12 @@ nav[aria-label=breadcrumb] li:last-child a {
   text-decoration: underline;
 }
 
+.aside {
+  border-radius: 8px;
+  padding: 1em;
+  background-color: #ed8080;
+}
+
 /* Quantity and Buttons */
 label[for=quantity] {
   display: block;

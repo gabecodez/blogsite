@@ -39,4 +39,10 @@
 }
 .image-credit a:hover {
   text-decoration: underline;
+}
+
+.aside {
+  border-radius: 8px;
+  padding: 1em;
+  background-color: #ed8080;
 }/*# sourceMappingURL=article_styles.css.map */
