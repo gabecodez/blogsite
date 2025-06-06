@@ -4,6 +4,7 @@
 // Purpose: Handles article retrieval
 class Article
 {
+    public $id;
     public $title;
     public $meta_description;
     public $meta_keywords;
@@ -31,7 +32,7 @@ class Article
     {
         try {
             $article_sql = "
-                 SELECT a.title, a.content, a.meta_description, a.meta_keywords, a.image_id, c.name AS category 
+                 SELECT a.id, a.title, a.content, a.meta_description, a.meta_keywords, a.image_id, c.name AS category 
                  FROM articles AS a 
                  JOIN categories AS c ON c.slug = ? AND a.slug = ? AND a.category = c.name 
                  WHERE a.public = 1
@@ -40,6 +41,7 @@ class Article
 
             if (sizeof($article) > 0) {
                 $article = $article[0];
+                $this->id = $article["id"];
                 $this->title = $article['title'];
                 $this->category = $article['category'];
                 $this->meta_description = $article['meta_description'];
