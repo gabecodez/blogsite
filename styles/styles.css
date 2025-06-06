@@ -474,6 +474,9 @@ nav[aria-label=breadcrumb] li:last-child a {
     margin-left: auto;
     margin-right: auto;
   }
+  .navbar-brand .logo {
+    margin-right: 0;
+  }
   .mobile-nav-panel {
     display: block;
     pointer-events: none;
