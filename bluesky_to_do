@@ -1,0 +1,23 @@
+need to do on bluesky:
+
+- add slug and meta description sections to admin dashboard
+- setup IP address checker for admin stuff
+- finish save product
+- make admin js be echoed from a php file that checks that the user has access or just include it or something
+
+- create unique user perms for langcentral and bluesky
+
+- redesign who we are page
+
+- add cart icon
+
+- make success page and email send
+
+- add descriptions and images so its clearer what each item is
+- add to cart page that shipping and fees will be calculated on the next page
+
+- improve documentation
+
+want to do on bluesky:
+
+- create newsletter

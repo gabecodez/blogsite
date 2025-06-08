@@ -78,6 +78,7 @@ class Database
         $this->query($sql, array_values($data));
     }
 
+    // should prob add try-catches
     // Method for deleting data from the database
     public function delete($table, $where, $params)
     {

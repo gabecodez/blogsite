@@ -4,13 +4,12 @@
 // Purpose: Admin save product function for BlueSky Homesteading
 declare(strict_types=1);
 
-require_once $_SERVER['DOCUMENT_ROOT'] . '/../../includes/blueskyhomesteading/admin_databaseconnection.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/../../header_files/blueskyhomesteading/config.php';
+session_start();
 
-require_once $_SERVER['DOCUMENT_ROOT'] . '/../../includes/blueskyhomesteading/session_starter.php';
-
-// Check that the user is authenticated.
+// ensure the user is an admin
 if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
-    header("Location: https://www.blueskyhomesteading.com/admin/login");
+    http_response_code(403);
     exit();
 }
 
@@ -22,7 +21,8 @@ if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_tok
 }
 
 // Helper function for sanitizing input.
-function sanitize(string $data): string {
+function sanitize(string $data): string
+{
     return htmlspecialchars(trim($data), ENT_QUOTES, 'UTF-8');
 }
 
@@ -48,33 +48,20 @@ $allowedMimeTypes = ['image/jpeg', 'image/png', 'image/gif'];
 if (!empty($_POST['remove_image_ids'])) {
     foreach ($_POST['remove_image_ids'] as $removeId) {
         // Fetch image record to get file path.
-        $stmt = $conn->prepare("SELECT image_url FROM images WHERE id = ?");
-        if (!$stmt) {
-            error_log("Prepare failed (removal select): " . $conn->error);
-            continue;
-        }
-        $stmt->bind_param("i", $removeId);
-        $stmt->execute();
-        $result = $stmt->get_result();
-        if ($row = $result->fetch_assoc()) {
-            // Convert the URL to a real file system path.
-            $filePath = realpath(__DIR__ . '/../../' . ltrim($row['image_url'], '/'));
-            if ($filePath && file_exists($filePath)) {
-                if (!unlink($filePath)) {
-                    error_log("Failed to delete file: " . $filePath);
-                }
+        $images = $conn->fetchAll("SELECT image_url FROM images WHERE id = ?", [$removeId]);
+
+        $image = $image[0];
+        // Convert the URL to a real file system path.
+        $filePath = realpath(__DIR__ . '/../../' . ltrim($image['image_url'], '/'));
+
+        if ($filePath && file_exists($filePath)) {
+            if (!unlink($filePath)) {
+                error_log("Failed to delete file: " . $filePath);
             }
         }
-        $stmt->close();
+
         // Delete the database record.
-        $stmt = $conn->prepare("DELETE FROM images WHERE id = ?");
-        if (!$stmt) {
-            error_log("Prepare failed (removal delete): " . $conn->error);
-            continue;
-        }
-        $stmt->bind_param("i", $removeId);
-        $stmt->execute();
-        $stmt->close();
+        $delete_query = $conn->delete("images", "id = ?", [$removeId]);
     }
 }
 
@@ -91,26 +78,28 @@ if (!empty($_POST['existing_image_ids']) && is_array($_POST['existing_image_ids'
     $existingCredits    = $_POST['existing_credit'] ?? [];
     $existingCreditUrls = $_POST['existing_credit_url'] ?? [];
     $existingAlttexts   = $_POST['existing_alttext'] ?? [];
-    
+
     // Also get list of images marked for removal.
     $removed = !empty($_POST['remove_image_ids']) ? $_POST['remove_image_ids'] : [];
-    
+
     // Loop over each existing image from the POST.
     foreach ($existingIds as $index => $imgId) {
         // Skip any images that were marked for removal.
         if (in_array($imgId, $removed, true)) {
             continue;
         }
-        
+
         // Determine whether a new file was provided.
         $newFileProvided = false;
         if (isset($_FILES['existing_file']) && isset($_FILES['existing_file']['error'][$index])) {
-            if ($_FILES['existing_file']['error'][$index] === UPLOAD_ERR_OK &&
-                !empty($_FILES['existing_file']['name'][$index])) {
+            if (
+                $_FILES['existing_file']['error'][$index] === UPLOAD_ERR_OK &&
+                !empty($_FILES['existing_file']['name'][$index])
+            ) {
                 $newFileProvided = true;
             }
         }
-        
+
         if ($newFileProvided) {
             // Validate file size.
             if ($_FILES['existing_file']['size'][$index] > $maxFileSize) {
@@ -213,7 +202,7 @@ if (isset($_FILES['new_file'])) {
     $newCredits    = $_POST['new_credit'] ?? [];
     $newCreditUrls = $_POST['new_credit_url'] ?? [];
     $newAlttexts   = $_POST['new_alttext'] ?? [];
-    
+
     for ($i = 0; $i < $newFilesCount; $i++) {
         if ($_FILES['new_file']['error'][$i] === UPLOAD_ERR_OK && !empty($_FILES['new_file']['name'][$i])) {
             // Validate file size.
@@ -296,4 +285,3 @@ $stmt->close();
 
 echo json_encode(['success' => true, 'message' => 'Product saved successfully.']);
 $conn->close();
-?>

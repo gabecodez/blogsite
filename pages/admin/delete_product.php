@@ -1,10 +1,9 @@
 <?php
-//delete_product.php
-require_once $_SERVER['DOCUMENT_ROOT'] . '/../../includes/blueskyhomesteading/admin_databaseconnection.php';
-session_start();
+// delete_product.php
+require_once $_SERVER['DOCUMENT_ROOT'] . '/../../header_files/blueskyhomesteading/config.php';
 
 if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
-    header("Location: https://www.blueskyhomesteading.com/admin/login");
+    http_response_code(403);
     exit();
 }
 
@@ -17,22 +16,7 @@ if ($product_id <= 0) {
     exit();
 }
 
-try {
-    $stmt = $conn->prepare("DELETE FROM products WHERE id = ?");
-    $stmt->bind_param("i", $product_id);
+$query = $conn->delete("products", "id = ?", [$product_id]);
+echo json_encode(['success' => true, 'message' => 'Product deleted successfully']);
 
-    if ($stmt->execute()) {
-        echo json_encode(['success' => true, 'message' => 'Product deleted successfully']);
-    } else {
-        http_response_code(500);
-        echo json_encode(['message' => 'Failed to delete product']);
-    }
-} catch (Exception $e) {
-    error_log($e->getMessage());
-    http_response_code(500);
-    echo json_encode(['message' => 'Server error']);
-} finally {
-    if (isset($stmt)) $stmt->close();
-    $conn->close();
-}
-?>
+$conn->close();

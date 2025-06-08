@@ -1,11 +1,10 @@
 <?php
 // admin_page.php
-require_once $_SERVER['DOCUMENT_ROOT'] . '/../../includes/blueskyhomesteading/admin_databaseconnection.php';
-session_start();
+require_once $_SERVER['DOCUMENT_ROOT'] . '/../../header_files/blueskyhomesteading/config.php';
 
 // Ensure that the user is an authenticated admin.
 if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
-    header("Location: https://www.blueskyhomesteading.com/admin/login");
+    http_response_code(403);
     exit();
 }
 
@@ -14,35 +13,18 @@ if (empty($_SESSION['csrf_token'])) {
     $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
 }
 $csrf_token = $_SESSION['csrf_token'];
-
-// Fetch all products.
-$products = [];
-try {
-    $stmt = $conn->prepare("SELECT * FROM products");
-    $stmt->execute();
-    $result = $stmt->get_result();
-    while ($row = $result->fetch_assoc()) {
-        $products[] = $row;
-    }
-} catch (Exception $e) {
-    error_log("Product Query Error: " . $e->getMessage());
-} finally {
-    if (isset($stmt)) {
-        $stmt->close();
-    }
-}
 ?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/../../includes/blueskyhomesteading/head.php'; ?>
+    <?php require_once HEAD_PATH; ?>
     <title>Admin Dashboard</title>
     <link rel="stylesheet" href="https://www.blueskyhomesteading.com/styles/admin.css">
 </head>
 
 <body>
-    <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/../../includes/blueskyhomesteading/navbar.php'; ?>
+    <?php require_once NAVBAR_PATH; ?>
     <main class="main-page">
         <h1>Admin Dashboard</h1>
         <button id="createProductBtn">Create New Product</button>
@@ -58,7 +40,11 @@ try {
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($products as $product): ?>
+                <?php
+                // Fetch all products.
+                $products = $conn->fetchAll("SELECT * FROM products", []);
+                foreach ($products as $product):
+                ?>
                     <tr>
                         <td><?php echo $product['id']; ?></td>
                         <td><?php echo htmlspecialchars($product['name']); ?></td>
@@ -101,7 +87,7 @@ try {
     </div>
 
     <script src="scripts/admin_panel.js"></script>
-    <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/../../includes/blueskyhomesteading/footer.php'; ?>
+    <?php require_once FOOTER_PATH; ?>
 </body>
 
 </html>
