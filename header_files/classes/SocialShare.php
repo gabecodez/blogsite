@@ -1,24 +1,28 @@
 <?php
-class SocialShare {
+class SocialShare
+{
     private string $title;
     private string $url;
     private string $description;
     private string $image;
 
-    public function __construct($title, $url, $description, object $image = null) {
+    public function __construct($title, $url, $description, object $image = null)
+    {
         $this->title = $title;
         $this->url = $url;
         $this->description = $description;
         $this->image = !empty($image->url) ? $image->url : 'https://www.blueskyhomesteading.com/images/social_media_previews/basic_white_bg_w_logo.jpeg';
     }
 
-    private function generateButton(string $class, string $href, string $icon): string {
+    private function generateButton(string $class, string $href, string $icon): string
+    {
         return '<a class="share-btn ' . $class . '" href="' . $href . '" target="_blank">
                     <i class="' . $icon . '"></i>
                 </a>';
     }
 
-    public function render(): void {
+    public function render(): void
+    {
         $buttons = [
             'facebook' => $this->generateButton('facebook', 'https://www.facebook.com/sharer/sharer.php?u=' . urlencode($this->url), 'fab fa-facebook-f'),
             'twitter' => $this->generateButton('twitter', 'https://twitter.com/intent/tweet?text=' . urlencode($this->title . ' ' . $this->url), 'fab fa-twitter'),
@@ -31,6 +35,6 @@ class SocialShare {
         ];
 
         echo '<div class="share-buttons">' . implode('', $buttons) . '</div>';
+        echo '<link rel="canonical" href="' . $this->url . '" />';
     }
 }
-?>

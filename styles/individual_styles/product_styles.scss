@@ -144,9 +144,9 @@ label[for="quantity"] {
   overflow: hidden;
   padding: 0;
   background-color: transparent;
-  text-decoration: none;
   transition: background-color 0.3s ease-in-out;
   width: 100%;
+  text-decoration: none;
   max-width: 300px;
 
   .product-image-container {
@@ -191,7 +191,6 @@ label[for="quantity"] {
     color: $highlight_color;
     margin-bottom: 0.8em;
     margin-top: 0;
-    text-decoration: none;
   }
 
   .buy-btn {
@@ -211,10 +210,7 @@ label[for="quantity"] {
   &:hover {
     .text {
       text-decoration: underline;
-
-      .price {
-        text-decoration: none;
-      }
+      text-decoration-color: black;
     }
 
     img {
