@@ -3,6 +3,8 @@
 // Author: Gabriel Sullivan
 // Purpose: 404 page for BlueSky Homesteading
 require_once $_SERVER['DOCUMENT_ROOT'] . '/../../header_files/blueskyhomesteading/config.php';
+http_response_code(404);
+
 ?>
 
 <!DOCTYPE html>

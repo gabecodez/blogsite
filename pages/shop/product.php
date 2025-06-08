@@ -6,8 +6,8 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/../../header_files/blueskyhomesteadin
 
 function show404()
 {
-    require_once $_SERVER['DOCUMENT_ROOT'] . '/404.php';
     http_response_code(404);
+    require_once $_SERVER['DOCUMENT_ROOT'] . '/404.php';
     exit();
 }
 

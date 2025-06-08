@@ -1,14 +1,16 @@
 <?php
-class ArticleController {
+class ArticleController
+{
     private Article $article;
     private Image $image;
     private Breadcrumb $breadcrumb;
     private SocialShare $socialShare;
 
-    public function __construct($conn, $category_slug, $article_slug) {
+    public function __construct($conn, $category_slug, $article_slug)
+    {
         $this->article = new Article($conn);
         $this->article->fetch_article($category_slug, $article_slug);
-        
+
         if (empty($this->article->title)) {
             $this->show404();
         }
@@ -26,26 +28,30 @@ class ArticleController {
         $this->socialShare = new SocialShare($this->article->title, $postURL, $this->article->meta_description, $this->image);
     }
 
-    private function show404() {
-        require_once $_SERVER['DOCUMENT_ROOT'] . '/404.php';
+    private function show404()
+    {
         http_response_code(404);
+        require_once $_SERVER['DOCUMENT_ROOT'] . '/404.php';
         exit();
     }
 
-    public function getArticle() {
+    public function getArticle()
+    {
         return $this->article;
     }
 
-    public function getImage() {
+    public function getImage()
+    {
         return $this->image;
     }
 
-    public function getBreadcrumb() {
+    public function getBreadcrumb()
+    {
         return $this->breadcrumb;
     }
 
-    public function getSocialShare() {
+    public function getSocialShare()
+    {
         return $this->socialShare;
     }
 }
-?>
