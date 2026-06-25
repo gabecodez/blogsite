@@ -1,9 +1,22 @@
-# bluesky
 
-# This is the code for the BlueSkyHomesteading website
+# Blogsite
 
-# Used composer packages:
+A fully-fledged ecommerce website and blog framework built from the ground up using PHP, SQL, and the Stripe API, originally a homesteading website 
 
-# Stripe CLI
+[![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
 
-# phpdotenv
+
+## Documentation
+
+This project uses the following Composer packages:
+- phpdotenv
+- Stripe CLI
+## Contributing
+
+Contributions are always welcome!
+
+
+## Authors
+
+- [@gabecodez](https://www.github.com/gabecodez)
+
